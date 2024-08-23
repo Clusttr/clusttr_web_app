@@ -1,9 +1,9 @@
 const colors: { [key: string]: string } = {
-  red: 'red',
+  backgroundColor: '#20131C',
   white: 'white',
   black: 'black',
   yellow: 'yellow',
-  orange: 'orange'
+  orange: 'orange',
 };
 
 export default colors;

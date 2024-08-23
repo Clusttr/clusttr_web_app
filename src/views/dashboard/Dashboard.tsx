@@ -1,20 +1,17 @@
 import styled from 'styled-components';
 import colors from '../../assets/colors/project_colors';
+import Header from '../reuseable_components/header/Header';
 
 const Dashboard = () => {
   return (
     <DashboardStyle>
-      <div>Dashboard</div>
-      <div>Dashboard</div>
-      <div>Dashboard</div>
+      <Header />
     </DashboardStyle>
   );
 };
 
 const DashboardStyle = styled.div`
-  background-color: ${colors.red};
   color: ${colors.white};
-  padding: 20px;
 
   > :nth-child(2) {
     color: ${colors.black};
