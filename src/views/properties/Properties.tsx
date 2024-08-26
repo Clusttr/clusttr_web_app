@@ -8,7 +8,7 @@ const Properties = () => {
       <Header />
       <div>
         <div>Properties</div>
-        <div>Here</div>
+        <div>Here, Buy Now.</div>
       </div>
     </PropertiesStyle>
   );
