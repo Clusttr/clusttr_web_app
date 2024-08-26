@@ -2,19 +2,19 @@ import styled from 'styled-components';
 import colors from '../../assets/colors/project_colors';
 import Header from '../reuseable_components/header/Header';
 
-const Upload = () => {
+const Financials = () => {
   return (
-    <UploadStyle>
+    <FinancialsStyle>
       <Header />
       <div>
-        <div>Upload</div>
+        <div>Financials</div>
         <div>Here</div>
       </div>
-    </UploadStyle>
+    </FinancialsStyle>
   );
 };
 
-const UploadStyle = styled.div`
+const FinancialsStyle = styled.div`
 
  > :nth-child(2){
     background-color: ${colors.backgroundColor};
@@ -29,4 +29,4 @@ const UploadStyle = styled.div`
   }
 `;
 
-export default Upload;
+export default Financials;

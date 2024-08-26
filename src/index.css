@@ -1,5 +1,36 @@
+@import url('https://fonts.cdnfonts.com/css/pricedown');
+@import url('https://fonts.cdnfonts.com/css/druk-trial');
+
+@font-face {
+  font-family: 'Roobert';
+  src: url(/Roobert-Regular.otf);
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: 'Roobert';
+  src: url(/Roobert-Medium.otf);
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Roobert';
+  src: url(/Roobert-SemiBold.otf);
+  font-weight: bolder;
+}
+
+@font-face {
+  font-family: 'Roobert';
+  src: url(/Roobert-Bold.otf);
+  font-weight: bold;
+}
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: Roobert;
+
+}
+body {
+  background-color: #05020d;
 }
