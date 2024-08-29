@@ -30,7 +30,7 @@ const TopHeader = () => {
   return (
     <TopHeaderStyle>
       <div className="logo_container">
-        <img src={logo} alt="Clusttr Logo" className="logo" />
+        <img src={logo} alt="Clusttr_Logo" className="logo" />
       </div>
       <div ref={navRef} className="nav_link__container">
         <NavLinks />
@@ -46,33 +46,33 @@ const TopHeaderStyle = styled.div`
   align-items: center;
   background-color: ${colors.backgroundColor};
   padding: 15px;
-  
+
   #active {
     color: ${colors.white};
     background-color: ${colors.darkLightGreen};
     padding: 8px 12px;
     border-radius: 10px;
-    font-size: 0.65rem;
+    font-size: calc(12.5 / 1.6 * 0.1rem);
     transition: all 0.3s;
   }
   .logo_container {
-    width: 6%;
+    width: 17%;
   }
   .logo {
-    width: 100%;
+    width: 34%;
   }
   .nav_link__container {
     display: flex;
-    flex-direction: row;
     align-items: center;
-    gap: 20px;
+    gap: 8px;
   }
   .nav_link {
     cursor: pointer;
     text-decoration: none;
     color: ${colors.navLinkColor};
-    font-size: 0.7rem;
+    font-size: calc(12.5 / 1.6 * 0.1rem);
     font-weight: 200;
+    padding: 0 12px;
   }
 `;
 

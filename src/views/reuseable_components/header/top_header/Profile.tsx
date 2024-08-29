@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import avatar from '../../../../assets/images/avatar.png';
-import notification from '../../../../assets/images/notification.png';
+import notificationIcon from '../../../../assets/images/notification_icon.png';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import colors from '../../../../assets/colors/project_colors';
@@ -13,7 +13,7 @@ const Profile = () => {
     <ProfileStyle>
       <div className="notification_container">
         <img
-          src={notification}
+          src={notificationIcon}
           alt="notification_bell"
           className="notification"
         />
@@ -24,10 +24,8 @@ const Profile = () => {
           <img src={avatar} alt="avatar" className="avatar" />
         </div>
         <div
-          className="profile_name__container"
-          onClick={() => {
-            setIsToggled(!isToggled);
-          }}
+          className="profile_name_container"
+          onClick={() => setIsToggled(!isToggled)}
         >
           <div className="profile_name">Sholadapo Olatunde</div>
 
@@ -36,8 +34,12 @@ const Profile = () => {
             fontSize={12}
             style={
               isToggled
-                ? {color: colors.white, transform: 'rotate(-180deg)', transition: 'all 0.4s' }
-                : {color: colors.white, transition: 'all 0.4s' }
+                ? {
+                    color: colors.white,
+                    transform: 'rotate(-180deg)',
+                    transition: 'all 0.4s',
+                  }
+                : { color: colors.white, transition: 'all 0.4s' }
             }
           />
         </div>
@@ -48,7 +50,6 @@ const Profile = () => {
 
 const ProfileStyle = styled.div`
   display: flex;
-  flex-direction: row;
   align-items: center;
   gap: 10px;
 
@@ -75,7 +76,6 @@ const ProfileStyle = styled.div`
   }
   .profile {
     display: flex;
-    flex-direction: row;
     align-items: center;
     gap: 9px;
     background-color: ${colors.lightLightGreen};
@@ -86,9 +86,8 @@ const ProfileStyle = styled.div`
     width: 100%;
     cursor: pointer;
   }
-  .profile_name__container {
+  .profile_name_container {
     display: flex;
-    flex-direction: row;
     align-items: center;
     gap: 12px;
     font-weight: 200;
@@ -98,9 +97,9 @@ const ProfileStyle = styled.div`
     cursor: pointer;
   }
   .profile_name {
-    font-size: 0.7rem;
+    font-size: calc(12 / 1.6 * 0.1rem);
     user-select: none;
-    color: ${colors.white}
+    color: ${colors.white};
   }
 `;
 

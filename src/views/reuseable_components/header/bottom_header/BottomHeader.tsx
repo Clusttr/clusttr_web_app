@@ -18,7 +18,7 @@ const BottomHeaderStyle = styled.div`
     width: 3.5%;
     padding: 10px 0px;
     color: white;
-    font-size: 0.7rem;
+    font-size: calc(12.5 / 1.6 * 0.1rem);
     font-weight: 200;
     margin-left: 15px;
     border-top: 2px solid ${colors.lightLightGreen};
