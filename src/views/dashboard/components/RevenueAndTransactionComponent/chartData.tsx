@@ -1,61 +1,52 @@
 import colors from '../../../../assets/colors/project_colors';
 
-export const data = {
-  labels: [
-    '23 January, 2020',
-    '12 February, 2020',
-    '10 March, 2020',
-    '25 April, 2020',
-    '11 May, 2020',
-    '4 June, 2020',
-    '30 July, 2020',
-    '23 January, 2021',
-    '12 February, 2021',
-    '10 March, 2021',
-    '25 April, 2021',
-    '11 May, 2021',
-    '4 June, 2021',
-    '30 July, 2021',
-    '23 January, 2022',
-    '12 February, 2022',
-    '10 March, 2022',
-    '25 April, 2022',
-    '11 May, 2022',
-    '4 June, 2022',
-    '30 July, 2022',
-    '23 January, 2023',
-    '12 February, 2023',
-    '10 March, 2023',
-    '25 April, 2023',
-    '11 May, 2023',
-    '4 June, 2023',
-    '30 July, 2023',
-    '23 January, 2024',
-    '12 February, 2024',
-    '10 March, 2024',
-    '25 April, 2024',
-    '11 May, 2024',
-    '4 June, 2024',
-    '30 July, 2024',
-    '29 August, 2024',
-  ],
-  datasets: [
-    {
-      data: [
-        1000000, 1800430, 1200987, 1809780, 1100003, 1050000, 2000000, 850000,
-        1050000, 950000, 1500300, 600000, 1805000, 750000, 1600000, 1000000,
-        1400000, 850000, 2205000, 2100200, 2550055, 1100000, 800000, 1700000,
-        1300000, 1250000, 700000, 2600000, 2000000, 2300000, 2400000, 2100000,
-        1500000, 1900000, 1300000, 1200000,
-      ],
-      fill: true,
-      borderColor: `${colors.lightLightGreen}`,
-      pointStyle: 'circle',
-      radius: 0,
-      //   backgroundColor: 'green'
-    },
-  ],
-};
+export const labels = [
+  '23 January, 2020',
+  '12 February, 2020',
+  '10 March, 2020',
+  '25 April, 2020',
+  '11 May, 2020',
+  '4 June, 2020',
+  '30 July, 2020',
+  '23 January, 2021',
+  '12 February, 2021',
+  '10 March, 2021',
+  '25 April, 2021',
+  '11 May, 2021',
+  '4 June, 2021',
+  '30 July, 2021',
+  '23 January, 2022',
+  '12 February, 2022',
+  '10 March, 2022',
+  '25 April, 2022',
+  '11 May, 2022',
+  '4 June, 2022',
+  '30 July, 2022',
+  '23 January, 2023',
+  '12 February, 2023',
+  '10 March, 2023',
+  '25 April, 2023',
+  '11 May, 2023',
+  '4 June, 2023',
+  '30 July, 2023',
+  '23 January, 2024',
+  '12 February, 2024',
+  '10 March, 2024',
+  '25 April, 2024',
+  '11 May, 2024',
+  '4 June, 2024',
+  '30 July, 2024',
+  '29 August, 2024',
+];
+
+export const dataSetData = [
+  1500000, 2400430, 1400987, 2609780, 1300003, 1300000, 2900000, 2050000,
+  1200000, 1250000, 1500300, 1300000, 2405000, 650000, 2200000, 1000000, 1700000,
+  750000, 2705000, 2400200, 2850055, 1100000, 800000, 1700000, 1300000, 1250000,
+  700000, 2600000, 2000000, 2300000, 2400000, 2100000, 1500000, 1900000,
+  1300000, 1200000,
+];
+
 export const options: object = {
   responsive: true,
   plugins: {
@@ -100,21 +91,8 @@ export const options: object = {
           const units = ['', 'K', 'M', 'B'];
           const k = 1000;
           const magnitude = Math.floor(Math.log(val) / Math.log(k));
-          return (
-            `${val / Math.pow(k, magnitude)}${units[magnitude]}`
-          );
+          return `${val / Math.pow(k, magnitude)}${units[magnitude]}`;
         },
-
-        // callback: function (val: object, index) {
-        //   // Hide every 2nd tick label
-        //   console.log(val, index);
-        //   return val[val.length - 1] === val[index]
-        //     ? this.getLabelForValue(val)
-        //     : '';
-        // },
-        // callback: val => {
-        //   return '$' + val;
-        // },
       },
     },
     x: {
@@ -122,4 +100,21 @@ export const options: object = {
     },
   },
   maintainAspectRatio: false,
+};
+
+export const chartBackgroundColor = (ctx: any) => {
+  const chart = ctx.chart;
+  const { ctx: context, chartArea } = chart;
+  if (!chartArea) {
+    return null;
+  }
+  const gradient = context.createLinearGradient(
+    0,
+    chartArea.bottom,
+    0,
+    chartArea.top
+  );
+  gradient.addColorStop(0, 'rgba(36, 35, 35, 0.8)');
+  gradient.addColorStop(1, 'rgba(0, 193, 135, 1)');
+  return gradient;
 };

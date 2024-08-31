@@ -17,7 +17,7 @@ const RevenueAndTransactionsStyle = styled.div`
   grid-template-columns: 1.5fr 0.5fr;
   margin: 0 20px 15px;
   gap: 15px;
-  height: 385px;
+  height: 390px;
 `;
 
 export default RevenueAndTransactions;
