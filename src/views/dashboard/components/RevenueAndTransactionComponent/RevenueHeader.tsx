@@ -81,11 +81,11 @@ const SubHeaderStyle = styled.div`
   }
   .revenue_header_left_bottom {
     display: flex;
-    padding: 9px 0 10px;
+    padding: 9px 0 13px;
     align-items: center;
     gap: 8px;
-  }
-  .revenue_header_left_bottom :first-child {
+    }
+    .revenue_header_left_bottom :first-child {
     font-size: calc(19 / 1.6 * 0.1rem);
     font-weight: 500;
     color: ${colors.lightGreenTextColor};
@@ -102,6 +102,8 @@ const RevenueHeaderStyle = styled.div`
   .revenue_header_container {
     display: flex;
     justify-content: space-between;
+    border-bottom: 1px solid #242830;
+    margin-bottom: 17px;
   }
   .revenue_header_right_container {
     display: flex;
