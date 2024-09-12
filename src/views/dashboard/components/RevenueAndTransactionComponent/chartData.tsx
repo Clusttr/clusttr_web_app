@@ -53,10 +53,6 @@ export const options: object = {
     legend: {
       display: false,
     },
-    tickFormat: {
-      prefix: '$',
-      notation: 'compact',
-    },
   },
   animations: {
     tension: {

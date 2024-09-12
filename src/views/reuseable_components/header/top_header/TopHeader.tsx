@@ -74,6 +74,14 @@ const TopHeaderStyle = styled.div`
     font-weight: 200;
     padding: 0 12px;
   }
+  .nav_link:hover {
+    background-color: #3e3c3c7e;
+    color: white;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    transition: all 0.3s;
+    border-radius: 10px;
+  }
 `;
 
 export default TopHeader;

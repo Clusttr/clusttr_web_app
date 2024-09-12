@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Header from '../reuseable_components/header/Header';
 import DashboardPropertyTab from './components/DashboardPropertyTabComponent/DashboardPropertyTab';
 import RevenueAndTransactions from './components/RevenueAndTransactionComponent/RevenueAndTransactions';
+import DashboardProperties from './components/DashboardProperties/DashboardProperties';
 
 const Dashboard = () => {
   return (
@@ -10,6 +11,7 @@ const Dashboard = () => {
       <Header />
       <DashboardPropertyTab />
       <RevenueAndTransactions />
+      <DashboardProperties/>
     </DashboardStyle>
   );
 };

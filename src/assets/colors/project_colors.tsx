@@ -6,6 +6,7 @@ const colors: { [key: string]: string } = {
   red: '#d81616',
   // red: 'red',
   backgroundColor: '#20131C',
+  propertiesBGColor: '#071616',
   navLinkColor: '#355358',
   darkLightGreen: '#00FFB266',
   lightLightGreen: '#00C187',
@@ -17,6 +18,7 @@ const colors: { [key: string]: string } = {
   darkGrey: '#575B61',
   darkerGrey: '#5D7A76',
   lightGreenTextColor: '#C8E3DF',
+  lightBlack: '#100A0E',
 };
 
 export default colors;
