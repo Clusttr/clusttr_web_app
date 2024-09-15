@@ -11,6 +11,7 @@ type fakeDataProp = {
   propertyName: string;
 };
 
+
 const DashboardListBox = () => {
   return (
     <ListBoxStyle>
@@ -25,20 +26,25 @@ const DashboardListBox = () => {
       </div>
       <div className="list_box_lists">
         {fakePropertyData.map(
-          ({
-            propertySize,
-            pricePerFragment,
-            totalAssetPrice,
-            location,
-            propertyName,
-          }: fakeDataProp) => (
-            <PropertiesList
-              propertySize={propertySize}
-              pricePerFragment={pricePerFragment}
-              totalAssetPrice={totalAssetPrice}
-              location={location}
-              propertyName={propertyName}
-            />
+          (
+            {
+              propertySize,
+              pricePerFragment,
+              totalAssetPrice,
+              location,
+              propertyName,
+            }: fakeDataProp,
+            index
+          ) => (
+            <div key={index}>
+              <PropertiesList
+                propertySize={propertySize}
+                pricePerFragment={pricePerFragment}
+                totalAssetPrice={totalAssetPrice}
+                location={location}
+                propertyName={propertyName}
+              />
+            </div>
           )
         )}
       </div>

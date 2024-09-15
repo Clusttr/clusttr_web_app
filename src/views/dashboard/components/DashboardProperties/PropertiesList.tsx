@@ -1,7 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import testPic from '../../../../assets/images/temp_test_pic.jpg';
 import styled from 'styled-components';
 import colors from '../../../../assets/colors/project_colors';
+import { getShortString } from './shortString';
+import { PropertiesContext } from '../../../../assets/utils/PropertiesContext';
 
 type listType = {
   propertySize: number;
@@ -18,45 +20,84 @@ const PropertiesList = ({
   location,
   propertyName,
 }: listType) => {
-  const [shortLocation, setShortLocation] = useState(location);
+  const { uncheckBoxes, setUncheckBoxes } = useContext(PropertiesContext);
+  const [checked, setChecked] = useState(false);
+  if (checked && uncheckBoxes) {
+    setChecked(false);
+    setUncheckBoxes(false);
+  } else if (!checked && uncheckBoxes) setUncheckBoxes(false);
+
+  const [shortStrings, setShortStrings] = useState({
+    propertySize: propertySize.toLocaleString(),
+    pricePerFragment: pricePerFragment.toLocaleString(),
+    totalAssetPrice: totalAssetPrice.toLocaleString(),
+    location: location,
+    propertyName: propertyName,
+  });
 
   useEffect(() => {
-    if (location.length > 24)
-      setShortLocation(
-        location.split('').splice(0, 24).join('').padEnd(27, '.')
-      );
-  }, [location]);
+    getShortString(
+      `${shortStrings.propertyName}`,
+      setShortStrings,
+      'propertyName',
+      21
+    );
+    getShortString(`${shortStrings.location}`, setShortStrings, 'location', 24);
+    getShortString(
+      `${shortStrings.propertySize}`,
+      setShortStrings,
+      'propertySize',
+      5
+    );
+    getShortString(
+      `${shortStrings.totalAssetPrice}`,
+      setShortStrings,
+      'totalAssetPrice',
+      10
+    );
+    getShortString(
+      `${shortStrings.pricePerFragment}`,
+      setShortStrings,
+      'pricePerFragment',
+      12
+    );
+  }, [
+    shortStrings.location,
+    shortStrings.pricePerFragment,
+    shortStrings.propertyName,
+    shortStrings.propertySize,
+    shortStrings.totalAssetPrice,
+  ]);
 
   return (
-    <ListStyle>
+    <ListStyle checked={checked}>
       <div className="check_box_container">
-        <input type="checkbox" checked={true} id="" />
-        <span className="checkmark"></span>
+        <div className="checkmark" onClick={() => setChecked(!checked)}></div>
       </div>
-      <div className="font_size">{propertyName}</div>
+      <div className="font_size">{shortStrings.propertyName}</div>
       <div className="location_container">
         <div className="location_image_container">
           <img className="location_image" src={testPic} alt="location_img" />
         </div>
-        <div className="location font_size">{shortLocation || location}</div>
+        <div className="location font_size">{shortStrings.location}</div>
       </div>
       <div>
         <div className="property_size font_size">
-          {propertySize.toLocaleString()} m²
+          {shortStrings.propertySize} m²
         </div>
       </div>
       <div>
         <div className="total_asset_price font_size">
-          ${totalAssetPrice.toLocaleString()}
+          ${shortStrings.totalAssetPrice}
         </div>
       </div>
-      <div className="font_size">${pricePerFragment.toLocaleString()}</div>
+      <div className="font_size">${shortStrings.pricePerFragment}</div>
       <div>Action</div>
     </ListStyle>
   );
 };
 
-const ListStyle = styled.div`
+const ListStyle = styled.div<{ checked: boolean }>`
   display: grid;
   grid-template-columns: 0.2fr 1fr 1.2fr 0.8fr 1fr 1.1fr 0.3fr;
   background-color: ${colors.backgroundColor};
@@ -65,28 +106,40 @@ const ListStyle = styled.div`
   align-items: center;
 
   .check_box_container {
-    /* Customize the label (the container) */
     cursor: pointer;
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-  }
-  .check_box_container input {
-    /* Hide the default checkbox */
-    display:none;
+    display: flex;
+    align-items: center;
+    height: 15px;
   }
   .checkmark {
-    /* Create a custom checkbox */
-    display:block;
-    height: 13px;
-    width: 13px;
+    position: relative;
+    display: block;
+    height: ${({ checked }) => (checked ? '12px' : '13px')};
+    width: ${({ checked }) => (checked ? '12px' : '13px')};
     border-radius: 2px;
     border: 1px solid #eee;
+    background-color: ${({ checked }) =>
+      checked ? '#41414194' : 'transparent'};
+    transition: all 0.4s;
   }
-    .check_box_container:hover input ~ .checkmark:hover {
-  background-color: ${colors.darkerGrey};
-}
+  .checkmark:hover {
+    background-color: #41414194;
+  }
+
+  .checkmark:after {
+    content: '';
+    position: absolute;
+    display: ${({ checked }) => (checked ? 'block' : 'none')};
+    left: 13%;
+    top: 50%;
+    border: solid transparent;
+    border-width: 0 1px 1px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    transform-origin: 0% 100%;
+    animation: checkbox-check 125ms 250ms cubic-bezier(0.5, 0, 0.23, 1) forwards;
+  }
 
   .location_container {
     display: flex;
@@ -119,6 +172,26 @@ const ListStyle = styled.div`
     background-color: #402638;
     padding: 7px 10px;
     border-radius: 20px;
+  }
+
+  @keyframes checkbox-check {
+    0% {
+      width: 0;
+      height: 0;
+      border-color: #212121;
+      transform: translate3d(0, 0, 0) rotate(45deg);
+    }
+    33% {
+      width: 0.2em;
+      height: 0;
+      transform: translate3d(0, 0, 0) rotate(45deg);
+    }
+    100% {
+      width: 2.5px;
+      height: 7px;
+      border-color: white;
+      transform: translate3d(0, -0.5em, 0) rotate(45deg);
+    }
   }
 `;
 

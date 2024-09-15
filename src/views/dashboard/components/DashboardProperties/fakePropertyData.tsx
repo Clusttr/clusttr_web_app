@@ -1,12 +1,12 @@
 const fakePropertyData = [
   {
-    propertyName: 'Charles Wuse Property',
+    propertyName: 'Charles and Sons Wuse Property',
     location: 'Plot 22 FHA Nyanya Extension, beside mane rise, wuse, Abuja.',
-    propertySize: 1314.75,
+    propertySize: 1313333333333334.75,
     beds: 7,
     bathrooms: 8,
-    pricePerFragment: 22456.05,
-    totalAssetPrice: 1432300.54,
+    pricePerFragment: 22433333333356.05,
+    totalAssetPrice: 14323002222222.54,
     totalAssetValue: 1342,
   },
   {
@@ -15,7 +15,7 @@ const fakePropertyData = [
     propertySize: 1314.75,
     beds: 7,
     bathrooms: 8,
-    pricePerFragment: 22456.05,
+    pricePerFragment: 22667456.05,
     totalAssetPrice: 1432300.54,
     totalAssetValue: 4221,
   },

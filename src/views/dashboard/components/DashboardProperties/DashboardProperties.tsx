@@ -6,6 +6,7 @@ import PropertiesGridBox from './PropertiesGridBox';
 import fakePropertyData from './fakePropertyData';
 import { useState } from 'react';
 import DashboardListBox from './DashboardListBox';
+import { ContextAPI } from '../../../../assets/utils/PropertiesContext';
 
 type fakeDataProp = {
   propertySize: number;
@@ -19,52 +20,60 @@ type fakeDataProp = {
 };
 
 const DashboardProperties = () => {
-  const [isGrid, setIsGrid] = useState(true);
+  const [isGrid, setIsGrid] = useState(false);
+
 
   return (
-    <DashboardPropertiesStyle isGrid={isGrid}>
-      <DashboardPropertiesHeader />
-      <SearchAndFilter setIsGrid={setIsGrid} />
-      <div
-        className={
-          isGrid ? 'property_grid_container' : 'property_list_container'
-        }
-      >
-        {isGrid ? (
-          fakePropertyData.map(
-            ({
-              propertySize,
-              beds,
-              bathrooms,
-              pricePerFragment,
-              totalAssetPrice,
-              totalAssetValue,
-              location,
-              propertyName,
-            }: fakeDataProp) => (
-              <PropertiesGridBox
-                propertySize={propertySize}
-                beds={beds}
-                bathrooms={bathrooms}
-                pricePerFragment={pricePerFragment}
-                totalAssetPrice={totalAssetPrice}
-                totalAssetValue={totalAssetValue}
-                location={location}
-                propertyName={propertyName}
-              />
+    <ContextAPI>
+      <DashboardPropertiesStyle $isGrid={isGrid}>
+        <DashboardPropertiesHeader />
+        <SearchAndFilter setIsGrid={setIsGrid} />
+        <div
+          className={
+            isGrid ? 'property_grid_container' : 'property_list_container'
+          }
+        >
+          {isGrid ? (
+            fakePropertyData.map(
+              (
+                {
+                  propertySize,
+                  beds,
+                  bathrooms,
+                  pricePerFragment,
+                  totalAssetPrice,
+                  totalAssetValue,
+                  location,
+                  propertyName,
+                }: fakeDataProp,
+                index
+              ) => (
+                <div key={index}>
+                  <PropertiesGridBox
+                    propertySize={propertySize}
+                    beds={beds}
+                    bathrooms={bathrooms}
+                    pricePerFragment={pricePerFragment}
+                    totalAssetPrice={totalAssetPrice}
+                    totalAssetValue={totalAssetValue}
+                    location={location}
+                    propertyName={propertyName}
+                  />
+                </div>
+              )
             )
-          )
-        ) : (
-          <DashboardListBox />
-        )}
-      </div>
-    </DashboardPropertiesStyle>
+          ) : (
+            <DashboardListBox />
+          )}
+        </div>
+      </DashboardPropertiesStyle>
+    </ContextAPI>
   );
 };
 
-const DashboardPropertiesStyle = styled.div<{ isGrid: boolean }>`
-  background-color: ${({ isGrid }) =>
-    isGrid ? colors.propertiesBGColor : colors.backgroundColor};
+const DashboardPropertiesStyle = styled.div<{ $isGrid: boolean }>`
+  background-color: ${({ $isGrid }) =>
+    $isGrid ? colors.propertiesBGColor : colors.backgroundColor};
   margin: 15px 20px;
   padding: 20px;
   border-radius: 10px;

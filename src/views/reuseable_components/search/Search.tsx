@@ -12,11 +12,11 @@ type SearchProp = {
 };
 
 type SearchStyleProp = {
-  bgColor: string;
-  inputWidth: number;
-  inputHeight: number;
-  iconHeight: number;
-  iconWidth: number;
+  $bgColor: string;
+  $inputWidth: number;
+  $inputHeight: number;
+  $iconHeight: number;
+  $iconWidth: number;
 };
 
 const Search = ({
@@ -41,11 +41,11 @@ const Search = ({
 
   return (
     <SearchStyle
-      bgColor={background}
-      inputWidth={inputWidth}
-      inputHeight={inputHeight}
-      iconHeight={iconHeight}
-      iconWidth={iconWidth}
+      $bgColor={background}
+      $inputWidth={inputWidth}
+      $inputHeight={inputHeight}
+      $iconHeight={iconHeight}
+      $iconWidth={iconWidth}
       onClick={() => toggleFilterFunc(true)}
       onMouseLeave={() => toggleFilterFunc(false)}
     >
@@ -80,20 +80,20 @@ const SearchStyle = styled.div<SearchStyleProp>`
     display: flex;
     justify-content: center;
     align-items: center;
-    background: ${({ bgColor }) => bgColor};
-    padding: ${({ iconHeight }) => iconHeight}rem;
-    padding-left: ${({ iconWidth }) => iconWidth}rem;
+    background: ${({ $bgColor }) => $bgColor};
+    padding: ${({ $iconHeight }) => $iconHeight}rem;
+    padding-left: ${({ $iconWidth }) => $iconWidth}rem;
     padding-right: 0;
     border-radius: 10px 0 0 10px;
     user-select: none;
   }
   #input_search {
-    background: ${({ bgColor }) => bgColor};
+    background: ${({ $bgColor }) => $bgColor};
     color: #355358;
     outline: none;
     border: none;
-    width: ${({ inputWidth }) => inputWidth}rem;
-    padding: ${({ inputHeight }) => inputHeight}rem;
+    width: ${({ $inputWidth }) => $inputWidth}rem;
+    padding: ${({ $inputHeight }) => $inputHeight}rem;
     border-radius: 0 10px 10px 0;
     font-weight: 200;
     font-size: calc(12.5 / 1.6 * 0.1rem);

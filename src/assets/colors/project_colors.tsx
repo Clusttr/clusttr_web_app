@@ -5,6 +5,7 @@ const colors: { [key: string]: string } = {
   orange: 'orange',
   red: '#d81616',
   // red: 'red',
+  lightRed: '#FF5B5B',
   backgroundColor: '#20131C',
   propertiesBGColor: '#071616',
   navLinkColor: '#355358',
@@ -22,7 +23,6 @@ const colors: { [key: string]: string } = {
 };
 
 export default colors;
-
 
 /*
 const data = {

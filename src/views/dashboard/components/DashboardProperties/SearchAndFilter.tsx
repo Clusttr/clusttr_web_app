@@ -6,9 +6,7 @@ import Search from '../../../reuseable_components/search/Search';
 type SFProp = {
   setIsGrid: React.Dispatch<React.SetStateAction<boolean>>;
 };
-const SearchAndFilter = ({
-  setIsGrid,
-}: SFProp) => {
+const SearchAndFilter = ({ setIsGrid }: SFProp) => {
   return (
     <SearchAndFilterStyle>
       <Search
