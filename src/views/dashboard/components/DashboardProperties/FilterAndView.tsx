@@ -4,40 +4,37 @@ import { useContext, useState } from 'react';
 import { Funnel, ListBullets, SquaresFour } from '@phosphor-icons/react';
 import { PropertiesContext } from '../../../../assets/utils/PropertiesContext';
 
-type SFProp = {
-  setIsGrid: React.Dispatch<React.SetStateAction<boolean>>;
-};
-const toggleActiveStyle = {
-  color: colors.black,
-  transform: 'rotate(-180deg)',
-  transition: 'all 0.4s',
-};
-const toggleInActiveStyle = {
-  color: colors.black,
-  transition: 'all 0.4s',
-};
-const FilterAndView = ({ setIsGrid }: SFProp) => {
+const FilterAndView = () => {
   // useState and useContext
-  const {uncheckBoxes, setUncheckBoxes } = useContext(PropertiesContext);
-  const [isList, setIsList] = useState(false);
+  const { setChecked, checked, isGrid, setIsGrid } =
+    useContext(PropertiesContext);
   const [toggleFilter, setToggleFilter] = useState(false);
 
   // functions
   const toggleFilterFunc = () => setToggleFilter(!toggleFilter);
-  const toggleView = (option: boolean) => setIsList(option);
-  const switchView = (toggle: boolean, isGrid: boolean) => {
-    toggleView(toggle);
-    setIsGrid(isGrid);
+  // style
+  const toggleActiveStyle = {
+    color: colors.black,
+    transform: 'rotate(-180deg)',
+    transition: 'all 0.4s',
   };
-  const clearCheckBoxes = () => {
-    setUncheckBoxes(true);
+  const toggleInActiveStyle = {
+    color: colors.black,
+    transition: 'all 0.4s',
   };
 
   return (
     <FilterAndViewStyle>
-      <div className="clear_checkboxes" onClick={clearCheckBoxes}>
-        Clear Checkboxes
-      </div>
+      {isGrid ? (
+        ''
+      ) : (
+        <div
+          className="clear_checkboxes"
+          onClick={() => setChecked(new Array(checked.length).fill(false))}
+        >
+          Clear Checkboxes
+        </div>
+      )}
       <div className="filter_and_view_filter" onClick={toggleFilterFunc}>
         <div style={toggleFilter ? toggleActiveStyle : toggleInActiveStyle}>
           <Funnel size={14} color={`${colors.black}`} />
@@ -46,21 +43,18 @@ const FilterAndView = ({ setIsGrid }: SFProp) => {
       </div>
       <div className="filter_and_view_view">
         <div
-          className={isList ? 'active' : ''}
-          onClick={() => switchView(true, false)}
+          className={isGrid ? '' : 'active'}
+          onClick={() => setIsGrid(false)}
         >
           <ListBullets
             size={22}
-            color={isList ? `${colors.black}` : `${colors.white}`}
+            color={isGrid ? `${colors.white}` : `${colors.black}`}
           />
         </div>
-        <div
-          className={isList ? '' : 'active'}
-          onClick={() => switchView(false, true)}
-        >
+        <div className={isGrid ? 'active' : ''} onClick={() => setIsGrid(true)}>
           <SquaresFour
             size={22}
-            color={isList ? `${colors.white}` : `${colors.black}`}
+            color={isGrid ? `${colors.black}` : `${colors.white}`}
           />
         </div>
       </div>
@@ -75,10 +69,10 @@ const FilterAndViewStyle = styled.div`
 
   .clear_checkboxes {
     background-color: ${colors.lightRed};
-    padding: 7px 14px;
+    padding: 8px 16px;
     border-radius: 6px;
     cursor: pointer;
-    font-size: calc(12.5 / 1.6 * 0.1rem);
+    font-size: calc(13.6 / 1.6 * 0.1rem);
     user-select: none;
     font-weight: 500;
     color: ${colors.white};
@@ -89,12 +83,12 @@ const FilterAndViewStyle = styled.div`
     align-items: center;
     gap: 2px;
     background-color: ${colors.white};
-    padding: 5px 14px;
+    padding: 6px 16px;
     border-radius: 6px;
     cursor: pointer;
   }
   .filter_and_view_filter_text {
-    font-size: calc(12.5 / 1.6 * 0.1rem);
+    font-size: calc(13.6 / 1.6 * 0.1rem);
     user-select: none;
     font-weight: 500;
     color: ${colors.black};
@@ -106,7 +100,7 @@ const FilterAndViewStyle = styled.div`
   }
   .filter_and_view_view > * {
     display: flex;
-    padding: 3px;
+    padding: 4px;
     transform: rotate(-180deg);
     transition: transform 0.4s;
   }

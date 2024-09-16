@@ -11,6 +11,7 @@ type listType = {
   totalAssetPrice: number;
   location: string;
   propertyName: string;
+  idx: number;
 };
 
 const PropertiesList = ({
@@ -19,14 +20,10 @@ const PropertiesList = ({
   totalAssetPrice,
   location,
   propertyName,
+  idx,
 }: listType) => {
-  const { uncheckBoxes, setUncheckBoxes } = useContext(PropertiesContext);
-  const [checked, setChecked] = useState(false);
-  if (checked && uncheckBoxes) {
-    setChecked(false);
-    setUncheckBoxes(false);
-  } else if (!checked && uncheckBoxes) setUncheckBoxes(false);
-
+  const {  checked, setChecked } =
+    useContext(PropertiesContext);
   const [shortStrings, setShortStrings] = useState({
     propertySize: propertySize.toLocaleString(),
     pricePerFragment: pricePerFragment.toLocaleString(),
@@ -35,7 +32,15 @@ const PropertiesList = ({
     propertyName: propertyName,
   });
 
+  const checkBoxClick = () => {
+    const newArray = checked.map((item, index) =>
+      idx === index ? !item : item
+    );
+    setChecked(newArray);
+  };
+
   useEffect(() => {
+
     getShortString(
       `${shortStrings.propertyName}`,
       setShortStrings,
@@ -70,9 +75,12 @@ const PropertiesList = ({
   ]);
 
   return (
-    <ListStyle checked={checked}>
+    <ListStyle checked={checked[idx]}>
       <div className="check_box_container">
-        <div className="checkmark" onClick={() => setChecked(!checked)}></div>
+        <div
+          className="checkmark"
+          onClick={checkBoxClick}
+        ></div>
       </div>
       <div className="font_size">{shortStrings.propertyName}</div>
       <div className="location_container">
@@ -120,7 +128,7 @@ const ListStyle = styled.div<{ checked: boolean }>`
     border: 1px solid #eee;
     background-color: ${({ checked }) =>
       checked ? '#41414194' : 'transparent'};
-    transition: all 0.4s;
+    transition: all 0.2s;
   }
   .checkmark:hover {
     background-color: #41414194;

@@ -3,15 +3,13 @@ import FilterAndView from './FilterAndView';
 import Search from '../../../reuseable_components/search/Search';
 // import colors from '../../../../assets/colors/project_colors';
 
-type SFProp = {
-  setIsGrid: React.Dispatch<React.SetStateAction<boolean>>;
-};
-const SearchAndFilter = ({ setIsGrid }: SFProp) => {
+const SearchAndFilter = () => {
+
   return (
     <SearchAndFilterStyle>
       <Search
-        inputWidth={13}
-        inputHeight={0.5}
+        inputWidth={14}
+        inputHeight={0.6}
         iconHeight={0.3}
         iconWidth={0.9}
         // inputWidth={13}
@@ -21,7 +19,7 @@ const SearchAndFilter = ({ setIsGrid }: SFProp) => {
         text={'Search'}
         background={'#0A2C2C'}
       />
-      <FilterAndView setIsGrid={setIsGrid} />
+      <FilterAndView />
     </SearchAndFilterStyle>
   );
 };

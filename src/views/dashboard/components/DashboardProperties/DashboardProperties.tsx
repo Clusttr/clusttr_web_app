@@ -4,9 +4,9 @@ import DashboardPropertiesHeader from './DashboardPropertiesHeader';
 import SearchAndFilter from './SearchAndFilter';
 import PropertiesGridBox from './PropertiesGridBox';
 import fakePropertyData from './fakePropertyData';
-import { useState } from 'react';
+import { useContext } from 'react';
 import DashboardListBox from './DashboardListBox';
-import { ContextAPI } from '../../../../assets/utils/PropertiesContext';
+import { PropertiesContext } from '../../../../assets/utils/PropertiesContext';
 
 type fakeDataProp = {
   propertySize: number;
@@ -20,54 +20,51 @@ type fakeDataProp = {
 };
 
 const DashboardProperties = () => {
-  const [isGrid, setIsGrid] = useState(false);
-
+  const { isGrid } = useContext(PropertiesContext);
 
   return (
-    <ContextAPI>
-      <DashboardPropertiesStyle $isGrid={isGrid}>
-        <DashboardPropertiesHeader />
-        <SearchAndFilter setIsGrid={setIsGrid} />
-        <div
-          className={
-            isGrid ? 'property_grid_container' : 'property_list_container'
-          }
-        >
-          {isGrid ? (
-            fakePropertyData.map(
-              (
-                {
-                  propertySize,
-                  beds,
-                  bathrooms,
-                  pricePerFragment,
-                  totalAssetPrice,
-                  totalAssetValue,
-                  location,
-                  propertyName,
-                }: fakeDataProp,
-                index
-              ) => (
-                <div key={index}>
-                  <PropertiesGridBox
-                    propertySize={propertySize}
-                    beds={beds}
-                    bathrooms={bathrooms}
-                    pricePerFragment={pricePerFragment}
-                    totalAssetPrice={totalAssetPrice}
-                    totalAssetValue={totalAssetValue}
-                    location={location}
-                    propertyName={propertyName}
-                  />
-                </div>
-              )
+    <DashboardPropertiesStyle $isGrid={isGrid}>
+      <DashboardPropertiesHeader />
+      <SearchAndFilter />
+      <div
+        className={
+          isGrid ? 'property_grid_container' : 'property_list_container'
+        }
+      >
+        {isGrid ? (
+          fakePropertyData.map(
+            (
+              {
+                propertySize,
+                beds,
+                bathrooms,
+                pricePerFragment,
+                totalAssetPrice,
+                totalAssetValue,
+                location,
+                propertyName,
+              }: fakeDataProp,
+              index
+            ) => (
+              <div key={index}>
+                <PropertiesGridBox
+                  propertySize={propertySize}
+                  beds={beds}
+                  bathrooms={bathrooms}
+                  pricePerFragment={pricePerFragment}
+                  totalAssetPrice={totalAssetPrice}
+                  totalAssetValue={totalAssetValue}
+                  location={location}
+                  propertyName={propertyName}
+                />
+              </div>
             )
-          ) : (
-            <DashboardListBox />
-          )}
-        </div>
-      </DashboardPropertiesStyle>
-    </ContextAPI>
+          )
+        ) : (
+          <DashboardListBox />
+        )}
+      </div>
+    </DashboardPropertiesStyle>
   );
 };
 

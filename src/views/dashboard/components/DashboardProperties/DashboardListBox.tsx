@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import colors from '../../../../assets/colors/project_colors';
 import fakePropertyData from './fakePropertyData';
 import PropertiesList from './PropertiesList';
+import { useContext, useEffect } from 'react';
+import { PropertiesContext } from '../../../../assets/utils/PropertiesContext';
 
 type fakeDataProp = {
   propertySize: number;
@@ -11,8 +13,14 @@ type fakeDataProp = {
   propertyName: string;
 };
 
-
 const DashboardListBox = () => {
+  const { setChecked } = useContext(PropertiesContext);
+
+  useEffect(() => {
+    setChecked(new Array(fakePropertyData.length).fill(false));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <ListBoxStyle>
       <div className="list_box_header">
@@ -38,6 +46,7 @@ const DashboardListBox = () => {
           ) => (
             <div key={index}>
               <PropertiesList
+                idx={index}
                 propertySize={propertySize}
                 pricePerFragment={pricePerFragment}
                 totalAssetPrice={totalAssetPrice}

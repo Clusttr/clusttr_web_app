@@ -1,22 +1,32 @@
 import { createContext, Dispatch, SetStateAction, useState } from 'react';
 
 type PropertiesContextType = {
-  uncheckBoxes: boolean;
-  setUncheckBoxes: Dispatch<SetStateAction<boolean>>;
+  isGrid: boolean;
+  checked: never[];
+  setIsGrid: Dispatch<SetStateAction<boolean>>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  setChecked: any;
 };
 
-export const PropertiesContext = createContext<PropertiesContextType>({
-  uncheckBoxes: false,
-  setUncheckBoxes: () => false,
-});
+export const PropertiesContext = createContext<PropertiesContextType>(
+  {} as PropertiesContextType
+);
 
 export const ContextAPI: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [uncheckBoxes, setUncheckBoxes] = useState<boolean>(false);
+  const [isGrid, setIsGrid] = useState(true);
+  const [checked, setChecked] = useState([]);
+
+  const value = {
+    isGrid,
+    checked,
+    setIsGrid,
+    setChecked,
+  };
 
   return (
-    <PropertiesContext.Provider value={{ uncheckBoxes, setUncheckBoxes }}>
+    <PropertiesContext.Provider value={value}>
       {children}
     </PropertiesContext.Provider>
   );
