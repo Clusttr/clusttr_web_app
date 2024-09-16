@@ -9,6 +9,7 @@ const FilterAndView = () => {
   const { setChecked, checked, isGrid, setIsGrid } =
     useContext(PropertiesContext);
   const [toggleFilter, setToggleFilter] = useState(false);
+  const isAnyChecked = checked.some(item => item === true);
 
   // functions
   const toggleFilterFunc = () => setToggleFilter(!toggleFilter);
@@ -25,7 +26,7 @@ const FilterAndView = () => {
 
   return (
     <FilterAndViewStyle>
-      {isGrid ? (
+      {isGrid || !isAnyChecked ? (
         ''
       ) : (
         <div
