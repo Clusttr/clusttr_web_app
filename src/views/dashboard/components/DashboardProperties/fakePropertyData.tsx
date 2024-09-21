@@ -1,6 +1,6 @@
 const fakePropertyData = [
   {
-    propertyName: 'Charles and Sons Wuse Property',
+    propertyName: 'Charles and Sons Wuse Property Property',
     location: 'Plot 22 FHA Nyanya Extension, beside mane rise, wuse, Abuja.',
     propertySize: 1313333333333334.75,
     beds: 7,

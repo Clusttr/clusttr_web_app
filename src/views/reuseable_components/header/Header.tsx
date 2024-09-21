@@ -14,6 +14,10 @@ const Header = () => {
 const HeaderStyle = styled.div`
   display: flex;
   flex-direction: column;
+  position: sticky;
+  z-index: 30;
+  width: 100%;
+  top: 0;
 `;
 
 export default Header;

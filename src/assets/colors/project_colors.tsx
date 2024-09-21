@@ -7,6 +7,7 @@ const colors: { [key: string]: string } = {
   // red: 'red',
   lightRed: '#FF5B5B',
   backgroundColor: '#20131C',
+  lightBGColor: '#402638',
   propertiesBGColor: '#071616',
   navLinkColor: '#355358',
   darkLightGreen: '#00FFB266',

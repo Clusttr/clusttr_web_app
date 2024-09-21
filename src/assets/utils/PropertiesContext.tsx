@@ -6,6 +6,7 @@ type PropertiesContextType = {
   setIsGrid: Dispatch<SetStateAction<boolean>>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setChecked: any;
+  checkCount:number;
 };
 
 export const PropertiesContext = createContext<PropertiesContextType>(
@@ -17,10 +18,13 @@ export const ContextAPI: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [isGrid, setIsGrid] = useState(true);
   const [checked, setChecked] = useState([]);
+  const checkCount = checked.filter(item => item).length;
+
 
   const value = {
     isGrid,
     checked,
+    checkCount,
     setIsGrid,
     setChecked,
   };

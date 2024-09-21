@@ -1,9 +1,15 @@
 import styled from 'styled-components';
 import PropertiesIcon from '../../../../assets/images/properties_icon.png';
+import { PropertiesContext } from '../../../../assets/utils/PropertiesContext';
+import { useContext } from 'react';
+import colors from '../../../../assets/colors/project_colors';
 
 const DashboardPropertiesHeader = () => {
+  const { isGrid } = useContext(PropertiesContext);
+
+
   return (
-    <DashboardPropertiesHeaderStyle>
+    <DashboardPropertiesHeaderStyle $isGrid={isGrid}>
       <div className="dashboard_properties_header_top">
         <div className="dashboard_properties_header_top_text">Properties</div>
         <div>
@@ -21,9 +27,14 @@ const DashboardPropertiesHeader = () => {
   );
 };
 
-const DashboardPropertiesHeaderStyle = styled.div`
+const DashboardPropertiesHeaderStyle = styled.div<{ $isGrid: boolean }>`
+  position: relative;
   padding-bottom: 10px;
   border-bottom: 2px solid #1e2120;
+  z-index: 3;
+  background-color: ${({ $isGrid }) =>
+    $isGrid ? colors.propertiesBGColor : colors.backgroundColor};
+  transition: all 0.4s;
 
   .dashboard_properties_header_top {
     display: flex;

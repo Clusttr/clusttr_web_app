@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import colors from '../../../../assets/colors/project_colors';
 import { getShortString } from './shortString';
 import { PropertiesContext } from '../../../../assets/utils/PropertiesContext';
+import { PencilSimpleLine, TrashSimple } from '@phosphor-icons/react';
 
 type listType = {
   propertySize: number;
@@ -22,8 +23,7 @@ const PropertiesList = ({
   propertyName,
   idx,
 }: listType) => {
-  const {  checked, setChecked } =
-    useContext(PropertiesContext);
+  const { checked, setChecked } = useContext(PropertiesContext);
   const [shortStrings, setShortStrings] = useState({
     propertySize: propertySize.toLocaleString(),
     pricePerFragment: pricePerFragment.toLocaleString(),
@@ -40,7 +40,6 @@ const PropertiesList = ({
   };
 
   useEffect(() => {
-
     getShortString(
       `${shortStrings.propertyName}`,
       setShortStrings,
@@ -67,6 +66,7 @@ const PropertiesList = ({
       12
     );
   }, [
+    checked,
     shortStrings.location,
     shortStrings.pricePerFragment,
     shortStrings.propertyName,
@@ -77,10 +77,7 @@ const PropertiesList = ({
   return (
     <ListStyle checked={checked[idx]}>
       <div className="check_box_container">
-        <div
-          className="checkmark"
-          onClick={checkBoxClick}
-        ></div>
+        <div className="checkmark" onClick={checkBoxClick}></div>
       </div>
       <div className="font_size">{shortStrings.propertyName}</div>
       <div className="location_container">
@@ -90,17 +87,24 @@ const PropertiesList = ({
         <div className="location font_size">{shortStrings.location}</div>
       </div>
       <div>
-        <div className="property_size font_size">
+        <div className="add_background_for_size_and_asset property_size font_size">
           {shortStrings.propertySize} m²
         </div>
       </div>
       <div>
-        <div className="total_asset_price font_size">
+        <div className="add_background_for_size_and_asset total_asset_price font_size">
           ${shortStrings.totalAssetPrice}
         </div>
       </div>
       <div className="font_size">${shortStrings.pricePerFragment}</div>
-      <div>Action</div>
+      <div className="action_container">
+        <div className="action">
+          <PencilSimpleLine size={15} />
+        </div>
+        <div className="action">
+          <TrashSimple size={15.5} />
+        </div>
+      </div>
     </ListStyle>
   );
 };
@@ -156,8 +160,8 @@ const ListStyle = styled.div<{ checked: boolean }>`
   }
   .location_image_container {
     display: flex;
-    width: 40px;
-    height: 37px;
+    width: 35px;
+    height: 33px;
     border-radius: 5px;
     background: linear-gradient(to bottom right, #323232, #101010);
     overflow: hidden;
@@ -169,19 +173,33 @@ const ListStyle = styled.div<{ checked: boolean }>`
     font-size: calc(12.9 / 1.6 * 0.1rem);
     font-weight: 200;
   }
+    .add_background_for_size_and_asset{
+      display: inline;
+      padding: 5px 10px;
+      border-radius: 20px;
+    }
   .property_size {
-    display: inline;
     background-color: #036363;
-    padding: 7px 10px;
-    border-radius: 20px;
   }
   .total_asset_price {
-    display: inline;
-    background-color: #402638;
-    padding: 7px 10px;
-    border-radius: 20px;
+    background-color: ${colors.lightBGColor};
   }
-
+  .action_container {
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+  }
+  .action {
+    display: flex;
+    align-items: center;
+    background-color: ${colors.lightBGColor};
+    border-radius: 5px;
+    padding: 3px;
+    cursor: pointer;
+  }
+  .action:hover {
+  color:rgba(255,255,255,0.5);
+  }
   @keyframes checkbox-check {
     0% {
       width: 0;

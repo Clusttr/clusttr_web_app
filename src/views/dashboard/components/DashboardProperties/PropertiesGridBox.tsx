@@ -4,9 +4,11 @@ import bed from '../../../../assets/images/bed.png';
 import bathroom from '../../../../assets/images/bathroom.png';
 import coinsIcon from '../../../../assets/images/coins.png';
 import dollarIcon from '../../../../assets/images/dollar_icon.png';
-import testPic from '../../../../assets/images/temp_test_pic.jpg';
+import assets from '../../../../assets/images/assets.png';
+import testPic from '../../../../assets/images/temp_test_pic.png';
 import angle from '../../../../assets/images/angle.png';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { getShortString } from './shortString';
 // import colors from '../../../../assets/colors/project_colors';
 
 type CardType = {
@@ -47,6 +49,8 @@ const Info = ({
   );
 };
 
+// ?add shortstring on here
+
 const PropertiesGridBox = ({
   propertySize,
   beds,
@@ -57,6 +61,50 @@ const PropertiesGridBox = ({
   location,
   propertyName,
 }: CardType) => {
+
+  const [shortStrings, setShortStrings] = useState({
+    propertySize: propertySize.toLocaleString(),
+    pricePerFragment: pricePerFragment.toLocaleString(),
+    totalAssetPrice: totalAssetPrice.toLocaleString(),
+    location: location,
+    propertyName: propertyName,
+  });
+
+  
+  useEffect(() => {
+    getShortString(
+      `${shortStrings.propertyName}`,
+      setShortStrings,
+      'propertyName',
+      25
+    );
+    getShortString(`${shortStrings.location}`, setShortStrings, 'location', 60);
+    getShortString(
+      `${shortStrings.propertySize}`,
+      setShortStrings,
+      'propertySize',
+      9
+    );
+    getShortString(
+      `${shortStrings.totalAssetPrice}`,
+      setShortStrings,
+      'totalAssetPrice',
+      12
+    );
+    getShortString(
+      `${shortStrings.pricePerFragment}`,
+      setShortStrings,
+      'pricePerFragment',
+      9
+    );
+  }, [
+    shortStrings.location,
+    shortStrings.pricePerFragment,
+    shortStrings.propertyName,
+    shortStrings.propertySize,
+    shortStrings.totalAssetPrice,
+  ]);
+
   return (
     <GridBoxStyle>
       <div className="card_img_container">
@@ -64,28 +112,28 @@ const PropertiesGridBox = ({
       </div>
       <div className="card_info_container">
         <div className="card_top_info_container">
-          <div className="card_top_info_property_name">{propertyName}</div>
-          <div className="card_top_info_location">{location}</div>
+          <div className="card_top_info_property_name">{shortStrings.propertyName}</div>
+          <div className="card_top_info_location">{shortStrings.location}</div>
         </div>
         <div className="card_bottom_info_container">
           <Info
             angleIcon={''}
-            info={`${propertySize.toLocaleString()} ft`}
+            info={`${shortStrings.propertySize} ft`}
             icon={windowEdge}
           />
           <Info
             angleIcon={angle}
-            info={`$${pricePerFragment.toLocaleString()}`}
+            info={`$${shortStrings.pricePerFragment}`}
             icon={coinsIcon}
           />
           <Info angleIcon={''} info={`${beds}`} icon={bed} />
           <Info
             angleIcon={angle}
-            info={`$${totalAssetPrice.toLocaleString()}`}
+            info={`$${shortStrings.totalAssetPrice}`}
             icon={dollarIcon}
           />
           <Info angleIcon={''} info={`${bathrooms}`} icon={bathroom} />
-          <Info angleIcon={''} info={`${totalAssetValue.toLocaleString()}`} icon={bathroom} />
+          <Info angleIcon={''} info={`${totalAssetValue.toLocaleString()}`} icon={assets} />
         </div>
       </div>
     </GridBoxStyle>
@@ -114,8 +162,7 @@ const GridBoxStyle = styled.div`
     transition: all 0.4s;
   }
   .card_info_container {
-    padding: 10px 0 0 3px;
-
+    padding: 15px 0 0 3px;
     display: flex;
     flex-direction: column;
     gap: 13px;
@@ -123,7 +170,7 @@ const GridBoxStyle = styled.div`
   .card_top_info_container {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 7px;
   }
   .card_top_info_property_name {
     font-weight: 200;

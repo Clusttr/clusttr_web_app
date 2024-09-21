@@ -14,11 +14,13 @@ type fakeDataProp = {
 };
 
 const DashboardListBox = () => {
-  const { setChecked } = useContext(PropertiesContext);
+  const { setChecked} =
+    useContext(PropertiesContext);
 
   useEffect(() => {
     setChecked(new Array(fakePropertyData.length).fill(false));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -57,6 +59,7 @@ const DashboardListBox = () => {
           )
         )}
       </div>
+    
     </ListBoxStyle>
   );
 };
@@ -83,7 +86,7 @@ const ListBoxStyle = styled.div`
     display: flex;
     flex-direction: column;
     gap: 5px;
-    height: 450px;
+    height: 415px;
     padding: 10px 0 10px 0;
     overflow: scroll;
     overflow-x: hidden;
