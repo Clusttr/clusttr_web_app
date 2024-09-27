@@ -2,9 +2,9 @@ import styled from "styled-components";
 import colors from "../../../../assets/colors/project_colors";
 
 type inputValues = {
-  valueRange: { from: string; to: string };
-  propertySize: { from: string; to: string };
+  [key: string]: { from: string; to: string };
 };
+
 type inputProp = {
   inputTitle: string;
   inputPlaceholder: string;
