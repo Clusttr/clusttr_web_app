@@ -51,7 +51,7 @@ const DashboardProperties = () => {
   const { isGrid, checkCount } = useContext(PropertiesContext);
 
   return (
-    <DashboardPropertiesStyle $isGrid={isGrid}>
+    <DashboardPropertiesStyle $isGrid={isGrid} $CC={checkCount}>
       <DashboardPropertiesHeader />
       <SearchAndFilter />
       <div
@@ -92,22 +92,22 @@ const DashboardProperties = () => {
           <DashboardListBox />
         )}
       </div>
-      {isGrid || checkCount === 0 ? (
+      {/* {isGrid || checkCount === 0 ? (
         <CheckCountComponent
           checkCount={checkCount}
           animate="check_count_animation_end"
         />
-      ) : (
-        <CheckCountComponent
-          checkCount={checkCount}
-          animate="check_count_animation_start"
-        />
-      )}
+      ) : ( */}
+      <CheckCountComponent
+        checkCount={checkCount}
+        animate={`check_count_animation_${checkCount === 0 ? 'end' : 'start'}`}
+      />
+      {/* )} */}
     </DashboardPropertiesStyle>
   );
 };
 
-const DashboardPropertiesStyle = styled.div<{ $isGrid: boolean }>`
+const DashboardPropertiesStyle = styled.div<{ $isGrid: boolean; $CC: number }>`
   background-color: ${({ $isGrid }) =>
     $isGrid ? colors.propertiesBGColor : colors.backgroundColor};
   margin: 15px 20px;
@@ -133,6 +133,7 @@ const DashboardPropertiesStyle = styled.div<{ $isGrid: boolean }>`
     align-items: center;
     gap: 20px;
     box-shadow: 0px 0px 1.7px ${colors.white};
+    display: ${({ $isGrid }) => ($isGrid ? 'none' : 'flex')};
   }
   .check_count_animation_start {
     animation: slide_check_count_start 0.4s forwards;
@@ -205,18 +206,18 @@ const DashboardPropertiesStyle = styled.div<{ $isGrid: boolean }>`
   @keyframes slide_check_count_end {
     0% {
       bottom: 30px;
-      opacity: 1;
+      opacity: ${({ $CC }) => ($CC === 0 ? 0 : 1)};
     }
     20% {
-      opacity: 0.5;
+      opacity: ${({ $CC }) => ($CC === 0 ? 0 : 0.5)};
     }
     40% {
       bottom: 20px;
-      opacity: 0.4;
+      opacity: ${({ $CC }) => ($CC === 0 ? 0 : 0.4)};
     }
     70% {
       bottom: 40px;
-      opacity: 0.2;
+      opacity: ${({ $CC }) => ($CC === 0 ? 0 : 0.2)};
     }
     100% {
       bottom: -50px;

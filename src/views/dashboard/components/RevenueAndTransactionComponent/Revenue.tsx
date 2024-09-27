@@ -29,7 +29,7 @@ const Revenue = () => {
   return (
     <RevenueStyle>
       <RevenueHeader />
-      <div>
+      <div style={{ cursor: 'pointer' }}>
         <Line data={data} options={options} height="225px" width="200px" />
       </div>
       <div className="revenue_bottom_container">

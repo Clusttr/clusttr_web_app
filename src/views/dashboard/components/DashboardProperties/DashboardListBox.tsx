@@ -14,8 +14,7 @@ type fakeDataProp = {
 };
 
 const DashboardListBox = () => {
-  const { setChecked} =
-    useContext(PropertiesContext);
+  const { setChecked } = useContext(PropertiesContext);
 
   useEffect(() => {
     setChecked(new Array(fakePropertyData.length).fill(false));
@@ -59,7 +58,6 @@ const DashboardListBox = () => {
           )
         )}
       </div>
-    
     </ListBoxStyle>
   );
 };
@@ -83,6 +81,7 @@ const ListBoxStyle = styled.div`
     font-size: calc(11.5 / 1.6 * 0.1rem);
   }
   .list_box_lists {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 5px;
