@@ -28,14 +28,7 @@ const Search = ({
   background,
 }: SearchProp) => {
   const [toggleFilter, setToggleFilter] = useState(false);
-  const toggleActiveStyle = {
-    transform: 'rotate(360deg)',
-    transition: 'all 0.5s',
-  };
-  const toggleInActiveStyle = {
-    transform: 'rotate(0deg)',
-    transition: 'all 0.5s',
-  };
+
   const toggleFilterFunc = (option: boolean) => setToggleFilter(option);
   const [searchValue, setSearchValue] = useState('');
 
@@ -51,7 +44,7 @@ const Search = ({
     >
       <div className="search_glass">
         <MagnifyingGlass
-          style={toggleFilter ? toggleActiveStyle : toggleInActiveStyle}
+          className={toggleFilter ? 'toggle_active' : 'toggle_inactive'}
           size={17}
           color="#5D7A76"
         />
@@ -76,6 +69,14 @@ const Search = ({
 const SearchStyle = styled.div<SearchStyleProp>`
   display: flex;
 
+  .toggle_active {
+    transform: rotate(360deg);
+    transition: all 0.5s;
+  }
+  .toggle_inactive {
+    transform: rotate(0deg);
+    transition: all 0.5s;
+  }
   .search_glass {
     display: flex;
     justify-content: center;

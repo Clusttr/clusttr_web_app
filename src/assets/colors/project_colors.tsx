@@ -22,7 +22,7 @@ const colors: { [key: string]: string } = {
   darkerGrey: '#5D7A76',
   lightGreenTextColor: '#C8E3DF',
   lightBlack: '#100A0E',
-  
+  darkWhite: '#B2CAC7',
 };
 
 export default colors;

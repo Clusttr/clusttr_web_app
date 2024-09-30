@@ -7,9 +7,11 @@ import dollarIcon from '../../../../assets/images/dollar_icon.png';
 import assets from '../../../../assets/images/assets.png';
 import testPic from '../../../../assets/images/temp_test_pic.png';
 import angle from '../../../../assets/images/angle.png';
-import { useEffect, useState } from 'react';
-import { getShortString } from './shortString';
+import EllipseText from '../../../reuseable_components/ellipsis_text/EllipseText';
+import PropertiesGridBoxInfo from './PropertiesGridBoxInfo';
 // import colors from '../../../../assets/colors/project_colors';
+import { Tooltip } from 'react-tooltip';
+import colors from '../../../../assets/colors/project_colors';
 
 type CardType = {
   propertySize: number;
@@ -22,35 +24,6 @@ type CardType = {
   propertyName: string;
 };
 
-const Info = ({
-  info,
-  icon,
-  angleIcon,
-}: {
-  info: string;
-  icon: string;
-  angleIcon: string;
-}) => {
-  const [rotateAngle, setRotateAngle] = useState(true);
-
-  return (
-    <div
-      className="card_bottom_info"
-      onClick={() => setRotateAngle(!rotateAngle)}
-    >
-      <img src={icon} alt="" />
-      <div>{info}</div>
-      <img
-        src={angleIcon}
-        alt=""
-        className={rotateAngle ? 'rotate_angle' : 'return_to_default'}
-      />
-    </div>
-  );
-};
-
-// ?add shortstring on here
-
 const PropertiesGridBox = ({
   propertySize,
   beds,
@@ -61,50 +34,6 @@ const PropertiesGridBox = ({
   location,
   propertyName,
 }: CardType) => {
-
-  const [shortStrings, setShortStrings] = useState({
-    propertySize: propertySize.toLocaleString(),
-    pricePerFragment: pricePerFragment.toLocaleString(),
-    totalAssetPrice: totalAssetPrice.toLocaleString(),
-    location: location,
-    propertyName: propertyName,
-  });
-
-  
-  useEffect(() => {
-    getShortString(
-      `${shortStrings.propertyName}`,
-      setShortStrings,
-      'propertyName',
-      25
-    );
-    getShortString(`${shortStrings.location}`, setShortStrings, 'location', 60);
-    getShortString(
-      `${shortStrings.propertySize}`,
-      setShortStrings,
-      'propertySize',
-      9
-    );
-    getShortString(
-      `${shortStrings.totalAssetPrice}`,
-      setShortStrings,
-      'totalAssetPrice',
-      12
-    );
-    getShortString(
-      `${shortStrings.pricePerFragment}`,
-      setShortStrings,
-      'pricePerFragment',
-      9
-    );
-  }, [
-    shortStrings.location,
-    shortStrings.pricePerFragment,
-    shortStrings.propertyName,
-    shortStrings.propertySize,
-    shortStrings.totalAssetPrice,
-  ]);
-
   return (
     <GridBoxStyle>
       <div className="card_img_container">
@@ -112,28 +41,112 @@ const PropertiesGridBox = ({
       </div>
       <div className="card_info_container">
         <div className="card_top_info_container">
-          <div className="card_top_info_property_name">{shortStrings.propertyName}</div>
-          <div className="card_top_info_location">{shortStrings.location}</div>
+          <div className="card_top_info_property_name">
+            <EllipseText id="propertyName" str={propertyName} len={25} />
+            {propertyName.length > 25 ? (
+              <Tooltip
+                id="propertyName"
+                className="tooltip"
+                classNameArrow="tooltip_arrow"
+                opacity={0.73}
+              />
+            ) : (
+              ''
+            )}
+          </div>
+          <div className="card_top_info_location">
+            <EllipseText id="location" str={location} len={60} />
+            {`${location}`.length > 60 ? (
+              <Tooltip
+                id="location"
+                className="tooltip"
+                classNameArrow="tooltip_arrow"
+                opacity={0.73}
+              />
+            ) : (
+              ''
+            )}
+          </div>
         </div>
         <div className="card_bottom_info_container">
-          <Info
+          <PropertiesGridBoxInfo
+            str={`${propertySize.toLocaleString()}`}
             angleIcon={''}
-            info={`${shortStrings.propertySize} ft`}
+            id="propertySize"
+            info={
+              <EllipseText
+                id="propertySize"
+                str={`${propertySize.toLocaleString()}`}
+                len={9}
+              />
+            }
+            len={9}
+            unit="ft"
             icon={windowEdge}
           />
-          <Info
+          <PropertiesGridBoxInfo
+            str={`${pricePerFragment.toLocaleString()}`}
             angleIcon={angle}
-            info={`$${shortStrings.pricePerFragment}`}
+            id="pricePerFragment"
+            info={
+              <EllipseText
+                id="pricePerFragment"
+                str={`${pricePerFragment.toLocaleString()}`}
+                len={9}
+              />
+            }
+            len={9}
             icon={coinsIcon}
+            unit="$"
           />
-          <Info angleIcon={''} info={`${beds}`} icon={bed} />
-          <Info
+          <PropertiesGridBoxInfo
+            str={''}
+            angleIcon={''}
+            info={`${beds}`}
+            icon={bed}
+            unit=""
+            id=""
+            len={0}
+          />
+          <PropertiesGridBoxInfo
+            str={`${totalAssetPrice.toLocaleString()}`}
             angleIcon={angle}
-            info={`$${shortStrings.totalAssetPrice}`}
+            id="totalAssetPrice"
+            info={
+              <EllipseText
+                id="totalAssetPrice"
+                str={`${totalAssetPrice.toLocaleString()}`}
+                len={12}
+              />
+            }
+            len={12}
             icon={dollarIcon}
+            unit="$"
           />
-          <Info angleIcon={''} info={`${bathrooms}`} icon={bathroom} />
-          <Info angleIcon={''} info={`${totalAssetValue.toLocaleString()}`} icon={assets} />
+          <PropertiesGridBoxInfo
+            str={''}
+            angleIcon={''}
+            info={`${bathrooms}`}
+            icon={bathroom}
+            unit=""
+            id=""
+            len={0}
+          />
+          <PropertiesGridBoxInfo
+            str={`${totalAssetValue.toLocaleString()}`}
+            angleIcon={''}
+            id="totalAssetValue"
+            info={
+              <EllipseText
+                id="totalAssetValue"
+                str={`${totalAssetValue.toLocaleString()}`}
+                len={9}
+              />
+            }
+            len={9}
+            icon={assets}
+            unit=""
+          />
         </div>
       </div>
     </GridBoxStyle>
@@ -141,6 +154,24 @@ const PropertiesGridBox = ({
 };
 
 const GridBoxStyle = styled.div`
+  .tooltip {
+    border-radius: 5px;
+    border: 1px dashed rgba(255, 255, 255, 0.5);
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: ${colors.black};
+    color: ${colors.darkWhite};
+    font-size: calc(11 / 1.6 * 0.1rem);
+    z-index: 20;
+  }
+  .tooltip_arrow {
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
+    border-right: 1px dashed rgba(255, 255, 255, 0.5);
+  }
+
   .card_img_container {
     border-radius: 10px;
     overflow: hidden;
@@ -153,6 +184,21 @@ const GridBoxStyle = styled.div`
     cursor: pointer;
   }
 
+  .card_top_info_property_name:hover > .pop_up_text_container {
+    display: inline-block;
+    top: -400%;
+    left: 0;
+  }
+  .card_top_info_location:hover > .pop_up_text_container {
+    display: inline-block;
+    top: -230%;
+    left: 0;
+  }
+  .pop_up_text:after {
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
+    border-right: 1px dashed rgba(255, 255, 255, 0.5);
+    bottom: -10%;
+  }
   .card_img {
     width: 140%;
     transition: all 0.4s;
@@ -175,6 +221,7 @@ const GridBoxStyle = styled.div`
   .card_top_info_property_name {
     font-weight: 200;
     font-size: calc(15 / 1.6 * 0.1rem);
+    position: relative;
     cursor: pointer;
   }
   .card_top_info_property_name:hover {
@@ -185,30 +232,13 @@ const GridBoxStyle = styled.div`
     font-weight: 200;
     color: #999999;
     font-size: calc(13.2 / 1.6 * 0.1rem);
+    position: relative;
     line-height: 1.1rem;
   }
   .card_bottom_info_container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     row-gap: 8px;
-  }
-  .card_bottom_info {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    overflow: hidden;
-  }
-  .card_bottom_info > div:nth-child(2) {
-    font-size: calc(12.5 / 1.6 * 0.1rem);
-    font-weight: 200;
-  }
-  .rotate_angle {
-    transform: rotate(180deg);
-    transition: all 0.4s;
-  }
-  .return_to_default {
-    transform: rotate(0deg);
-    transition: all 0.4s;
   }
 `;
 

@@ -29,19 +29,19 @@ const TransactionsTabs = () => {
 
   setTimeout(() => {
     setTempRun1(true);
-  }, 1000);
+  }, 500);
   setTimeout(() => {
     setTempRun2(true);
-  }, 2000);
+  }, 1000);
   setTimeout(() => {
     setTempRun3(true);
-  }, 3000);
+  }, 1500);
   setTimeout(() => {
     setTempRun4(true);
-  }, 4000);
+  }, 2000);
   setTimeout(() => {
     setTempRun5(true);
-  }, 5000);
+  }, 2500);
 
   setInterval(() => {}, 1000);
   return (

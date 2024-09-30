@@ -71,6 +71,7 @@ const ListBoxStyle = styled.div`
 
   .list_box_header {
     background-color: ${colors.lightBlack};
+    color: ${colors.darkWhite};
     padding: 18px 20px;
     display: grid;
     grid-template-columns: 0.2fr 1.09fr 1.28fr 0.83fr 1fr 1.3fr 0.3fr;

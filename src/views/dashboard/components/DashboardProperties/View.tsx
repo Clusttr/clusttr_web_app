@@ -38,6 +38,17 @@ const ViewStyle = styled.div`
     cursor: pointer;
     border-radius: 7px;
   }
+
+  .active {
+    background-color: ${colors.white};
+    transform: rotate(0deg);
+    transition: all 0.4s;
+  }
+  .active:hover {
+    background-color: rgba(255, 255, 255, 0.85);
+    cursor: pointer;
+    transition: all 0.4s;
+  }
 `;
 
 export default View;

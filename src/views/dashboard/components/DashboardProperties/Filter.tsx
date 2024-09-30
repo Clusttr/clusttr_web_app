@@ -4,14 +4,6 @@ import colors from '../../../../assets/colors/project_colors';
 import FilterDropDown from './FilterDropDown';
 
 type FilterProp = {
-  toggleActiveStyle: {
-    color: string;
-    transition: string;
-  };
-  toggleInActiveStyle: {
-    color: string;
-    transition: string;
-  };
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   toggleFilterFunc: any;
   toggleFilter: boolean;
@@ -21,14 +13,12 @@ type FilterProp = {
 const Filter = ({
   toggleFilter,
   toggleFilterFunc,
-  toggleActiveStyle,
-  toggleInActiveStyle,
   setToggleFilter,
 }: FilterProp) => {
   return (
     <FilterStyle $toggleFilter={toggleFilter}>
       <div className="filter" onClick={toggleFilterFunc}>
-        <div style={toggleFilter ? toggleActiveStyle : toggleInActiveStyle}>
+        <div className={toggleFilter ? 'toggle_active' : 'toggle_inactive'}>
           <Funnel size={14} color={`${colors.black}`} />
         </div>
         <div className="filter_text">Filter</div>
@@ -62,6 +52,16 @@ const FilterStyle = styled.div<{ $toggleFilter: boolean }>`
     user-select: none;
     font-weight: 500;
     color: ${colors.black};
+  }
+
+  .toggle_active {
+    color: ${colors.black};
+    transform: rotate(-180deg);
+    transition: all 0.6s;
+  }
+  .toggle_inactive {
+    color: ${colors.black};
+    transition: all 0.6s;
   }
 `;
 
