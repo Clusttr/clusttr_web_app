@@ -67,7 +67,6 @@ const Dashboard = () => {
 
 const DashboardStyle = styled.div`
   position: relative;
-  width: 100%;
   display: flex;
   flex-direction: column;
 `;
