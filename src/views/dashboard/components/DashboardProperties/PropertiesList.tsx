@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import colors from '../../../../assets/colors/project_colors';
 import ListCheckBox from './ListCheckBox';
@@ -10,6 +11,13 @@ type listType = {
   location: string;
   propertyName: string;
   idx: number;
+  setIsActive: Dispatch<
+    SetStateAction<{
+      isDeleteActive: boolean;
+      isEditActive: boolean;
+      isSearchActive: boolean;
+    }>
+  >;
 };
 
 const PropertiesList = ({
@@ -19,6 +27,7 @@ const PropertiesList = ({
   location,
   propertyName,
   idx,
+  setIsActive
 }: listType) => {
   return (
     <ListStyle $index={idx}>
@@ -29,6 +38,7 @@ const PropertiesList = ({
         totalAssetPrice={totalAssetPrice}
         location={location}
         propertyName={propertyName}
+        setIsActive={setIsActive}
       />
     </ListStyle>
   );

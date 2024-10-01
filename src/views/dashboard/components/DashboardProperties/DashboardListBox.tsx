@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import colors from '../../../../assets/colors/project_colors';
 import fakePropertyData from './fakePropertyData';
@@ -12,8 +13,17 @@ type fakeDataProp = {
   location: string;
   propertyName: string;
 };
+type ListBoxProp = {
+  setIsActive: Dispatch<
+    SetStateAction<{
+      isDeleteActive: boolean;
+      isEditActive: boolean;
+      isSearchActive: boolean;
+    }>
+  >;
+};
 
-const DashboardListBox = () => {
+const DashboardListBox = ({ setIsActive }: ListBoxProp) => {
   const { setChecked } = useContext(PropertiesContext);
 
   useEffect(() => {
@@ -53,6 +63,7 @@ const DashboardListBox = () => {
                 totalAssetPrice={totalAssetPrice}
                 location={location}
                 propertyName={propertyName}
+                setIsActive={setIsActive}
               />
             </div>
           )

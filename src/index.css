@@ -31,10 +31,11 @@
   font-family: Roobert;
   user-select: none !important;
 }
-body {
-  background-color: #05020d;
+.scroll-lock {
+  overflow: hidden;
 }
 body {
+  background-color: #05020d;
   overflow-x: hidden;
 }
 /* width */

@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import colors from '../../../../assets/colors/project_colors';
 import DashboardPropertiesHeader from './DashboardPropertiesHeader';
@@ -7,6 +8,7 @@ import fakePropertyData from './fakePropertyData';
 import { useContext } from 'react';
 import DashboardListBox from './DashboardListBox';
 import { PropertiesContext } from '../../../../assets/utils/PropertiesContext';
+import CheckCountComponent from './CheckCountComponent';
 
 type fakeDataProp = {
   propertySize: number;
@@ -18,36 +20,17 @@ type fakeDataProp = {
   location: string;
   propertyName: string;
 };
-type CheckCountType = {
-  checkCount: number;
-  animate: string;
-};
-const CheckCountComponent = ({ checkCount, animate }: CheckCountType) => {
-  return (
-    <div className={`check_count ${animate}`}>
-      <div className="count_info">
-        {checkCount === 0 ? '1' : checkCount} properties selected, what would
-        you like to do?
-      </div>
-      <div className="request_container">
-        <div
-          className="request request_edit"
-          onClick={() => console.log('request edit')}
-        >
-          Request Edit
-        </div>
-        <div
-          className="request request_delete"
-          onClick={() => console.log('request delete')}
-        >
-          Request Delete
-        </div>
-      </div>
-    </div>
-  );
+type DashboardPropertiesProp = {
+  setIsActive: Dispatch<
+    SetStateAction<{
+      isDeleteActive: boolean;
+      isEditActive: boolean;
+      isSearchActive: boolean;
+    }>
+  >;
 };
 
-const DashboardProperties = () => {
+const DashboardProperties = ({ setIsActive }: DashboardPropertiesProp) => {
   const { isGrid, checkCount } = useContext(PropertiesContext);
 
   return (
@@ -89,20 +72,15 @@ const DashboardProperties = () => {
             )
           )
         ) : (
-          <DashboardListBox />
+          <DashboardListBox setIsActive={setIsActive} />
         )}
       </div>
-      {/* {isGrid || checkCount === 0 ? (
-        <CheckCountComponent
-          checkCount={checkCount}
-          animate="check_count_animation_end"
-        />
-      ) : ( */}
+
       <CheckCountComponent
         checkCount={checkCount}
         animate={`check_count_animation_${checkCount === 0 ? 'end' : 'start'}`}
+        setIsActive={setIsActive}
       />
-      {/* )} */}
     </DashboardPropertiesStyle>
   );
 };
@@ -118,65 +96,12 @@ const DashboardPropertiesStyle = styled.div<{ $isGrid: boolean; $CC: number }>`
   overflow: hidden;
   transition: all 0.4s;
 
-  .check_count {
-    position: fixed;
-    bottom: -50px;
-    left: 0;
-    right: 0;
-    background-color: ${colors.lightBlack};
-    padding: 7px 15px;
-    border-radius: 15px;
-    margin-inline: auto;
-    width: fit-content;
-    z-index: 5;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    box-shadow: 0px 0px 1.7px ${colors.white};
-    display: ${({ $isGrid }) => ($isGrid ? 'none' : 'flex')};
-  }
   .check_count_animation_start {
     animation: slide_check_count_start 0.4s forwards;
   }
   .check_count_animation_end {
     animation: slide_check_count_end 0.4s backwards;
   }
-  .count_info {
-    font-size: calc(13.6 / 1.6 * 0.1rem);
-    font-weight: 200;
-  }
-  .request_container {
-    display: flex;
-    gap: 10px;
-  }
-  .request {
-    top: 0;
-    padding: 8px 16px;
-    border-radius: 6px;
-    text-wrap: nowrap;
-    font-size: calc(13.6 / 1.6 * 0.1rem);
-    font-weight: 500;
-  }
-  .request_edit {
-    background-color: ${colors.white};
-    color: ${colors.black};
-  }
-  .request_delete {
-    left: 110%;
-    background-color: ${colors.lightRed};
-    color: ${colors.white};
-  }
-  .request:hover {
-    cursor: pointer;
-    transition: all 0.4s;
-  }
-  .request_edit:hover {
-    background-color: rgba(255, 255, 255, 0.8);
-  }
-  .request_delete:hover {
-    background-color: red;
-  }
-
   @keyframes slide_check_count_start {
     0% {
       bottom: -50px;

@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import testPic from '../../../../assets/images/location_image.png';
 import { PencilSimpleLine, TrashSimple } from '@phosphor-icons/react';
@@ -11,6 +12,13 @@ type listType = {
   totalAssetPrice: number;
   location: string;
   propertyName: string;
+  setIsActive: Dispatch<
+    SetStateAction<{
+      isDeleteActive: boolean;
+      isEditActive: boolean;
+      isSearchActive: boolean;
+    }>
+  >;
 };
 
 const ListChildren = ({
@@ -19,7 +27,25 @@ const ListChildren = ({
   totalAssetPrice,
   location,
   propertyName,
+  setIsActive,
 }: listType) => {
+  const editRequest = () => {
+    console.log('request edit');
+    setIsActive({
+      isEditActive: true,
+      isDeleteActive: false,
+      isSearchActive: false,
+    });
+  };
+  const deleteRequest = () => {
+    console.log('request delete');
+    setIsActive({
+      isEditActive: false,
+      isDeleteActive: true,
+      isSearchActive: false,
+    });
+  };
+
   return (
     <>
       <PropertyNameStyle>
@@ -120,10 +146,10 @@ const ListChildren = ({
         )}
       </PricePerFragmentStyle>
       <ActionStyle>
-        <div className="action">
+        <div className="action" onClick={editRequest}>
           <PencilSimpleLine size={15} />
         </div>
-        <div className="action">
+        <div className="action" onClick={deleteRequest}>
           <TrashSimple size={15.5} />
         </div>
       </ActionStyle>
@@ -258,6 +284,23 @@ const TotalAssetPriceStyle = styled.div`
   }
 `;
 const PricePerFragmentStyle = styled.div`
+  .tooltip {
+    border-radius: 5px;
+    border: 1px dashed rgba(255, 255, 255, 0.5);
+    width: 13%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: ${colors.black};
+    color: ${colors.darkWhite};
+    font-size: calc(11 / 1.6 * 0.1rem);
+    z-index: 20;
+  }
+  .tooltip_arrow {
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
+    border-right: 1px dashed rgba(255, 255, 255, 0.5);
+  }
   .font_size {
     font-size: calc(12.9 / 1.6 * 0.1rem);
     font-weight: 200;

@@ -14,7 +14,7 @@ const RevenueAndTransactions = () => {
 
 const RevenueAndTransactionsStyle = styled.div`
   display: grid;
-  grid-template-columns: 1.5fr 0.5fr;
+  grid-template-columns: 3fr 1fr;
   margin: 0 20px 15px;
   gap: 15px;
   height: 390px;
