@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { MagnifyingGlass } from '@phosphor-icons/react';
 import { useState } from 'react';
+import colors from '../../../assets/colors/project_colors';
 
 type SearchProp = {
   inputWidth: number;
@@ -90,7 +91,7 @@ const SearchStyle = styled.div<SearchStyleProp>`
   }
   #input_search {
     background: ${({ $bgColor }) => $bgColor};
-    color: #355358;
+    color: ${colors.white};
     outline: none;
     border: none;
     width: ${({ $inputWidth }) => $inputWidth}rem;

@@ -8,6 +8,7 @@ const colors: { [key: string]: string } = {
   lightRed: '#FF5B5B',
   backgroundColor: '#20131C',
   lightBGColor: '#402638',
+  ModalBGColor: '#05020D',
   propertiesBGColor: '#071616',
   filterDropDownBGColor: '#070808',
   navLinkColor: '#355358',

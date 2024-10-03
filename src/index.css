@@ -32,6 +32,7 @@
   user-select: none !important;
 }
 body {
-  overflow: hidden;
   background-color: #05020d;
+  overflow-x: hidden;
+  user-select: none;
 }

@@ -49,7 +49,7 @@ const FilterDropDown = ({
     setTimeout(() => {
       setToggleFilter(false);
       setIsLoading(false);
-    }, 1500);
+    }, 2000);
   };
 
   return (
@@ -85,7 +85,7 @@ const FilterDropDown = ({
           }}
           onClick={filterBtnFunc}
         >
-          {loading ? 'Filtering...' : 'Apply'}
+          {loading ? <div className="loader"></div> : <span>Apply</span>}
         </div>
       </div>
     </FilterDDStyle>
@@ -185,9 +185,30 @@ const FilterDDStyle = styled.div`
     justify-content: center;
     align-content: center;
     font-size: calc(12 / 1.6 * 0.1rem);
-    font-weight: 200;
+    font-weight: 500;
     transition: background-color 0.4s;
     cursor: pointer;
+  }
+  .filter_button > span {
+    display: flex;
+    align-items: center;
+    height: 20px;
+  }
+  .loader {
+    width: 20px;
+    height: 20px;
+    border: 1px solid white;
+    animation: rotate_loader 0.4s forwards ease-out infinite;
+    border-right: 1px solid ${colors.ModalBGColor};
+    border-radius: 10px;
+  }
+  @keyframes rotate_loader {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 `;
 

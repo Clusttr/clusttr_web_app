@@ -14,6 +14,7 @@ const Dashboard = () => {
     isDeleteActive: false,
     isSearchActive: false,
   });
+  const [isModalClosed, setIsModalClosed] = useState(false);
 
   const closeModal = () => {
     setIsActive({
@@ -21,15 +22,16 @@ const Dashboard = () => {
       isDeleteActive: false,
       isSearchActive: false,
     });
+    setIsModalClosed(false);
   };
 
-  if (
-    isActive.isDeleteActive ||
-    isActive.isEditActive ||
-    isActive.isSearchActive
-  )
-    document.body.classList.add('scroll-lock');
-  else document.body.classList.remove('scroll-lock');
+  // if (
+  //   isActive.isDeleteActive ||
+  //   isActive.isEditActive ||
+  //   isActive.isSearchActive
+  // )
+  //   document.body.classList.add('scroll-lock');
+  // else document.body.classList.remove('scroll-lock');
 
   return (
     <DashboardStyle>
@@ -41,10 +43,17 @@ const Dashboard = () => {
         {isActive.isEditActive ? (
           <div>
             <DashboardDeleteAndEditUI
+              isModalClosed={isModalClosed}
+              setIsModalClosed={setIsModalClosed}
               closeModal={closeModal}
-              title={'Edit Request'}
+              title={'You are requesting an edit'}
             />
-            <span onClick={closeModal}></span>
+            <span
+              onClick={() => {
+                setIsModalClosed(true);
+                setTimeout(() => closeModal(), 500);
+              }}
+            ></span>
           </div>
         ) : (
           <></>
@@ -52,10 +61,17 @@ const Dashboard = () => {
         {isActive.isDeleteActive ? (
           <div>
             <DashboardDeleteAndEditUI
+              isModalClosed={isModalClosed}
+              setIsModalClosed={setIsModalClosed}
               closeModal={closeModal}
-              title={'Delete Request'}
+              title={'You are seeking to delete some files'}
             />
-            <span onClick={closeModal}></span>
+            <span
+              onClick={() => {
+                setIsModalClosed(true);
+                setTimeout(() => closeModal(), 500);
+              }}
+            ></span>
           </div>
         ) : (
           <></>

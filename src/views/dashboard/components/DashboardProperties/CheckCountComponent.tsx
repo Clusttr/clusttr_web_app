@@ -59,7 +59,7 @@ const CheckCountComponent = ({
 
 const CheckCountComponentStyle = styled.div<{ $isGrid: boolean }>`
   position: fixed;
-  bottom: -50px;
+  // bottom: -50px;
   left: 0;
   right: 0;
   background-color: ${colors.lightBlack};
@@ -73,6 +73,7 @@ const CheckCountComponentStyle = styled.div<{ $isGrid: boolean }>`
   gap: 20px;
   box-shadow: 0px 0px 1.7px ${colors.white};
   display: ${({ $isGrid }) => ($isGrid ? 'none' : 'flex')};
+
 
   .count_info {
     font-size: calc(13.6 / 1.6 * 0.1rem);
