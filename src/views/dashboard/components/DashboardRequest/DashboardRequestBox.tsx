@@ -2,37 +2,52 @@
 import styled from 'styled-components';
 import colors from '../../../../assets/colors/project_colors';
 import { WarningOctagon } from '@phosphor-icons/react';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
-type DeleteAndEditProp = {
+type RequestBoxPropType = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   closeModal: any;
   title: string;
   isModalClosed: boolean;
   setIsModalClosed: Dispatch<SetStateAction<boolean>>;
+  setIsSendBtn: Dispatch<SetStateAction<boolean>>;
 };
 
-const DashboardDeleteAndEditUI = ({
+const DashboardRequestBox = ({
   closeModal,
   title,
   isModalClosed,
   setIsModalClosed,
-}: DeleteAndEditProp) => {
+  setIsSendBtn,
+}: RequestBoxPropType) => {
   const [textValue, setTextValue] = useState('');
   const [loading, setIsLoading] = useState(false);
+  const [isTextEmpty, setIsTextEmpty] = useState(false);
 
   const cancelFunc = () => {
     setIsModalClosed(true);
     setTimeout(() => closeModal(), 500);
   };
+
   const sendFunc = () => {
+    if (textValue === '') {
+      setIsTextEmpty(true);
+      return;
+    }
+
     setIsLoading(true);
+    console.log(textValue);
     setTimeout(() => {
       setIsLoading(false);
-      setIsModalClosed(true);
+      setIsSendBtn(true);
     }, 2000);
-    setTimeout(() => closeModal(), 2500);
   };
+
+  useEffect(() => {
+    if (textValue !== '') {
+      setIsTextEmpty(false);
+    }
+  }, [textValue]);
 
   return (
     <DeleteAndEditStyle $isModalClosed={isModalClosed}>
@@ -53,22 +68,35 @@ const DashboardDeleteAndEditUI = ({
             you in a moment.
           </div>
         </div>
-        <textarea
-          placeholder={'Text'}
-          maxLength={300}
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          onChange={(e: any) => {
-            setTextValue(e.target.value);
-          }}
-          value={textValue}
-          id="input_search"
-        />
+        <div className="text_area_container">
+          <textarea
+            placeholder={'Text'}
+            maxLength={300}
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            onChange={(e: any) => {
+              setTextValue(e.target.value);
+            }}
+            style={
+              isTextEmpty
+                ? {
+                    border: `2px solid ${colors.lightRed}`,
+                    opacity: 0.8,
+                    animation: 'blinkRadar 1s linear',
+                  }
+                : {}
+            }
+            value={textValue}
+            id="input_search"
+          />
+        </div>
         <div className="buttons_container">
-          <div onClick={cancelFunc} className="btn cancel_btn">
-            Cancel
+          <div onClick={cancelFunc} className="btn">
+            <div className="cancel_btn">Cancel</div>
           </div>
-          <div onClick={sendFunc} className="btn send_btn">
-            {loading ? <div className="loader"></div> : <span>Send</span>}
+          <div onClick={sendFunc} className="btn">
+            <div className="send_btn">
+              {loading ? <span className="loader"></span> : <>Send</>}
+            </div>
           </div>
         </div>
       </ContentStyle>
@@ -225,20 +253,45 @@ const ContentStyle = styled.div`
     font-weight: 500;
     color: ${colors.lightGrey};
   }
+  .text_area_container {
+    position: relative;
+    height: calc(120 / 1.6 * 0.1rem);
+  }
   #input_search {
+    position: absolute;
     display: block;
     background: #0a2c2c;
     color: ${colors.white};
     resize: none;
     outline: none;
-    border: none;
     width: 100%;
-    height: calc(120 / 1.6 * 0.1rem);
+    height: 100%;
+    border: 2px solid ${colors.ModalBGColor};
     padding: 0.6rem;
     border-radius: 12px;
     font-weight: 200;
     font-size: calc(12.5 / 1.6 * 0.1rem);
     box-shadow: inset -0.1rem -0.1rem 0.6rem 0.05rem rgba(255, 255, 255, 0.2);
+  }
+  @keyframes blinkRadar {
+    0% {
+      transform: rotate(0);
+    }
+    50% {
+      transform: rotate(-9deg);
+    }
+    62.5% {
+      transform: rotate(3deg);
+    }
+    75% {
+      transform: rotate(-3deg);
+    }
+    87.5% {
+      transform: rotate(3deg);
+    }
+    100% {
+      transform: rotate(-3deg);
+    }
   }
   #input_search::placeholder {
     color: #355358;
@@ -276,40 +329,58 @@ const ContentStyle = styled.div`
   }
   .btn {
     width: 40%;
-    padding: 10px 0;
-    border-radius: 20px;
     font-size: calc(13.5 / 1.6 * 0.1rem);
-    display: inline;
     cursor: pointer;
+    position: relative;
+  }
+  .btn > div {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    border-radius: 20px;
+    padding: 11.5px 0;
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: all 0.3s ease-in-out;
   }
   .cancel_btn {
     background-color: white;
     color: black;
+    box-shadow: inset -0.2rem -0.2rem 0.7rem 0.2rem rgba(0, 0, 0, 0.7);
   }
   .cancel_btn:hover {
-    background-color: white;
-    opacity: 0.9;
+    opacity: 0.85;
+    margin-top: 2px;
+    margin-right: 1px;
   }
   .send_btn {
     background-color: ${colors.lightLightGreen};
     color: white;
+    box-shadow: inset -0.2rem -0.2rem 0.7rem 0.2rem rgba(0, 0, 0, 0.7);
   }
   .send_btn:hover {
-    background-color: ${colors.lightLightGreen};
     color: white;
-    opacity: 0.9;
+    opacity: 0.85;
+    margin-top: 2px;
+    margin-right: 1px;
   }
   .loader {
     width: 16px;
     height: 16px;
-    border: 1px solid white;
+    // border: 1px solid white;
     animation: rotate_loader 0.4s forwards ease-out infinite;
-    border-right: 1px solid ${colors.ModalBGColor};
+    border-right: 2px solid ${colors.ModalBGColor};
     border-radius: 10px;
+  }
+  @keyframes rotate_loader {
+    0% {
+      transform: rotate(0);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 `;
 
-export default DashboardDeleteAndEditUI;
+export default DashboardRequestBox;

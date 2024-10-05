@@ -74,7 +74,6 @@ const CheckCountComponentStyle = styled.div<{ $isGrid: boolean }>`
   box-shadow: 0px 0px 1.7px ${colors.white};
   display: ${({ $isGrid }) => ($isGrid ? 'none' : 'flex')};
 
-
   .count_info {
     font-size: calc(13.6 / 1.6 * 0.1rem);
     font-weight: 200;
@@ -90,6 +89,8 @@ const CheckCountComponentStyle = styled.div<{ $isGrid: boolean }>`
     text-wrap: nowrap;
     font-size: calc(13.6 / 1.6 * 0.1rem);
     font-weight: 500;
+    box-shadow: inset -0.2rem -0.4rem 0.8rem 0.2rem rgba(0, 0, 0, 0.7);
+    transition: all 0.4s linear;
   }
   .request_edit {
     background-color: ${colors.white};
@@ -102,7 +103,6 @@ const CheckCountComponentStyle = styled.div<{ $isGrid: boolean }>`
   }
   .request:hover {
     cursor: pointer;
-    transition: all 0.4s;
   }
   .request_edit:hover {
     background-color: rgba(255, 255, 255, 0.8);

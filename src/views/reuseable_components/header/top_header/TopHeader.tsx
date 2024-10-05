@@ -53,7 +53,6 @@ const TopHeaderStyle = styled.div`
     padding: 8px 12px;
     border-radius: 10px;
     font-size: calc(12.5 / 1.6 * 0.1rem);
-    transition: all 0.3s;
   }
   .logo_container {
     width: 17%;
@@ -73,6 +72,7 @@ const TopHeaderStyle = styled.div`
     font-size: calc(12.5 / 1.6 * 0.1rem);
     font-weight: 200;
     padding: 0 12px;
+    transition: all 0.5s linear;
   }
   .nav_link:hover {
     background-color: #3e3c3c7e;

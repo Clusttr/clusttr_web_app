@@ -31,6 +31,9 @@ const Filter = ({
 const FilterStyle = styled.div<{ $toggleFilter: boolean }>`
   z-index: 1;
   position: relative;
+  position: absolute;
+  right: 95%;
+  top: 5%;
 
   .filter {
     display: flex;
@@ -39,12 +42,13 @@ const FilterStyle = styled.div<{ $toggleFilter: boolean }>`
     background-color: ${colors.white};
     padding: 6px 16px;
     border-radius: 6px;
+    box-shadow: inset -0.2rem -0.3rem 0.8rem 0.2rem rgba(0, 0, 0, 0.7);
+    transition: background-color 0.4s linear, margin-top 0.2s linear;
   }
   .filter:hover {
     background-color: rgba(255, 255, 255, 0.8);
     cursor: pointer;
     margin-top: ${({ $toggleFilter }) => ($toggleFilter ? '0' : '2px')};
-    transition: background-color 0.4s, margin-top 0.25s;
   }
 
   .filter_text {

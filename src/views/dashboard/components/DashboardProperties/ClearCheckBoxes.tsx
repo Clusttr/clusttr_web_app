@@ -27,7 +27,7 @@ const ClearCheckBoxes = ({ animate }: CCBoxesTypes) => {
 const CCBoxesStyle = styled.div<{ $isGrid: boolean; $CC: number }>`
   .clear_checkboxes {
     position: absolute;
-    right: 100%;
+    right: 220%;
     top: -120%;
     z-index: 0;
     background-color: ${colors.lightRed};
@@ -39,6 +39,8 @@ const CCBoxesStyle = styled.div<{ $isGrid: boolean; $CC: number }>`
     color: ${colors.white};
     transition: top 0.4s ease-out;
     display: ${({ $isGrid }) => ($isGrid ? 'none' : 'flex')};
+    transition: background-color 0.4s linear, margin-top 0.3s ease-in-out;
+    box-shadow: inset -0.2rem -0.4rem 0.8rem 0.2rem rgba(0, 0, 0, 0.7);
   }
   #clear_checkboxes_animation_start {
     animation: slide_button_start 0.4s forwards;
@@ -50,7 +52,6 @@ const CCBoxesStyle = styled.div<{ $isGrid: boolean; $CC: number }>`
     background-color: red;
     cursor: pointer;
     margin-top: 2px;
-    transition: background-color 0.4s, margin-top 0.25s;
   }
 
   @keyframes slide_button_start {

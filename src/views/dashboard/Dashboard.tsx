@@ -5,8 +5,9 @@ import DashboardPropertyTab from './components/DashboardPropertyTabComponent/Das
 import RevenueAndTransactions from './components/RevenueAndTransactionComponent/RevenueAndTransactions';
 import DashboardProperties from './components/DashboardProperties/DashboardProperties';
 import { ContextAPI } from '../../assets/utils/PropertiesContext';
-import DashboardDeleteAndEditUI from './components/DashboardDeleteAndEditUI/DashboardDeleteAndEditUI';
+
 import { useState } from 'react';
+import DashboardRequest from './components/DashboardRequest/DashboardRequest';
 
 const Dashboard = () => {
   const [isActive, setIsActive] = useState({
@@ -42,15 +43,17 @@ const Dashboard = () => {
         <DashboardProperties setIsActive={setIsActive} />
         {isActive.isEditActive ? (
           <div>
-            <DashboardDeleteAndEditUI
+            <DashboardRequest
               isModalClosed={isModalClosed}
               setIsModalClosed={setIsModalClosed}
               closeModal={closeModal}
               title={'You are requesting an edit'}
+              request={'Edit'}
             />
             <span
               onClick={() => {
-                setIsModalClosed(true);
+                if (!isActive.isDeleteActive || !isActive.isEditActive)
+                  setIsModalClosed(true);
                 setTimeout(() => closeModal(), 500);
               }}
             ></span>
@@ -60,18 +63,13 @@ const Dashboard = () => {
         )}
         {isActive.isDeleteActive ? (
           <div>
-            <DashboardDeleteAndEditUI
+            <DashboardRequest
               isModalClosed={isModalClosed}
               setIsModalClosed={setIsModalClosed}
               closeModal={closeModal}
               title={'You are seeking to delete some files'}
+              request={'Delete'}
             />
-            <span
-              onClick={() => {
-                setIsModalClosed(true);
-                setTimeout(() => closeModal(), 500);
-              }}
-            ></span>
           </div>
         ) : (
           <></>

@@ -173,14 +173,19 @@ const FilterDDStyle = styled.div`
     flex-direction: column;
   }
   .filter_button_container {
-    padding: 15px 11px;
+    padding: 15px 0;
     border-top: 1px solid #1e2120;
     position: relative;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    height:65px;
   }
   .filter_button {
     padding: 7px;
+    position:absolute;
     border-radius: 20px;
-    width: 100%;
+    width: 92%;
     display: flex;
     justify-content: center;
     align-content: center;
@@ -188,6 +193,12 @@ const FilterDDStyle = styled.div`
     font-weight: 500;
     transition: background-color 0.4s;
     cursor: pointer;
+    box-shadow: inset -0.3rem -0.4rem 0.8rem 0.2rem rgba(0, 0, 0, 0.7);
+    transition: all 0.3s ease-in-out;
+  }
+  .filter_button:hover {
+    opacity: 0.85;
+    margin-top: 2.5px;
   }
   .filter_button > span {
     display: flex;

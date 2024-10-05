@@ -43,11 +43,12 @@ const ViewStyle = styled.div`
     background-color: ${colors.white};
     transform: rotate(0deg);
     transition: all 0.4s;
+    box-shadow: inset -0.1rem -0.1rem 0.7rem 0.05rem rgba(0, 0, 0, 0.6);
+    transition: all 0.4s linear;
   }
   .active:hover {
     background-color: rgba(255, 255, 255, 0.85);
     cursor: pointer;
-    transition: all 0.4s;
   }
 `;
 
