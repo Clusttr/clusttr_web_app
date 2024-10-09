@@ -1,9 +1,8 @@
-import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import colors from '../../../../assets/colors/project_colors';
 import fakePropertyData from './fakePropertyData';
 import PropertiesList from './PropertiesList';
-import { useContext, useEffect } from 'react';
+import { Dispatch, SetStateAction, useContext, useEffect } from 'react';
 import { PropertiesContext } from '../../../../assets/utils/PropertiesContext';
 
 type fakeDataProp = {
@@ -23,7 +22,7 @@ type ListBoxProp = {
   >;
 };
 
-const DashboardListBox = ({ setIsActive }: ListBoxProp) => {
+const DashboardListBox = ({  setIsActive }: ListBoxProp) => {
   const { setChecked } = useContext(PropertiesContext);
 
   useEffect(() => {

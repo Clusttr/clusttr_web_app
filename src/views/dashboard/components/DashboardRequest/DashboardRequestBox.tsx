@@ -30,13 +30,14 @@ const DashboardRequestBox = ({
   };
 
   const sendFunc = () => {
-    if (textValue === '') {
+    const regex = /^\s*$/;
+    if (!textValue || regex.test(textValue)) {
+      setTextValue('');
       setIsTextEmpty(true);
       return;
     }
 
     setIsLoading(true);
-    console.log(textValue);
     setTimeout(() => {
       setIsLoading(false);
       setIsSendBtn(true);

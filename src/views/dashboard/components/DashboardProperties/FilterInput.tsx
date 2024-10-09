@@ -1,16 +1,34 @@
-import styled from "styled-components";
-import colors from "../../../../assets/colors/project_colors";
+import styled from 'styled-components';
+import colors from '../../../../assets/colors/project_colors';
+import { Dispatch, SetStateAction } from 'react';
 
-type inputValues = {
-  [key: string]: { from: string; to: string };
-};
 
 type inputProp = {
   inputTitle: string;
   inputPlaceholder: string;
-  setInputValues: React.Dispatch<React.SetStateAction<inputValues>>;
+  setInputValues: Dispatch<
+    SetStateAction<{
+      valueRange: {
+        from: string;
+        to: string;
+      };
+      propertySize: {
+        from: string;
+        to: string;
+      };
+    }>
+  >;
   inputValue: string;
-  keyName: string;
+  keyName: keyof {
+    valueRange: {
+      from: string;
+      to: string;
+    };
+    propertySize: {
+      from: string;
+      to: string;
+    };
+  };
 };
 
 const FilterInput = ({
@@ -74,4 +92,4 @@ const InputStyle = styled.div`
   }
 `;
 
-export default FilterInput
+export default FilterInput;

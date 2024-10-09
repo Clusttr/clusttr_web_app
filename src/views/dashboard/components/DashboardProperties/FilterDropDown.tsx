@@ -49,6 +49,7 @@ const FilterDropDown = ({
     setTimeout(() => {
       setToggleFilter(false);
       setIsLoading(false);
+      console.log(inputValues);
     }, 2000);
   };
 
@@ -176,14 +177,14 @@ const FilterDDStyle = styled.div`
     padding: 15px 0;
     border-top: 1px solid #1e2120;
     position: relative;
-    display:flex;
-    justify-content:center;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    height:65px;
+    height: 65px;
   }
   .filter_button {
     padding: 7px;
-    position:absolute;
+    position: absolute;
     border-radius: 20px;
     width: 92%;
     display: flex;
@@ -208,9 +209,9 @@ const FilterDDStyle = styled.div`
   .loader {
     width: 20px;
     height: 20px;
-    border: 1px solid white;
+    // border: 1px solid white;
     animation: rotate_loader 0.4s forwards ease-out infinite;
-    border-right: 1px solid ${colors.ModalBGColor};
+    border-right: 2px solid ${colors.ModalBGColor};
     border-radius: 10px;
   }
   @keyframes rotate_loader {

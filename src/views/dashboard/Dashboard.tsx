@@ -50,13 +50,6 @@ const Dashboard = () => {
               title={'You are requesting an edit'}
               request={'Edit'}
             />
-            <span
-              onClick={() => {
-                if (!isActive.isDeleteActive || !isActive.isEditActive)
-                  setIsModalClosed(true);
-                setTimeout(() => closeModal(), 500);
-              }}
-            ></span>
           </div>
         ) : (
           <></>
@@ -75,6 +68,7 @@ const Dashboard = () => {
           <></>
         )}
       </ContextAPI>
+
     </DashboardStyle>
   );
 };

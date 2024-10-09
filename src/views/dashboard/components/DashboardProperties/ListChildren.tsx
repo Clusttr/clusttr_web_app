@@ -39,6 +39,7 @@ const ListChildren = ({
   };
   const deleteRequest = () => {
     console.log('request delete');
+    // setDeleteIndex(idx);
     setIsActive({
       isEditActive: false,
       isDeleteActive: true,

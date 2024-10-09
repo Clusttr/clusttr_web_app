@@ -31,6 +31,7 @@ function App() {
 const DashboardStyle = styled.div`
   .dashboard_container {
     overflow-y: scroll;
+    overflow-x: hidden;
     height: 100vh;
   }
 

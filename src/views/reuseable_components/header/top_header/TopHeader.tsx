@@ -1,12 +1,18 @@
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import colors from '../../../../assets/colors/project_colors';
-import { useEffect, useRef } from 'react';
+import { Dispatch, SetStateAction, useEffect, useRef } from 'react';
 import logo from '../../../../assets/images/clusttr_logo.png';
 import NavLinks from './NavLinks';
 import Profile from './Profile';
 
-const TopHeader = () => {
+type TopHeaderType = {
+  setIsTrayOpen: Dispatch<SetStateAction<boolean>>;
+  isTrayOpen: boolean;
+  setCloseTray: Dispatch<SetStateAction<boolean>>;
+};
+
+const TopHeader = ({ setIsTrayOpen, isTrayOpen, setCloseTray }: TopHeaderType) => {
   const navRef = useRef<HTMLDivElement>(null);
   const { pathname: windowPathname } = useLocation();
 
@@ -35,7 +41,11 @@ const TopHeader = () => {
       <div ref={navRef} className="nav_link__container">
         <NavLinks />
       </div>
-      <Profile />
+      <Profile
+        setIsTrayOpen={setIsTrayOpen}
+        isTrayOpen={isTrayOpen}
+        setCloseTray={setCloseTray}
+      />
     </TopHeaderStyle>
   );
 };

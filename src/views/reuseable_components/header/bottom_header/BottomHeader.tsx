@@ -16,7 +16,7 @@ const BottomHeaderStyle = styled.div`
 
   .overview {
     width: 3.5%;
-    padding: 10px 0px;
+    padding: 10px 0;
     color: white;
     font-size: calc(12.5 / 1.6 * 0.1rem);
     font-weight: 200;

@@ -27,7 +27,7 @@ const PropertiesList = ({
   location,
   propertyName,
   idx,
-  setIsActive
+  setIsActive,
 }: listType) => {
   return (
     <ListStyle $index={idx}>
@@ -44,15 +44,17 @@ const PropertiesList = ({
   );
 };
 
-const ListStyle = styled.div<{ $index: number }>`
+const ListStyle = styled.div<{
+  $index: number;
+}>`
   display: grid;
   grid-template-columns: 0.2fr 1fr 1.2fr 0.8fr 1fr 1.1fr 0.3fr;
   background-color: ${colors.backgroundColor};
   padding: 5px 18px;
   align-items: center;
   transform: scale(0) translateY(0);
-  animation: row_lists 0.6s calc(0.1s * ${({ $index }) => $index}) ease-in-out
-    forwards;
+  animation: row_lists 0.6s calc(0.1s * ${({ $index }) =>
+    $index}) ease-in-out forwards;
 
   @keyframes row_lists {
     0% {
@@ -62,6 +64,26 @@ const ListStyle = styled.div<{ $index: number }>`
       transform: scale(1) translateY(0);
     }
   }
+
+
+  }
 `;
+
+// ? animation for deleting elements in the list
+// ${({ $index, $deleteIndex, $isModalClosed }) =>
+//   $isModalClosed && $index === $deleteIndex
+//     ? `animation: slide_off 1s ease-in-out forwards;`
+//     : `animation: row_lists 0.6s calc(0.1s * ${$index}) ease-in-out forwards;`}
+
+// @keyframes slide_off {
+//   0% {
+//     transform: scale(1) translateY(0);
+//   }
+//   50% {
+//     transform: scale(1) translateX(90%);
+//   }
+//   100% {
+//     transform: scale(0) translateX(100%);
+//   }
 
 export default PropertiesList;

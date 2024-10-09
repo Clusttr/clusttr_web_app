@@ -1,17 +1,37 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 import FilterInput from './FilterInput';
-import colors from "../../../../assets/colors/project_colors";
+import colors from '../../../../assets/colors/project_colors';
+import { Dispatch, SetStateAction } from 'react';
 
-type inputValues = {
-  valueRange: { from: string; to: string };
-  propertySize: { from: string; to: string };
-};
+// type inputValues = {
+//   [key: string]: { from: string; to: string };
+// };
 type contentProp = {
   inputPlaceholder: string[];
   contentTitle: string;
-  setInputValues: React.Dispatch<React.SetStateAction<inputValues>>;
+  setInputValues: Dispatch<
+    SetStateAction<{
+      valueRange: {
+        from: string;
+        to: string;
+      };
+      propertySize: {
+        from: string;
+        to: string;
+      };
+    }>
+  >;
   inputValues: { from: string; to: string };
-  keyName: string;
+  keyName: keyof {
+    valueRange: {
+      from: string;
+      to: string;
+    };
+    propertySize: {
+      from: string;
+      to: string;
+    };
+  };
 };
 
 const FilterDDContent = ({
@@ -47,7 +67,6 @@ const FilterDDContent = ({
   );
 };
 
-
 const DDContentStyle = styled.div`
   display: flex;
   flex-direction: column;
@@ -79,4 +98,4 @@ const DDContentStyle = styled.div`
   }
 `;
 
-export default FilterDDContent
+export default FilterDDContent;

@@ -24,7 +24,13 @@ const DashboardRequestSent = ({
       setIsLoading(false);
       setIsModalClosed(true);
     }, 2000);
-    setTimeout(() => closeModal(), 2500);
+    setTimeout(() => {
+      closeModal();
+      console.log('Request Sent Successfully');
+      // ? for deleting individual items in the list
+      //   if (request.toLowerCase() === 'delete')
+      //     fakePropertyData.splice(deleteIndex, 1);
+    }, 2500);
   };
 
   return (
@@ -141,8 +147,8 @@ const BtnStyle = styled.div`
     color: ${colors.black};
     border-radius: 20px;
     font-size: calc(13.5 / 1.6 * 0.1rem);
-    box-shadow: inset -0.2rem -0.2rem 0.7rem 0.2rem rgba(0, 0, 0, 0.7);
     transition: all 0.3s ease-in-out;
+    box-shadow: inset -0.2rem -0.2rem 0.8rem 0.2rem rgba(0, 0, 0, 0.7);
   }
   .close_btn:hover {
     opacity: 0.9;
