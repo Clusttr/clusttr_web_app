@@ -16,6 +16,7 @@ const EndSearchStyle = styled.div`
   align-items: center;
   background-color: ${colors.lightLightGreen};
   padding: 9px 17px;
+  margin-left: 20px;
   border-radius: 8px;
   gap: 5px;
   cursor: pointer;

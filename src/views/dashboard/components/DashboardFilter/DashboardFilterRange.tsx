@@ -1,20 +1,58 @@
 import styled from 'styled-components';
 import colors from '../../../../assets/colors/project_colors';
+import ReactSlider from 'react-slider';
+import {
+  ClassAttributes,
+  HTMLAttributes,
+  SetStateAction,
+  useState,
+} from 'react';
+import { JSX } from 'react/jsx-runtime';
 
 type RangePropType = {
   title: string;
+  maxValue: number;
+  unit: string;
 };
 
-const DashboardFilterRange = ({ title }: RangePropType) => {
+const DashboardFilterRange = ({ title, maxValue, unit }: RangePropType) => {
+  const defaultRange = [0, maxValue];
+  const [currentValue, setCurrentValue] = useState(defaultRange);
+
   return (
     <RangeStyle>
-      <div className="title">{title}</div>
-      <div className="price_container">
-        <div className="price">$3,500</div>
-        <div className="line"></div>
-        <div className="price">$3,500,000</div>
+      <div>
+        <div className="title">{title}</div>
+        <div className="price_container">
+          <div className="price">
+            {unit === '$' ? unit : ''}
+            {currentValue[0].toLocaleString()}
+            {unit === '$' ? '' : unit}
+          </div>
+          <div className="line"></div>
+          <div className="price">
+            {unit === '$' ? unit : ''}
+            {currentValue[1].toLocaleString()}
+            {unit === '$' ? '' : unit}
+          </div>
+        </div>
       </div>
-      <div style={{ fontSize: 14 }}>DashboardFilterRange</div>
+      <ReactSlider
+        className="horizontal_slider"
+        thumbClassName="slider_thumb"
+        trackClassName="slider_track"
+        defaultValue={defaultRange}
+        min={0}
+        max={maxValue}
+        renderThumb={(
+          props: JSX.IntrinsicAttributes &
+            ClassAttributes<HTMLDivElement> &
+            HTMLAttributes<HTMLDivElement>
+        ) => <div {...props}></div>}
+        // pearling
+        minDistance={maxValue / 5 / 5}
+        onChange={(value: SetStateAction<number[]>) => setCurrentValue(value)}
+      />
     </RangeStyle>
   );
 };
@@ -23,7 +61,8 @@ const RangeStyle = styled.div`
   padding: 5px 0 5px 20px;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 15px;
+  width: 100%;
 
   .title {
     font-size: calc(12 / 1.6 * 0.1rem);
@@ -33,6 +72,7 @@ const RangeStyle = styled.div`
     display: flex;
     align-items: center;
     gap: 10px;
+    margin-top: 5px;
   }
   .price {
     font-size: calc(11 / 1.6 * 0.1rem);
@@ -46,11 +86,36 @@ const RangeStyle = styled.div`
     border-radius: 8px;
   }
   .line {
-    // padding: 1px 16px;
-    width: 13px;
+    width: 16px;
     height: 2px;
     border-radius: 50px;
     background-color: #242830;
+  }
+
+  .horizontal_slider {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 256px;
+    height: 2px;
+  }
+  .slider_thumb {
+    background-color: ${colors.lightLightGreen};
+    padding: 6px;
+    outline: none;
+    border-radius: 50%;
+  }
+  .slider_track.slider_track-0,
+  .slider_track.slider_track-2 {
+    top: 0;
+    height: 2px;
+    background-color: #353535;
+  }
+  .slider_track.slider_track-1 {
+    top: 0;
+    height: 2px;
+    background-color: ${colors.lightLightGreen};
   }
 `;
 

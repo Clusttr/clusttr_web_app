@@ -9,8 +9,8 @@ const DashboardFilterContent = () => {
     <ContentStyle>
       <DashboardFilterSearch />
       <DashboardFilterDropdown />
-      <DashboardFilterRange title='Price range' />
-      <DashboardFilterRange title='Area range' />
+      <DashboardFilterRange title='Price range' maxValue={4500000} unit='$' />
+      <DashboardFilterRange title='Area range' maxValue={2000000}  unit='m²'/>
       <DashboardFilterEndSearch/>
     </ContentStyle>
   );
@@ -18,7 +18,7 @@ const DashboardFilterContent = () => {
 
 const ContentStyle = styled.div`
   display: grid;
- grid-template-columns: 1.5fr 1.5fr 1fr 1.6fr .4fr;
+ grid-template-columns: 1.5fr 1.5fr 1fr 1fr .4fr;
  align-items: center;
   gap: 20px;
 `;
