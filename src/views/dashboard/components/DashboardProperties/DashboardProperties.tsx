@@ -2,7 +2,6 @@ import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import colors from '../../../../assets/colors/project_colors';
 import DashboardPropertiesHeader from './DashboardPropertiesHeader';
-import SearchAndFilter from './SearchAndFilter';
 import PropertiesGridBox from './PropertiesGridBox';
 import fakePropertyData from './fakePropertyData';
 import { useContext } from 'react';
@@ -36,7 +35,6 @@ const DashboardProperties = ({ setIsActive }: DashboardPropertiesProp) => {
   return (
     <DashboardPropertiesStyle $isGrid={isGrid} $CC={checkCount}>
       <DashboardPropertiesHeader />
-      <SearchAndFilter />
       <div
         className={
           isGrid ? 'property_grid_container' : 'property_list_container'

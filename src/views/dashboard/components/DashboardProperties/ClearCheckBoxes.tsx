@@ -27,7 +27,7 @@ const ClearCheckBoxes = ({ animate }: CCBoxesTypes) => {
 const CCBoxesStyle = styled.div<{ $isGrid: boolean; $CC: number }>`
   .clear_checkboxes {
     position: absolute;
-    right: 220%;
+    right: 100%;
     top: -120%;
     z-index: 0;
     background-color: ${colors.lightRed};

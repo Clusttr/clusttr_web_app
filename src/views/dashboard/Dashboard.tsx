@@ -8,6 +8,7 @@ import { ContextAPI } from '../../assets/utils/PropertiesContext';
 
 import { useState } from 'react';
 import DashboardRequest from './components/DashboardRequest/DashboardRequest';
+import DashboardFilter from './components/DashboardFilter/DashboardFilter';
 
 const Dashboard = () => {
   const [isActive, setIsActive] = useState({
@@ -38,6 +39,7 @@ const Dashboard = () => {
     <DashboardStyle>
       <Header />
       <DashboardPropertyTab />
+      <DashboardFilter />
       <RevenueAndTransactions />
       <ContextAPI>
         <DashboardProperties setIsActive={setIsActive} />
@@ -68,7 +70,6 @@ const Dashboard = () => {
           <></>
         )}
       </ContextAPI>
-
     </DashboardStyle>
   );
 };

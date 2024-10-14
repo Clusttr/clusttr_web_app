@@ -15,7 +15,7 @@ const colors: { [key: string]: string } = {
   darkLightGreen: '#00FFB266',
   lightLightGreen: '#00C187',
   lighterLightGreen: '#B8FFF2',
-  lightGreenBorder: '#0a2c2c',
+  darkerLightGreen: '#0a2c2c',
   profileNameBlackBG: '#0D0F0F',
   propertyTabLineColor: '#424242',
   lightGrey: '#9AABA6',

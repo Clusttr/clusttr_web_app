@@ -1,21 +1,8 @@
 import styled from 'styled-components';
 import notificationBell from '../../../assets/images/notification.png';
 import colors from '../../../assets/colors/project_colors';
-import { DotsThreeVertical } from '@phosphor-icons/react';
-import { Link } from 'react-router-dom';
+import TrayTab from './TrayTab';
 
-type trayTabProp = {
-  data: {
-    title: (
-      | string
-      | {
-          text: string;
-          link: string;
-        }
-    )[];
-    date: string;
-  };
-};
 type trayType = {
   closeTray: boolean;
 };
@@ -48,45 +35,13 @@ const notificationInfo = [
   },
 ];
 
-const TrayTab = ({ data }: trayTabProp) => {
-  return (
-    <div className="tray_tab_container">
-      <div className="top_tab">
-        <div className="tray_tab_name">
-          {data.title.map((item, index) => {
-            if (typeof item === 'string')
-              return (
-                <span className="tray_tab_text" key={index}>
-                  {item}
-                </span>
-              );
-            else if (item.link) {
-              return (
-                <span key={index}>
-                  <Link className="tray_tab_link" to={item.link} target='_blank'>
-                    {item.text}
-                  </Link>
-                </span>
-              );
-            }
-          })}
-        </div>
-
-        <div className="tray_tab_ellipsis">
-          <DotsThreeVertical size={18} />
-        </div>
-      </div>
-      <div className="tray_tab_date">{data.date}</div>
-    </div>
-  );
-};
-
 const NotificationTray = ({ closeTray }: trayType) => {
   return (
     <NotificationTrayStyle
       style={{
-        animation: `${closeTray ? 'slide_out' : 'slide_in'} 0.5s
-    linear forwards`,
+        animation: `${
+          closeTray ? 'slide_out' : 'slide_in'
+        } 0.4s ease-out forwards`,
       }}
     >
       <div className="tray_header">
@@ -101,66 +56,16 @@ const NotificationTray = ({ closeTray }: trayType) => {
           <div className="tray_header_right_text">Clear all</div>
         </div>
       </div>
-      <TrayTabStyle className="tray_tabs_container">
+      <div className="tray_tabs_container">
         {notificationInfo.map((data, index) => (
-          <div key={index}>
-            <TrayTab data={data} />
-          </div>
+          <TrayTab data={data} key={index} />
         ))}
         <div className="end_of_list">End of List</div>
-      </TrayTabStyle>
+      </div>
     </NotificationTrayStyle>
   );
 };
 
-const TrayTabStyle = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  padding: 30px 5px 30px 15px;
-  color: ${colors.darkWhite};
-  height: 90%;
-  overflow-y: scroll;
-
-  .tray_tab_container {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    border-bottom: 1px solid #242830;
-    padding-bottom: 20px;
-  }
-  .top_tab {
-    display: flex;
-    justify-content: space-between;
-  }
-  .tray_tab_name {
-    font-size: calc(13.5 / 1.6 * 0.1rem);
-    display: flex;
-    gap: 5px;
-  }
-  .tray_tab_text {
-    // font-weight: 200;
-    font-weight: 500;
-  }
-  .tray_tab_link {
-    font-weight: 500;
-    color: ${colors.lightLightGreen};
-  }
-  .tray_tab_date {
-    font-size: calc(11.5 / 1.6 * 0.1rem);
-    font-weight: 200;
-    color: ${colors.darkerGrey};
-  }
-  .tray_tab_ellipsis {
-    cursor: pointer;
-  }
-  .end_of_list {
-    margin-top: 40px;
-    font-size: calc(13 / 1.6 * 0.1rem);
-    text-align: center;
-    color: ${colors.darkerGrey};
-  }
-`;
 const NotificationTrayStyle = styled.div`
   position: absolute;
   background-color: ${colors.backgroundColor};
@@ -219,15 +124,19 @@ const NotificationTrayStyle = styled.div`
     cursor: pointer;
   }
 
+  .tray_tabs_container {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding: 15px 5px 30px 17px;
+    color: ${colors.darkWhite};
+    height: 90%;
+    overflow-y: scroll;
+  }
   /* width */
   .tray_tabs_container::-webkit-scrollbar {
     width: 4px;
   }
-
-  /* Track */
-  /* .tray_tabs_container::-webkit-scrollbar-track {
-  border: 1px solid rgb(217, 217, 217);
-} */
 
   /* Handle */
   .tray_tabs_container::-webkit-scrollbar-thumb {
@@ -243,6 +152,12 @@ const NotificationTrayStyle = styled.div`
   .tray_tabs_container::-webkit-scrollbar-thumb:hover {
     background: #5b5959;
     cursor: pointer;
+  }
+  .end_of_list {
+    margin-top: 40px;
+    font-size: calc(13 / 1.6 * 0.1rem);
+    text-align: center;
+    color: ${colors.darkerGrey};
   }
 `;
 

@@ -11,8 +11,8 @@ const BottomHeader = () => {
 
 const BottomHeaderStyle = styled.div`
   background-color: ${colors.backgroundColor};
-  border-top: 1px solid ${colors.lightGreenBorder};
-  border-bottom: 1px solid ${colors.lightGreenBorder};
+  border-top: 1px solid ${colors.darkerLightGreen};
+  border-bottom: 1px solid ${colors.darkerLightGreen};
 
   .overview {
     width: 3.5%;

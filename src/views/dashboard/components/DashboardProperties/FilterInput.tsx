@@ -86,7 +86,7 @@ const InputStyle = styled.div`
     padding: 10px 10px;
     color: ${colors.lightGreenTextColor};
     border-radius: 8px;
-    background-color: ${colors.lightGreenBorder};
+    background-color: ${colors.darkerLightGreen};
     font-size: calc(11 / 1.6 * 0.1rem);
     font-weight: 200;
   }
