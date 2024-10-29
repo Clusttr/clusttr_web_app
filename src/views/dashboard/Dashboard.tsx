@@ -9,6 +9,7 @@ import { ContextAPI } from '../../assets/utils/PropertiesContext';
 import { useState } from 'react';
 import DashboardRequest from './components/DashboardRequest/DashboardRequest';
 import DashboardFilter from './components/DashboardFilter/DashboardFilter';
+import DashboardSearch from './components/DashboardSearch/DashboardSearch';
 
 const Dashboard = () => {
   const [isActive, setIsActive] = useState({
@@ -17,6 +18,7 @@ const Dashboard = () => {
     isSearchActive: false,
   });
   const [isModalClosed, setIsModalClosed] = useState(false);
+  const [isSearchActive, setIsSearchActive] = useState(false);
 
   const closeModal = () => {
     setIsActive({
@@ -24,6 +26,11 @@ const Dashboard = () => {
       isDeleteActive: false,
       isSearchActive: false,
     });
+    setIsModalClosed(false);
+  };
+
+  const closeSearchBox = () => {
+    setIsSearchActive(false);
     setIsModalClosed(false);
   };
 
@@ -39,9 +46,20 @@ const Dashboard = () => {
     <DashboardStyle>
       <Header />
       <DashboardPropertyTab />
-      <DashboardFilter />
-      <RevenueAndTransactions />
       <ContextAPI>
+        <DashboardFilter setIsSearchActive={setIsSearchActive} />
+        {isSearchActive ? (
+          <div>
+            <DashboardSearch
+              isModalClosed={isModalClosed}
+              setIsModalClosed={setIsModalClosed}
+              closeSearchBox={closeSearchBox}
+            />
+          </div>
+        ) : (
+          ''
+        )}
+        <RevenueAndTransactions />
         <DashboardProperties setIsActive={setIsActive} />
         {isActive.isEditActive ? (
           <div>

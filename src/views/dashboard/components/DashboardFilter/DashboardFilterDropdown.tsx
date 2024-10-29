@@ -49,6 +49,7 @@ const DropdownStyle = styled.div`
     border-radius: 8px;
     font-weight: 500;
     font-size: calc(12 / 1.6 * 0.1rem);
+    cursor: pointer;
     color: #0d0f0f;
   }
 
@@ -105,12 +106,12 @@ const DropdownStyle = styled.div`
   .dropdown_list {
     padding: 0 10px;
     font-size: calc(13 / 1.6 * 0.1rem);
-    color: #060809;
     font-weight: 200;
     // background-color: yellow;
     padding: 3px 0;
-  }
-  .dropdown_list > div {
+    }
+    .dropdown_list > div {
+      color: #060809;
     cursor: pointer;
     display: flex;
     align-items: center;

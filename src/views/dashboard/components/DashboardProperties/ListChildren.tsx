@@ -61,7 +61,7 @@ const ListChildren = ({
             opacity={0.9}
           />
         ) : (
-          ''
+          <></>
         )}
       </PropertyNameStyle>
       <LocationStyle>
@@ -80,7 +80,7 @@ const ListChildren = ({
               opacity={0.9}
             />
           ) : (
-            ''
+            <></>
           )}
         </div>
       </LocationStyle>
@@ -101,7 +101,7 @@ const ListChildren = ({
             opacity={0.9}
           />
         ) : (
-          ''
+          <></>
         )}
       </PropertySizeStyle>
       <TotalAssetPriceStyle>
@@ -122,7 +122,7 @@ const ListChildren = ({
               opacity={0.9}
             />
           ) : (
-            ''
+            <></>
           )}
         </div>
       </TotalAssetPriceStyle>
@@ -143,7 +143,7 @@ const ListChildren = ({
             opacity={0.9}
           />
         ) : (
-          ''
+          <></>
         )}
       </PricePerFragmentStyle>
       <ActionStyle>
@@ -158,11 +158,11 @@ const ListChildren = ({
   );
 };
 
-const PropertyNameStyle = styled.div`
-  .tooltip {
+const tooltipStyle: string = `
     border-radius: 5px;
     border: 1px dashed rgba(255, 255, 255, 0.5);
-    width: 20%;
+    min-width: 5%;
+    max-width: 20%;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -170,11 +170,18 @@ const PropertyNameStyle = styled.div`
     background-color: ${colors.black};
     color: ${colors.darkWhite};
     font-size: calc(11 / 1.6 * 0.1rem);
-    z-index: 20;
+    z-index: 20;`;
+
+const tooltipArrowStyle: string = `
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
+    border-right: 1px dashed rgba(255, 255, 255, 0.5);`;
+    
+const PropertyNameStyle = styled.div`
+  .tooltip {
+    ${tooltipStyle}
   }
   .tooltip_arrow {
-    border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
-    border-right: 1px dashed rgba(255, 255, 255, 0.5);
+    ${tooltipArrowStyle}
   }
 
   .font_size {
@@ -189,21 +196,10 @@ const LocationStyle = styled.div`
   gap: 10px;
 
   .tooltip {
-    border-radius: 5px;
-    border: 1px dashed rgba(255, 255, 255, 0.5);
-    width: 20%;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: ${colors.black};
-    color: ${colors.darkWhite};
-    font-size: calc(11 / 1.6 * 0.1rem);
-    z-index: 20;
+    ${tooltipStyle}
   }
   .tooltip_arrow {
-    border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
-    border-right: 1px dashed rgba(255, 255, 255, 0.5);
+    ${tooltipArrowStyle}
   }
 
   .font_size {
@@ -226,21 +222,10 @@ const LocationStyle = styled.div`
 `;
 const PropertySizeStyle = styled.div`
   .tooltip {
-    border-radius: 5px;
-    border: 1px dashed rgba(255, 255, 255, 0.5);
-    width: 13%;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: ${colors.black};
-    color: ${colors.darkWhite};
-    font-size: calc(11 / 1.6 * 0.1rem);
-    z-index: 20;
+    ${tooltipStyle}
   }
   .tooltip_arrow {
-    border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
-    border-right: 1px dashed rgba(255, 255, 255, 0.5);
+    ${tooltipArrowStyle}
   }
   .font_size {
     font-size: calc(12.9 / 1.6 * 0.1rem);
@@ -256,21 +241,10 @@ const PropertySizeStyle = styled.div`
 `;
 const TotalAssetPriceStyle = styled.div`
   .tooltip {
-    border-radius: 5px;
-    border: 1px dashed rgba(255, 255, 255, 0.5);
-    width: 13%;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: ${colors.black};
-    color: ${colors.darkWhite};
-    font-size: calc(11 / 1.6 * 0.1rem);
-    z-index: 20;
+    ${tooltipStyle}
   }
   .tooltip_arrow {
-    border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
-    border-right: 1px dashed rgba(255, 255, 255, 0.5);
+    ${tooltipArrowStyle}
   }
   .font_size {
     font-size: calc(12.9 / 1.6 * 0.1rem);
@@ -286,21 +260,10 @@ const TotalAssetPriceStyle = styled.div`
 `;
 const PricePerFragmentStyle = styled.div`
   .tooltip {
-    border-radius: 5px;
-    border: 1px dashed rgba(255, 255, 255, 0.5);
-    width: 13%;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: ${colors.black};
-    color: ${colors.darkWhite};
-    font-size: calc(11 / 1.6 * 0.1rem);
-    z-index: 20;
+    ${tooltipStyle}
   }
   .tooltip_arrow {
-    border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
-    border-right: 1px dashed rgba(255, 255, 255, 0.5);
+    ${tooltipArrowStyle}
   }
   .font_size {
     font-size: calc(12.9 / 1.6 * 0.1rem);

@@ -13,40 +13,67 @@ function App() {
         <Route
           path="/"
           element={
-            <DashboardStyle>
-              <div className="dashboard_container">
+            <ContainerStyle>
+              <div className="container">
                 <Dashboard />
               </div>
-            </DashboardStyle>
+            </ContainerStyle>
           }
         />
-        <Route path="/upload" element={<Upload />} />
-        <Route path="/properties" element={<Properties />} />
-        <Route path="/financials" element={<Financials />} />
+        <Route
+          path="/upload"
+          element={
+            <ContainerStyle>
+              <div className="container">
+                <Upload />
+              </div>
+            </ContainerStyle>
+          }
+        />
+        <Route
+          path="/properties"
+          element={
+            <ContainerStyle>
+              <div className="container">
+                <Properties />
+              </div>
+            </ContainerStyle>
+          }
+        />
+        <Route
+          path="/financials"
+          element={
+            <ContainerStyle>
+              <div className="container">
+                <Financials />
+              </div>
+            </ContainerStyle>
+          }
+        />
       </Routes>
     </Router>
   );
 }
 
-const DashboardStyle = styled.div`
-  .dashboard_container {
+const ContainerStyle = styled.div`
+  .container {
     overflow-y: scroll;
     overflow-x: hidden;
     height: 100vh;
   }
 
   /* width */
-  .dashboard_container::-webkit-scrollbar {
+  .container::-webkit-scrollbar {
     width: 4px;
   }
 
   /* Track */
-  /* .dashboard_container::-webkit-scrollbar-track {
+  /* .container::-webkit-scrollbar-track {
   border: 1px solid rgb(217, 217, 217);
 } */
 
   /* Handle */
-  .dashboard_container::-webkit-scrollbar-thumb {
+  .container::-webkit-scrollbar-thumb {
     background: #33313183;
     border-radius: 8px;
     -webkit-border-radius: 8px;
@@ -56,7 +83,7 @@ const DashboardStyle = styled.div`
   }
 
   /* Handle on hover */
-  .dashboard_container::-webkit-scrollbar-thumb:hover {
+  .container::-webkit-scrollbar-thumb:hover {
     background: #5b5959;
     cursor: pointer;
   }

@@ -21,6 +21,11 @@ const DashboardRequest = ({
 }: RequestPropType) => {
   const [isSendBtn, setIsSendBtn] = useState(false);
 
+  const closeUpModal = () => {
+    setIsModalClosed(true);
+    setTimeout(() => closeModal(), 500);
+  };
+
   return (
     <RequestStyle>
       {isSendBtn ? (
@@ -33,18 +38,12 @@ const DashboardRequest = ({
       ) : (
         <DashboardRequestBox
           isModalClosed={isModalClosed}
-          setIsModalClosed={setIsModalClosed}
-          closeModal={closeModal}
+          closeUpModal={closeUpModal}
           setIsSendBtn={setIsSendBtn}
           title={title}
         />
       )}
-      <span
-        onClick={() => {
-          setIsModalClosed(true);
-          setTimeout(() => closeModal(), 500);
-        }}
-      ></span>
+      <span onClick={() => closeUpModal()}></span>
     </RequestStyle>
   );
 };

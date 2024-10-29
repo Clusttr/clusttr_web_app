@@ -25,9 +25,7 @@ const DashboardFilterSearch = () => {
         <input
           type="text"
           placeholder="Search keywords"
-          onChange={e => {
-            setSearchValue(e.target.value);
-          }}
+          onChange={({ target: { value } }) => setSearchValue(value)}
           value={searchValue}
           name="search"
           id="input_search"

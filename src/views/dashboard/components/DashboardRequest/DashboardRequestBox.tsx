@@ -5,29 +5,21 @@ import { WarningOctagon } from '@phosphor-icons/react';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 type RequestBoxPropType = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  closeModal: any;
+  closeUpModal: () => void;
   title: string;
   isModalClosed: boolean;
-  setIsModalClosed: Dispatch<SetStateAction<boolean>>;
   setIsSendBtn: Dispatch<SetStateAction<boolean>>;
 };
 
 const DashboardRequestBox = ({
-  closeModal,
+  closeUpModal,
   title,
   isModalClosed,
-  setIsModalClosed,
   setIsSendBtn,
 }: RequestBoxPropType) => {
   const [textValue, setTextValue] = useState('');
   const [loading, setIsLoading] = useState(false);
   const [isTextEmpty, setIsTextEmpty] = useState(false);
-
-  const cancelFunc = () => {
-    setIsModalClosed(true);
-    setTimeout(() => closeModal(), 500);
-  };
 
   const sendFunc = () => {
     const regex = /^\s*$/;
@@ -91,7 +83,7 @@ const DashboardRequestBox = ({
           />
         </div>
         <div className="buttons_container">
-          <div onClick={cancelFunc} className="btn">
+          <div onClick={closeUpModal} className="btn">
             <div className="cancel_btn">Cancel</div>
           </div>
           <div onClick={sendFunc} className="btn">
@@ -177,6 +169,7 @@ const DeleteAndEditStyle = styled.div<{ $isModalClosed: boolean }>`
     top: 0;
     background-color: rgba(0, 0, 0, 0.6);
     bottom: 0;
+    backdrop-filter: blur(5px);
   }
 
   .caution_icon_container {

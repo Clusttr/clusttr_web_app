@@ -1,10 +1,15 @@
 import { MagnifyingGlass } from '@phosphor-icons/react';
 import styled from 'styled-components';
 import colors from '../../../../assets/colors/project_colors';
+import { Dispatch, SetStateAction } from 'react';
 
-const DashboardFilterEndSearch = () => {
+const DashboardFilterEndSearch = ({
+  setIsSearchActive,
+}: {
+  setIsSearchActive: Dispatch<SetStateAction<boolean>>;
+}) => {
   return (
-    <EndSearchStyle>
+    <EndSearchStyle onClick={() => setIsSearchActive(true)}>
       <MagnifyingGlass size={16} color="#001423" />
       <div className="text">Search</div>
     </EndSearchStyle>

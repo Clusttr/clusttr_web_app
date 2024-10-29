@@ -127,6 +127,7 @@ const RequestSentStyle = styled.div<{ $isModalClosed: boolean }>`
     top: 0;
     background-color: rgba(0, 0, 0, 0.6);
     bottom: 0;
+    backdrop-filter: blur(5px);
   }
 `;
 

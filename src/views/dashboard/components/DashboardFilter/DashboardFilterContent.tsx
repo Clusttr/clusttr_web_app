@@ -3,15 +3,21 @@ import DashboardFilterSearch from './DashboardFilterSearch';
 import DashboardFilterEndSearch from './DashboardFilterEndSearch';
 import DashboardFilterDropdown from './DashboardFilterDropdown';
 import DashboardFilterRange from './DashboardFilterRange';
+import { Dispatch, SetStateAction } from 'react';
 
-const DashboardFilterContent = () => {
+
+const DashboardFilterContent = ({
+  setIsSearchActive,
+}: {
+  setIsSearchActive: Dispatch<SetStateAction<boolean>>;
+}) => {
   return (
     <ContentStyle>
       <DashboardFilterSearch />
       <DashboardFilterDropdown />
-      <DashboardFilterRange title='Price range' maxValue={4500000} unit='$' />
-      <DashboardFilterRange title='Area range' maxValue={2000000}  unit='m²'/>
-      <DashboardFilterEndSearch/>
+      <DashboardFilterRange title="Price range" maxValue={4500000} unit="$" />
+      <DashboardFilterRange title="Area range" maxValue={2000000} unit="m²" />
+      <DashboardFilterEndSearch setIsSearchActive={setIsSearchActive} />
     </ContentStyle>
   );
 };

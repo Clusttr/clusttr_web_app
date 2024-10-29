@@ -2,12 +2,11 @@ import styled from 'styled-components';
 import colors from '../../../../assets/colors/project_colors';
 import ReactSlider from 'react-slider';
 import {
-  ClassAttributes,
-  HTMLAttributes,
-  SetStateAction,
+  // ClassAttributes,
+  // HTMLAttributes,
   useState,
 } from 'react';
-import { JSX } from 'react/jsx-runtime';
+// import { JSX } from 'react/jsx-runtime';
 
 type RangePropType = {
   title: string;
@@ -44,14 +43,14 @@ const DashboardFilterRange = ({ title, maxValue, unit }: RangePropType) => {
         defaultValue={defaultRange}
         min={0}
         max={maxValue}
-        renderThumb={(
-          props: JSX.IntrinsicAttributes &
-            ClassAttributes<HTMLDivElement> &
-            HTMLAttributes<HTMLDivElement>
-        ) => <div {...props}></div>}
+        // renderThumb={(
+        //   props: JSX.IntrinsicAttributes &
+        //     ClassAttributes<HTMLDivElement> &
+        //     HTMLAttributes<HTMLDivElement>
+        // ) => <div {...props}></div>}
         // pearling
         minDistance={maxValue / 5 / 5}
-        onChange={(value: SetStateAction<number[]>) => setCurrentValue(value)}
+        onChange={value => setCurrentValue(value)}
       />
     </RangeStyle>
   );

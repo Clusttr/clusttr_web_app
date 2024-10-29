@@ -23,10 +23,15 @@ const colors: { [key: string]: string } = {
   darkerGrey: '#5D7A76',
   lightGreenTextColor: '#C8E3DF',
   lightBlack: '#100A0E',
-  darkWhite: '#B2CAC7',
+  darkWhite: '#B2CAC7'
 };
 
 export default colors;
+
+// ? What I've completed
+// * Entire Dashboard
+// * Notifications Tray
+// * Profile Dropdown
 
 /*
 const data = {
