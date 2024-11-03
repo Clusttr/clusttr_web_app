@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import colors from '../../../../assets/colors/project_colors';
 import DashboardPropertiesHeader from './DashboardPropertiesHeader';
 import PropertiesGridBox from './PropertiesGridBox';
-import fakePropertyData from './fakePropertyData';
+import fakePropertyData from '../../../../assets/utils/fakePropertyData';
 import { useContext } from 'react';
 import DashboardListBox from './DashboardListBox';
 import { PropertiesContext } from '../../../../assets/utils/PropertiesContext';
@@ -11,7 +11,7 @@ import CheckCountComponent from './CheckCountComponent';
 
 type fakeDataProp = {
   propertySize: number;
-  beds: number;
+  bedrooms: number;
   bathrooms: number;
   pricePerFragment: number;
   totalAssetPrice: number;
@@ -45,7 +45,7 @@ const DashboardProperties = ({ setIsActive }: DashboardPropertiesProp) => {
             (
               {
                 propertySize,
-                beds,
+                bedrooms,
                 bathrooms,
                 pricePerFragment,
                 totalAssetPrice,
@@ -58,7 +58,7 @@ const DashboardProperties = ({ setIsActive }: DashboardPropertiesProp) => {
               <div key={index}>
                 <PropertiesGridBox
                   propertySize={propertySize}
-                  beds={beds}
+                  bedrooms={bedrooms}
                   bathrooms={bathrooms}
                   pricePerFragment={pricePerFragment}
                   totalAssetPrice={totalAssetPrice}

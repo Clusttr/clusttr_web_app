@@ -33,6 +33,8 @@ export default colors;
 // * Notifications Tray
 // * Profile Dropdown
 
+// ?Mobile simulator 
+
 /*
 const data = {
   labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','January', 'February', 'March', 'April', 'May', 'June', 'July','January', 'February', 'March', 'April', 'May', 'June', 'July','January', 'February', 'March', 'April', 'May', 'June', 'July'],

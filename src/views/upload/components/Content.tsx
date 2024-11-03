@@ -1,12 +1,39 @@
 import styled from 'styled-components';
 import FirstForm from './FirstUploadForm/FirstForm';
 import colors from '../../../assets/colors/project_colors';
+import { useEffect, useState } from 'react';
+import ThirdForm from './ThirdUploadForm/ThirdForm';
+import SecondForm from './SecondUploadForm/SecondForm';
+import PageUploadNumbers from './PageUploadNumber';
 
 const Content = () => {
+  const [pageNumber, setPageNumber] = useState(0);
+
+  useEffect(() => {
+    setPageNumber(1);
+  }, []);
+
   return (
     <ContentStyle>
       <div className="content_header">Add Property Information</div>
-      <FirstForm />
+      <div className="content_outer_container">
+        <div className="content_inner_container">
+          {/* handle updating the variable that will make the line fill here and pass the variable to the line component.*/}
+          <PageUploadNumbers
+            pageNumber={pageNumber}
+            setPageNumber={setPageNumber}
+          />
+          {pageNumber === 1 ? (
+            <FirstForm setPageNumber={setPageNumber} />
+          ) : pageNumber === 2 ? (
+            <SecondForm setPageNumber={setPageNumber} />
+          ) : pageNumber === 3 ? (
+            <ThirdForm />
+          ) : (
+            <></>
+          )}
+        </div>
+      </div>
     </ContentStyle>
   );
 };
@@ -14,7 +41,8 @@ const Content = () => {
 const ContentStyle = styled.div`
   background-color: ${colors.backgroundColor};
   margin: 15px 0 0;
-  height: 100vh;
+  padding-bottom: 100px;
+  // height: 200vh;
   border-radius: 7px 7px 0 0;
 
   .content_header {
@@ -30,6 +58,13 @@ const ContentStyle = styled.div`
     height: 1px;
     margin-top: 10px;
     background-color: #1e2120;
+  }
+  .content_outer_container {
+    display: flex;
+    justify-content: center;
+  }
+  .content_inner_container {
+    width: 40%;
   }
 `;
 

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import colors from '../../../../assets/colors/project_colors';
 import EllipseText from '../../../reuseable_components/ellipsis_text/EllipseText';
-import fakePropertyData from '../DashboardProperties/fakePropertyData';
+import fakePropertyData from '../../../../assets/utils/fakePropertyData';
 import { Tooltip } from 'react-tooltip';
 
 type fakeDataProp = {
@@ -19,7 +19,6 @@ const Content = ({ inputText }: { inputText: string }) => {
           : ''
       }`}
     >
-      {' '}
       {fakePropertyData.map(
         (
           { propertySize, totalAssetPrice, propertyName }: fakeDataProp,

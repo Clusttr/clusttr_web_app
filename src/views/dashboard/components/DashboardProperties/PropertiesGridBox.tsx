@@ -15,7 +15,7 @@ import colors from '../../../../assets/colors/project_colors';
 
 type CardType = {
   propertySize: number;
-  beds: number;
+  bedrooms: number;
   bathrooms: number;
   pricePerFragment: number;
   totalAssetPrice: number;
@@ -26,7 +26,7 @@ type CardType = {
 
 const PropertiesGridBox = ({
   propertySize,
-  beds,
+  bedrooms,
   bathrooms,
   pricePerFragment,
   totalAssetPrice,
@@ -102,7 +102,7 @@ const PropertiesGridBox = ({
           <PropertiesGridBoxInfo
             str={''}
             angleIcon={''}
-            info={`${beds}`}
+            info={`${bedrooms}`}
             icon={bed}
             unit=""
             id=""

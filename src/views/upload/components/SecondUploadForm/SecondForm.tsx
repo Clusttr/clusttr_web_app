@@ -2,14 +2,14 @@ import { Dispatch, SetStateAction, useContext, useState } from 'react';
 import styled from 'styled-components';
 import FormHeader from '../FormHeader';
 import PageBtn from '../PageBtn';
-import FirstFormInputs from './FirstFormInputs';
 import { UploadContext } from '../../../../assets/utils/UploadContext';
+import SecondFormInputs from './SecondFormInputs';
 
-type FirstFormType = {
+type SecondFormType = {
   setPageNumber: Dispatch<SetStateAction<number>>;
 };
 
-const FirstForm = ({ setPageNumber }: FirstFormType) => {
+const SecondForm = ({ setPageNumber }: SecondFormType) => {
   const [loading, setIsLoading] = useState(false);
   const { formData } = useContext(UploadContext);
 
@@ -19,38 +19,38 @@ const FirstForm = ({ setPageNumber }: FirstFormType) => {
       setIsLoading(false);
     }, 2000);
     setTimeout(() => {
-      setPageNumber(2);
+      setPageNumber(3);
     }, 2500);
   };
 
   return (
-    <FirstFormStyle>
+    <SecondFormStyle>
       <FormHeader
-        title={'House Details'}
-        subTitle={'Details regarding the house itself'}
+        title={'Property Details'}
+        subTitle={'Details regarding the general property'}
       />
-      <FirstFormInputs />
+      <SecondFormInputs />
       <PageBtn
         goToNextPage={goToNextPage}
         loading={loading}
-        text={'Next'}
+        text={'Almost Done...'}
         isFullyFilled={
-          formData.propertyName &&
-          formData.description &&
-          formData.bedrooms &&
-          formData.bathrooms
+          formData.address &&
+          formData.landArea &&
+          formData.latitude &&
+          formData.longitude
             ? true
             : false
         }
       />
-    </FirstFormStyle>
+    </SecondFormStyle>
   );
 };
 
-const FirstFormStyle = styled.div`
+const SecondFormStyle = styled.div`
   display: flex;
   flex-direction: column;
   gap: 30px;
 `;
 
-export default FirstForm;
+export default SecondForm;
