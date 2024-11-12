@@ -67,6 +67,7 @@ const ThirdFormInputs = ({
         inputValue={formData.propertyType}
         isHalf={false}
         isTextArea={false}
+        isLatOrLong={false}
       />
       <Input
         title={'year'}
@@ -75,6 +76,7 @@ const ThirdFormInputs = ({
         inputValue={formData.year}
         isHalf={false}
         isTextArea={false}
+        isLatOrLong={false}
       />
       <SingleFileSelect
         handleSingleDrop={handleSingleDrop}

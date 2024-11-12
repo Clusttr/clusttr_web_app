@@ -60,6 +60,7 @@ const SecondFormInputs = () => {
         inputValue={formData.location}
         isHalf={false}
         isTextArea={false}
+        isLatOrLong={false}
       />
       <Input
         title={'Land Area (sqm) *'}
@@ -68,6 +69,7 @@ const SecondFormInputs = () => {
         inputValue={formData.landArea}
         isHalf={false}
         isTextArea={false}
+        isLatOrLong={false}
       />
       <Input
         title={'Location (latitude)'}
@@ -76,6 +78,7 @@ const SecondFormInputs = () => {
         isTextArea={false}
         handleOnChange={handleLatitude}
         inputValue={formData.latitude}
+        isLatOrLong = {true}
       />
       <Input
         title={'Location (longitude)'}
@@ -84,6 +87,7 @@ const SecondFormInputs = () => {
         inputValue={formData.longitude}
         isHalf={false}
         isTextArea={false}
+        isLatOrLong = {true}
       />
     </SecondFormInputsStyle>
   );

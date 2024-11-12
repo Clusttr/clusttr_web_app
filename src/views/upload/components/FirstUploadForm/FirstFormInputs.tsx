@@ -54,6 +54,7 @@ const FirstFormInputs = () => {
         inputValue={formData.propertyName}
         isHalf={false}
         isTextArea={false}
+        isLatOrLong={false}
       />
 
       <Input
@@ -65,6 +66,7 @@ const FirstFormInputs = () => {
         inputValue={formData.description}
         isHalf={false}
         isTextArea={true}
+        isLatOrLong={false}
       />
       <div className="double_input_container">
         <Input
@@ -74,6 +76,7 @@ const FirstFormInputs = () => {
           inputValue={formData.bedrooms}
           isHalf={true}
           isTextArea={false}
+          isLatOrLong={false}
         />
         <Input
           title={'number of bathrooms'}
@@ -82,6 +85,7 @@ const FirstFormInputs = () => {
           inputValue={formData.bathrooms}
           isHalf={true}
           isTextArea={false}
+          isLatOrLong={false}
         />
       </div>
     </FirstFormInputsStyle>

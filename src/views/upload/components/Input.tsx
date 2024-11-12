@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import colors from '../../../assets/colors/project_colors';
+import map from '../../../assets/images/map.png';
 
 //   eslint-disable-next-line @typescript-eslint/no-explicit-any
 type onChangeType = { target: { value: any } };
@@ -11,6 +12,7 @@ type InputType = {
   inputValue: string | number;
   isHalf: boolean;
   isTextArea: boolean;
+  isLatOrLong: boolean;
 };
 
 const Input = ({
@@ -20,7 +22,9 @@ const Input = ({
   inputValue,
   isHalf,
   isTextArea,
+  isLatOrLong,
 }: InputType) => {
+
   return (
     <InputStyle
       className={`${isHalf ? 'half_input_search' : ''} ${
@@ -37,12 +41,15 @@ const Input = ({
           id="input_text"
         />
       ) : (
-        <input
-          placeholder={placeholder}
-          onChange={handleOnChange}
-          value={inputValue || ''}
-          id="input_text"
-        />
+        <div className={isLatOrLong ? 'latitude_n_longitude' : ''}>
+          <input
+            placeholder={placeholder}
+            onChange={handleOnChange}
+            value={inputValue || ''}
+            id="input_text"
+          />
+          {isLatOrLong ? <img src={map} alt="map" /> : <></>}
+        </div>
       )}
     </InputStyle>
   );
@@ -106,6 +113,16 @@ const InputStyle = styled.div`
   #input_text::-webkit-scrollbar-thumb:hover {
     background: #5b5959;
     cursor: pointer;
+  }
+  .latitude_n_longitude {
+    position: relative;
+  }
+  .latitude_n_longitude > img {
+    top: 50%;
+    bottom: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    position: absolute;
   }
 `;
 
