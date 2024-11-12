@@ -49,6 +49,7 @@ type descriptionType = {
   width: number;
   height: number;
   type: string;
+  url: string;
 };
 
 type PropertiesContextType = {
@@ -63,9 +64,7 @@ type PropertiesContextType = {
   setSingleImageDescription: Dispatch<SetStateAction<descriptionType>>;
   setMultipleImagesDescription: Dispatch<SetStateAction<descriptionType[]>>;
   singleFileIsSelected: boolean;
-  multipleFilesAreSelected: boolean;
   setSingleFileIsSelected: Dispatch<SetStateAction<boolean>>;
-  setMultipleFilesAreSelected: Dispatch<SetStateAction<boolean>>;
 };
 
 export const UploadContext = createContext<PropertiesContextType>(
@@ -121,13 +120,12 @@ export const UploadAPI: React.FC<{ children: React.ReactNode }> = ({
     width: 0,
     height: 0,
     type: '',
+    url: '',
   });
   const [multipleImagesDescription, setMultipleImagesDescription] = useState<
     descriptionType[]
   >([]);
   const [singleFileIsSelected, setSingleFileIsSelected] = useState(false);
-  const [multipleFilesAreSelected, setMultipleFilesAreSelected] =
-    useState(false);
 
   const value = {
     formData,
@@ -141,9 +139,7 @@ export const UploadAPI: React.FC<{ children: React.ReactNode }> = ({
     setSingleImageDescription,
     setMultipleImagesDescription,
     singleFileIsSelected,
-    multipleFilesAreSelected,
     setSingleFileIsSelected,
-    setMultipleFilesAreSelected,
   };
 
   return (

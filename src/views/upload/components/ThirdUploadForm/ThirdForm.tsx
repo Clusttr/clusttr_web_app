@@ -22,9 +22,7 @@ const ThirdForm = ({ setIsFormUploaded }: ThirdFormType) => {
     setSingleImageDescription,
     setMultipleImagesDescription,
     setSingleFileIsSelected,
-    setMultipleFilesAreSelected,
   } = useContext(UploadContext);
- 
 
   // ? Gets the image dimensions (height and width)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -32,12 +30,14 @@ const ThirdForm = ({ setIsFormUploaded }: ThirdFormType) => {
     const newImg = new Image();
     newImg.src = URL.createObjectURL(file);
     await newImg.decode();
+    const imgUrl = URL.createObjectURL(file);
     return {
       name: file.name,
       size: file.size,
       width: newImg.width,
       height: newImg.height,
       type: file.type,
+      url: imgUrl,
     };
   };
 
@@ -100,7 +100,6 @@ const ThirdForm = ({ setIsFormUploaded }: ThirdFormType) => {
 
       // * run this if the file passes the checks
       setMultipleImagesDescription(prev => [...prev, imageDescription]);
-      setMultipleFilesAreSelected(true);
       setFormData(prev => {
         return {
           ...prev,

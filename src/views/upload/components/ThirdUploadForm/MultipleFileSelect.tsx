@@ -1,9 +1,10 @@
 import { styled } from 'styled-components';
-import uploadImage from '../../../../assets/images/upload_image.png';
+import uploadImageIcon from '../../../../assets/images/upload_image.png';
 import Requirements from './Requirements';
 import colors from '../../../../assets/colors/project_colors';
 import { useContext } from 'react';
 import { UploadContext } from '../../../../assets/utils/UploadContext';
+import MultipleFileSelectListTab from './MultipleFileSelectListTab';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type onAddFileType = { target: { files: any } };
@@ -15,13 +16,23 @@ type MultipleFileSelectType = {
   handleMultipleDrops: (e: any) => void;
 };
 
+const UploadImageIcon = ({ willRotate }: { willRotate: boolean }) => {
+  return (
+    <img
+      src={uploadImageIcon}
+      alt="upload_image_icon"
+      className={`upload_image ${willRotate ? 'rotate' : ''}`}
+    />
+  );
+};
+
 const MultipleFileSelect = ({
   handleMultipleDrops,
   handleMultipleUploads,
 }: MultipleFileSelectType) => {
-  const { formData, multipleImagesDescription, multipleFilesAreSelected } =
-    useContext(UploadContext);
+  const { formData, multipleImagesDescription } = useContext(UploadContext);
 
+  const multipleFilesAreSelected = formData.multipleImages.length !== 0;
   return (
     <MultipleFileSelectStyle>
       <div className="input_title">extra images</div>
@@ -52,49 +63,18 @@ const MultipleFileSelect = ({
           <div className="drag_n_drop_container">
             <div className="drag_n_drop_text">drag and drop to upload</div>
             <div className="upload_images">
-              <img
-                src={uploadImage}
-                alt="upload_image"
-                className="upload_image"
-              />
-              <img
-                src={uploadImage}
-                alt="upload_image"
-                className="rotate upload_image"
-              />
-              <img
-                src={uploadImage}
-                alt="upload_image"
-                className="rotate upload_image"
-              />
-              <img
-                src={uploadImage}
-                alt="upload_image"
-                className="rotate upload_image"
-              />
-              <img
-                src={uploadImage}
-                alt="upload_image"
-                className="rotate upload_image"
-              />
+              <UploadImageIcon willRotate={false} />
+              <UploadImageIcon willRotate={true} />
+              <UploadImageIcon willRotate={true} />
+              <UploadImageIcon willRotate={true} />
+              <UploadImageIcon willRotate={true} />
             </div>
           </div>
         </div>
         {multipleFilesAreSelected ? (
           <div className="multiple_images_list_container">
             {multipleImagesDescription.map((description, i) => (
-              <MultipleImageListStyle key={i}>
-                <div className="multiple_image_list_left">
-                  <div className="multiple_image_list_image_container">
-                    <img
-                      src={URL.createObjectURL(formData.multipleImages[i])}
-                      alt=""
-                    />
-                  </div>
-                  <div>{description.name}</div>
-                </div>
-                <div className="multiple_image_list_right">right</div>
-              </MultipleImageListStyle>
+              <MultipleFileSelectListTab description={description} index={i} />
             ))}
           </div>
         ) : (
@@ -105,39 +85,6 @@ const MultipleFileSelect = ({
     </MultipleFileSelectStyle>
   );
 };
-
-const MultipleImageListStyle = styled.div`
-  background-color: #051818;
-  padding: 10px 12px;
-  border-radius: 12px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  .multiple_image_list_left {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-  }
-  .multiple_image_list_image_container {
-    width: 25px;
-    height: 25px;
-    overflow: hidden;
-    border-radius: 6px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: ${colors.backgroundColor};
-    cursor: pointer;
-  }
-  img {
-    width: 130%;
-  }
-  .multiple_image_list_left:hover  img {
-  background-color:red;
-    width: 140%;
-  }
-`;
 
 const MultipleFileSelectStyle = styled.div`
   display: flex;
