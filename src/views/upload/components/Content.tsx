@@ -5,9 +5,11 @@ import { useEffect, useState } from 'react';
 import ThirdForm from './ThirdUploadForm/ThirdForm';
 import SecondForm from './SecondUploadForm/SecondForm';
 import PageUploadNumbers from './PageUploadNumber';
+import DashboardRequestBox from '../../dashboard/components/DashboardRequest/DashboardRequestBox';
 
 const Content = () => {
   const [pageNumber, setPageNumber] = useState(0);
+  const [isFormUploaded, setIsFormUploaded] = useState(false);
 
   useEffect(() => {
     setPageNumber(1);
@@ -15,6 +17,19 @@ const Content = () => {
 
   return (
     <ContentStyle>
+      {isFormUploaded ? (
+        <div>
+          <DashboardRequestBox
+            isModalClosed={isFormUploaded}
+            closeUpModal={() => setIsFormUploaded(false)}
+            setIsSendBtn={() => {}}
+            title={'lorem ipsum dolor sit down, consectetur'}
+          />
+          <span onClick={() => setIsFormUploaded(false)}></span>
+        </div>
+      ) : (
+        <></>
+      )}
       <div className="content_header">Add Property Information</div>
       <div className="content_outer_container">
         <div className="content_inner_container">
@@ -28,7 +43,7 @@ const Content = () => {
           ) : pageNumber === 2 ? (
             <SecondForm setPageNumber={setPageNumber} />
           ) : pageNumber === 3 ? (
-            <ThirdForm />
+            <ThirdForm setIsFormUploaded={setIsFormUploaded} />
           ) : (
             <></>
           )}

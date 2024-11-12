@@ -97,7 +97,7 @@ const PageUploadNumbers = ({
         details={'Property Details'}
         page={'2'}
         isFullyFilled={
-          formData.address &&
+          formData.location &&
           formData.landArea &&
           formData.latitude &&
           formData.longitude

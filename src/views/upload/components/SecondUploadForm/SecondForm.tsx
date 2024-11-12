@@ -35,7 +35,7 @@ const SecondForm = ({ setPageNumber }: SecondFormType) => {
         loading={loading}
         text={'Almost Done...'}
         isFullyFilled={
-          formData.address &&
+          formData.location &&
           formData.landArea &&
           formData.latitude &&
           formData.longitude
