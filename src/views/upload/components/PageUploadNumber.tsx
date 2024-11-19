@@ -115,7 +115,14 @@ const PageUploadNumbers = ({
         goTo={goToPageThree}
         details={'Final Details'}
         page={'3'}
-        isFullyFilled={formData.propertyType && formData.year ? true : false}
+        isFullyFilled={
+          formData.propertyType &&
+          formData.year &&
+          formData.multipleImages.length !== 0 &&
+          formData.singleImage !== null
+            ? true
+            : false
+        }
       />
     </PageUploadNumbersStyle>
   );

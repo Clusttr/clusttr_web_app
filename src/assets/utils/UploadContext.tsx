@@ -20,28 +20,7 @@ type FormDataType = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   multipleImages: any[];
 };
-type SetFormDataType = Dispatch<
-  SetStateAction<{
-    propertyName: string;
-    location: string;
-    description: string;
-    propertyType: string;
-    year: string;
-    propertySize: number;
-    bedrooms: number;
-    bathrooms: number;
-    pricePerFragment: number;
-    totalAssetPrice: number;
-    totalAssetValue: number;
-    landArea: number;
-    latitude: number;
-    longitude: number;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    singleImage: null | any;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    multipleImages: any[];
-  }>
->;
+type SetFormDataType = Dispatch<SetStateAction<FormDataType>>;
 
 type descriptionType = {
   name: string;
@@ -59,6 +38,8 @@ type PropertiesContextType = {
   maxWidth: number;
   maxHeight: number;
   allowedTypes: string[];
+  formDataDefaults: FormDataType;
+  singleImageDescriptionDefault: descriptionType;
   singleImageDescription: descriptionType;
   multipleImagesDescription: descriptionType[];
   setSingleImageDescription: Dispatch<SetStateAction<descriptionType>>;
@@ -74,7 +55,34 @@ export const UploadContext = createContext<PropertiesContextType>(
 export const UploadAPI: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  const formDataDefaults = {
+    propertyName: '',
+    location: '',
+    description: '',
+    propertyType: '',
+    year: '',
+    propertySize: 0,
+    bedrooms: 0,
+    bathrooms: 0,
+    pricePerFragment: 0,
+    totalAssetPrice: 0,
+    totalAssetValue: 0,
+    landArea: 0,
+    latitude: 0,
+    longitude: 0,
+    singleImage: null,
+    multipleImages: [],
+  };
+  const singleImageDescriptionDefault = {
+    name: '',
+    size: 0,
+    width: 0,
+    height: 0,
+    type: '',
+    url: '',
+  };
   const [formData, setFormData] = useState<FormDataType>({
+    //temporary test data
     propertyName: 'faj',
     location: 'fa',
     description: 'fa',
@@ -91,22 +99,7 @@ export const UploadAPI: React.FC<{ children: React.ReactNode }> = ({
     longitude: 10,
     singleImage: null,
     multipleImages: [],
-    // propertyName: '',
-    // location: '',
-    // description: '',
-    // propertyType: '',
-    // year: '',
-    // propertySize: 0,
-    // bedrooms: 0,
-    // bathrooms: 0,
-    // pricePerFragment: 0,
-    // totalAssetPrice: 0,
-    // totalAssetValue: 0,
-    // landArea: 0,
-    // latitude: 0,
-    // longitude: 0,
-    // singleImage: null,
-    // multipleImages: [],
+    //formDataDefaults
   });
   const maxSize = 10;
   const maxWidth = 800;
@@ -114,14 +107,9 @@ export const UploadAPI: React.FC<{ children: React.ReactNode }> = ({
   const allowedTypes = ['image/png', 'image/jpeg', 'image/gif', 'image/svg'];
 
   // ? Image Description:
-  const [singleImageDescription, setSingleImageDescription] = useState({
-    name: '',
-    size: 0,
-    width: 0,
-    height: 0,
-    type: '',
-    url: '',
-  });
+  const [singleImageDescription, setSingleImageDescription] = useState(
+    singleImageDescriptionDefault
+  );
   const [multipleImagesDescription, setMultipleImagesDescription] = useState<
     descriptionType[]
   >([]);
@@ -134,11 +122,13 @@ export const UploadAPI: React.FC<{ children: React.ReactNode }> = ({
     maxWidth,
     maxHeight,
     allowedTypes,
+    formDataDefaults,
     singleImageDescription,
     multipleImagesDescription,
+    singleFileIsSelected,
+    singleImageDescriptionDefault,
     setSingleImageDescription,
     setMultipleImagesDescription,
-    singleFileIsSelected,
     setSingleFileIsSelected,
   };
 

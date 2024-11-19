@@ -4,6 +4,8 @@ import Requirements from './Requirements';
 import colors from '../../../../assets/colors/project_colors';
 import { useContext } from 'react';
 import { UploadContext } from '../../../../assets/utils/UploadContext';
+import { Tooltip } from 'react-tooltip';
+import EllipseText from '../../../reuseable_components/ellipsis_text/EllipseText';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type onAddFileType = { target: { files: any } };
@@ -42,7 +44,7 @@ const SingleFileSelect = ({
         <input
           type="file"
           onChange={({ target: { files } }: onAddFileType) =>
-            handleSingleUpload(files)
+            handleSingleUpload(files[0])
           }
           className="input_file"
           id="single_image"
@@ -55,7 +57,20 @@ const SingleFileSelect = ({
               <div className="single_file_type">{singleType}</div>
             </div>
             <div className="single_file_more_details">
-              <div className="single_file_name">{singleName}</div>
+              <div className="single_file_name">
+                <EllipseText id="single_file_name" str={singleName} len={21} />
+
+                {singleName.length > 21 ? (
+                  <Tooltip
+                    id="single_file_name"
+                    className="tooltip"
+                    classNameArrow="tooltip_arrow"
+                    opacity={0.9}
+                  />
+                ) : (
+                  <></>
+                )}
+              </div>
               <div className="single_file_dimension_n_size">
                 {singleWidth}x{singleHeight}px size: {singleSize}MB
               </div>
@@ -113,6 +128,24 @@ const SingleFileSelectStyle = styled.div<{ $singleFileIsSelected: boolean }>`
     color: ${colors.lightLightGreen};
     font-size: calc(13.5 / 1.6 * 0.1rem);
     font-weight: 500;
+  }
+  .tooltip {
+    border-radius: 5px;
+    border: 1px dashed rgba(255, 255, 255, 0.5);
+    min-width: 5%;
+    max-width: 20%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: ${colors.black};
+    color: ${colors.darkWhite};
+    font-size: calc(11 / 1.6 * 0.1rem);
+    z-index: 20;
+  }
+  .tooltip_arrow {
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
+    border-right: 1px dashed rgba(255, 255, 255, 0.5);
   }
   .single_file_dimension_n_size {
     color: #2a4446;

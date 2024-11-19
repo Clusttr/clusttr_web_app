@@ -26,20 +26,13 @@ const ThirdFormInputs = ({
   handleSingleDrop,
   handleMultipleDrops,
 }: ThirdFormInputsType) => {
-  const {
-    formData,
-    setFormData,
-    multipleImagesDescription,
-    singleImageDescription,
-  } = useContext(UploadContext);
+  const { formData, setFormData } = useContext(UploadContext);
   const regex = /^\d*$/;
 
   // ? Temporary
   useEffect(() => {
     console.log(formData);
-    console.log(multipleImagesDescription, 'gath');
-    console.log(singleImageDescription, 'seth');
-  }, [formData, multipleImagesDescription, singleImageDescription]);
+  }, [formData]);
 
   const handlePropertyType = ({ target: { value } }: onChangeType) => {
     setFormData(prev => {

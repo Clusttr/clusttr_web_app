@@ -1,31 +1,58 @@
 import styled from 'styled-components';
 import FirstForm from './FirstUploadForm/FirstForm';
 import colors from '../../../assets/colors/project_colors';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import ThirdForm from './ThirdUploadForm/ThirdForm';
 import SecondForm from './SecondUploadForm/SecondForm';
 import PageUploadNumbers from './PageUploadNumber';
-import DashboardRequestBox from '../../dashboard/components/DashboardRequest/DashboardRequestBox';
+import FinalPopUp from './FinalPopUp';
+import { UploadContext } from '../../../assets/utils/UploadContext';
 
 const Content = () => {
   const [pageNumber, setPageNumber] = useState(0);
   const [isFormUploaded, setIsFormUploaded] = useState(false);
+  const [loading, setIsLoading] = useState(false);
+  const [isModalClosed, setIsModalClosed] = useState(false);
+  const {
+    formDataDefaults,
+    singleImageDescriptionDefault,
+    setFormData,
+    setMultipleImagesDescription,
+    setSingleImageDescription,
+    setSingleFileIsSelected,
+  } = useContext(UploadContext);
 
   useEffect(() => {
     setPageNumber(1);
   }, []);
 
+  const closeFunc = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      setIsModalClosed(true);
+    }, 2000);
+    setTimeout(() => {
+      setIsModalClosed(false);
+      setIsFormUploaded(false);
+      setFormData(formDataDefaults);
+      setPageNumber(1);
+      setMultipleImagesDescription([]);
+      setSingleImageDescription(singleImageDescriptionDefault);
+      setSingleFileIsSelected(false);
+    }, 2500);
+  };
+
   return (
     <ContentStyle>
       {isFormUploaded ? (
         <div>
-          <DashboardRequestBox
-            isModalClosed={isFormUploaded}
-            closeUpModal={() => setIsFormUploaded(false)}
-            setIsSendBtn={() => {}}
-            title={'lorem ipsum dolor sit down, consectetur'}
+          <FinalPopUp
+            closeFunc={closeFunc}
+            isLoading={loading}
+            isModalClosed={isModalClosed}
           />
-          <span onClick={() => setIsFormUploaded(false)}></span>
+          <span onClick={closeFunc}></span>
         </div>
       ) : (
         <></>
