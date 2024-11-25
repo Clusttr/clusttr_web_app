@@ -15,6 +15,10 @@ const Upload = () => {
   );
 };
 
-const UploadStyle = styled.div``;
+const UploadStyle = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+`;
 
 export default Upload;

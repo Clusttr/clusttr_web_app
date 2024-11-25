@@ -6,12 +6,18 @@ type FinalPopUpType = {
   closeFunc: () => void;
   isModalClosed: boolean;
   isLoading: boolean;
+  title: string;
+  subTitle: string;
+  isUploadForm: boolean;
 };
 
 const FinalPopUp = ({
   closeFunc,
   isModalClosed,
   isLoading,
+  title,
+  subTitle,
+  isUploadForm
 }: FinalPopUpType) => {
   return (
     <FinalPopUpStyle $isModalClosed={isModalClosed}>
@@ -31,10 +37,8 @@ const FinalPopUp = ({
       </div>
       <FinalPopUpContentStyle>
         <div className="content_text_container">
-          <div className="title">Property Details Submitted Successfully</div>
-          <div className="sub_title">
-            Once approved, you will get a notification about a successful mint.
-          </div>
+          <div className="title">{title}</div>
+          <div className={`sub_title ${isUploadForm? 'sub_title_upload':'sub_title_support'}`}>{subTitle}</div>
         </div>
         <div onClick={closeFunc} className="close_btn">
           {isLoading ? <span className="loader"></span> : <>Close</>}
@@ -211,15 +215,20 @@ const FinalPopUpContentStyle = styled.div`
     gap: 8px;
   }
   .title {
-    font-size: calc(17 / 1.6 * 0.1rem);
+    font-size: calc(17.2 / 1.6 * 0.1rem);
     font-weight: bolder;
   }
   .sub_title {
     font-size: calc(13.5 / 1.6 * 0.1rem);
     line-height: 1.3rem;
     font-weight: 500;
-    width: 90%;
     color: ${colors.lightGrey};
+  }
+  .sub_title_upload {
+    width: 90%;
+  }
+  .sub_title_support {
+    width: 100%;
   }
 
   .close_btn {
@@ -229,7 +238,7 @@ const FinalPopUpContentStyle = styled.div`
     cursor: pointer;
     position: relative;
     background-color: ${colors.lightLightGreen};
-    color: #fcfcfe;
+    color: #0d0f0f;
     width: 100%;
     height: 40px;
     border-radius: 20px;

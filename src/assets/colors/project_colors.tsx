@@ -32,6 +32,8 @@ export default colors;
 // * Entire Dashboard
 // * Notifications Tray
 // * Profile Dropdown
+// * Upload Form
+// * Support
 
 // ?Mobile simulator 
 

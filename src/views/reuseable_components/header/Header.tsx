@@ -3,10 +3,13 @@ import TopHeader from './top_header/TopHeader';
 import BottomHeader from './bottom_header/BottomHeader';
 import NotificationTray from './NotificationTray';
 import { useState } from 'react';
+import Support from '../../support/Support';
 
 const Header = () => {
   const [isTrayOpen, setIsTrayOpen] = useState(false);
   const [closeTray, setCloseTray] = useState(false);
+  const [isSupportOpen, setIsSupportOpen] = useState(false);
+  const [closeSupport, setCloseSupport] = useState(false);
 
   return (
     <HeaderStyle>
@@ -14,9 +17,15 @@ const Header = () => {
         setIsTrayOpen={setIsTrayOpen}
         isTrayOpen={isTrayOpen}
         setCloseTray={setCloseTray}
+        setIsSupportOpen={setIsSupportOpen}
       />
-      <BottomHeader />
+      {isSupportOpen ? <></> : <BottomHeader />}
       {isTrayOpen ? <NotificationTray closeTray={closeTray} /> : <></>}
+      {isSupportOpen ? (
+        <Support closeSupport={closeSupport} setIsSupportOpen={setIsSupportOpen} isSupportOpen={isSupportOpen} setCloseSupport={setCloseSupport}/>
+      ) : (
+        <></>
+      )}
     </HeaderStyle>
   );
 };

@@ -4,33 +4,59 @@ import messageIcon from '../../../../assets/images/messages.png';
 import supportIcon from '../../../../assets/images/support.png';
 import settingIcon from '../../../../assets/images/setting.png';
 import logoutIcon from '../../../../assets/images/logout.png';
+import { Dispatch, SetStateAction } from 'react';
 
-const ProfileDropDown = () => {
+type profileType = {
+  isToggled: boolean;
+  setIsToggled: Dispatch<SetStateAction<boolean>>;
+  setIsSupportOpen: Dispatch<SetStateAction<boolean>>;
+};
+
+const ProfileDropDown = ({
+  isToggled,
+  setIsToggled,
+  setIsSupportOpen,
+}: profileType) => {
+  const openMessage = () => {
+    setIsToggled(!isToggled);
+  };
+  const openSupport = () => {
+    setIsSupportOpen(true);
+    setIsToggled(!isToggled);
+  };
+  const openSetting = () => {
+    setIsToggled(!isToggled);
+  };
+  const logOut = () => {
+    setIsToggled(!isToggled);
+  };
+
   return (
     <ProfileDropDownStyle>
-      <div className="dropdown_list">
-        <div onClick={() => console.log('Message Opened')}>
+      <div className="dropdown_list" onClick={openMessage}>
+        <div className="dropdown_list_icon_container">
           <img src={messageIcon} alt="message_icon" />
-          <div>Message</div>
         </div>
+        <div className="dropdown_list_text">Message</div>
       </div>
-      <div className="dropdown_list">
-        <div onClick={() => console.log('Support Opened')}>
+
+      <div className="dropdown_list" onClick={openSupport}>
+        <div className="dropdown_list_icon_container">
           <img src={supportIcon} alt="support_icon" />
-          <div>Support</div>
         </div>
+        <div className="dropdown_list_text">Support</div>
       </div>
-      <div className="dropdown_list">
-        <div onClick={() => console.log('Settings Opened')}>
+      <div className="dropdown_list" onClick={openSetting}>
+        <div className="dropdown_list_icon_container">
           <img src={settingIcon} alt="setting_icon" />
-          <div>Settings</div>
         </div>
+        <div className="dropdown_list_text">Settings</div>
       </div>
-      <div className="dropdown_list logout">
-        <div onClick={() => console.log('Logged out!')}>
+      <div className="dropdown_list logout" onClick={logOut}>
+        <div className="dropdown_list_icon_container">
           <img src={logoutIcon} alt="logout_icon" />
-          <div>Logout</div>
         </div>
+        <div className="dropdown_list_text">Logout</div>
       </div>
     </ProfileDropDownStyle>
   );
@@ -41,13 +67,13 @@ const ProfileDropDownStyle = styled.div`
   right: 0;
   top: 120%;
   background-color: ${colors.white};
-  width: 90%;
+  width: 92%;
   border-radius: 16px;
   display: flex;
-  padding: 25px 0 0;
+  padding: 20px 0 0;
   flex-direction: column;
-  gap: 15px;
-  animation: show_dropdown .6s forwards;
+  gap: 20px;
+  animation: show_dropdown 0.6s forwards;
   z-index: 3;
 
   @keyframes show_dropdown {
@@ -77,21 +103,25 @@ const ProfileDropDownStyle = styled.div`
   }
 
   .dropdown_list {
-    padding: 0 10px;
-    font-size: calc(13 / 1.6 * 0.1rem);
-    color: #060809;
-    font-weight: 200;
-  }
-  .dropdown_list > div {
-    cursor: pointer;
+    padding: 6px 15px;
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 5px;
+    cursor: pointer;
+    text-decoration: none;
     width: min-content;
+    gap: 5px;
+  }
+  .dropdown_list_icon_container {
+    display: flex;
+  }
+  .dropdown_list_text {
+    color: #060809;
+    font-size: calc(13 / 1.6 * 0.1rem);
+    font-weight: 200;
   }
   .logout {
-    padding: 15px 10px 25px;
+    width: 100%;
+    padding: 15px 15px 25px;
     border-top: 1px solid #e2e7f0;
   }
 `;

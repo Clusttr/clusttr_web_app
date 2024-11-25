@@ -11,9 +11,15 @@ type ProfileType = {
   setIsTrayOpen: Dispatch<SetStateAction<boolean>>;
   isTrayOpen: boolean;
   setCloseTray: Dispatch<SetStateAction<boolean>>;
+  setIsSupportOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-const Profile = ({ setIsTrayOpen, isTrayOpen, setCloseTray }: ProfileType) => {
+const Profile = ({
+  setIsTrayOpen,
+  isTrayOpen,
+  setCloseTray,
+  setIsSupportOpen,
+}: ProfileType) => {
   const [isToggled, setIsToggled] = useState(false);
   const profileFunc = () => {
     setIsToggled(!isToggled);
@@ -63,7 +69,15 @@ const Profile = ({ setIsTrayOpen, isTrayOpen, setCloseTray }: ProfileType) => {
           />
         </div>
       </div>
-      {isToggled ? <ProfileDropDown /> : <></>}
+      {isToggled ? (
+        <ProfileDropDown
+          setIsSupportOpen={setIsSupportOpen}
+          setIsToggled={setIsToggled}
+          isToggled={isToggled}
+        />
+      ) : (
+        <></>
+      )}
     </ProfileStyle>
   );
 };

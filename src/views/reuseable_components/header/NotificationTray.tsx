@@ -40,7 +40,7 @@ const NotificationTray = ({ closeTray }: trayType) => {
     <NotificationTrayStyle
       style={{
         animation: `${
-          closeTray ? 'slide_out' : 'slide_in'
+          closeTray ? 'slide_out_tray' : 'slide_in_tray'
         } 0.4s ease-out forwards`,
       }}
     >
@@ -78,7 +78,7 @@ const NotificationTrayStyle = styled.div`
   box-shadow: 1rem 3rem 1.7rem 0.6rem rgba(0, 207, 212, 0.2);
   right: -0.1%;
 
-  @keyframes slide_in {
+  @keyframes slide_in_tray {
     0% {
       right: -30%;
     }
@@ -86,7 +86,7 @@ const NotificationTrayStyle = styled.div`
       right: -0.1%;
     }
   }
-  @keyframes slide_out {
+  @keyframes slide_out_tray {
     0% {
       right: -0.1%;
     }

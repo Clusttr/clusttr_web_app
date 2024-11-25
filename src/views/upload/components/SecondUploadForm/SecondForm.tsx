@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useContext, useState } from 'react';
+import { Dispatch, SetStateAction, useContext } from 'react';
 import styled from 'styled-components';
 import FormHeader from '../FormHeader';
 import PageBtn from '../PageBtn';
@@ -7,20 +7,26 @@ import SecondFormInputs from './SecondFormInputs';
 
 type SecondFormType = {
   setPageNumber: Dispatch<SetStateAction<number>>;
+  setIsPageThreeLoading: Dispatch<SetStateAction<boolean>>;
 };
 
-const SecondForm = ({ setPageNumber }: SecondFormType) => {
-  const [loading, setIsLoading] = useState(false);
+const SecondForm = ({
+  setPageNumber,
+  setIsPageThreeLoading,
+}: SecondFormType) => {
+  // const [loading, setIsLoading] = useState(false);
   const { formData } = useContext(UploadContext);
 
   const goToNextPage = () => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
+    // setIsLoading(true);
+    // setTimeout(() => {
+    //   setIsLoading(false);
+    setIsPageThreeLoading(true);
     setTimeout(() => {
       setPageNumber(3);
-    }, 2500);
+      setIsPageThreeLoading(false);
+    }, 1000);
+    // }, 1000);
   };
 
   return (
@@ -32,7 +38,7 @@ const SecondForm = ({ setPageNumber }: SecondFormType) => {
       <SecondFormInputs />
       <PageBtn
         goToNextPage={goToNextPage}
-        loading={loading}
+        loading={false}
         text={'Almost Done...'}
         isFullyFilled={
           formData.location &&

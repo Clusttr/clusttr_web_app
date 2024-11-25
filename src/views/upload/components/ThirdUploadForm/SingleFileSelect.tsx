@@ -133,7 +133,7 @@ const SingleFileSelectStyle = styled.div<{ $singleFileIsSelected: boolean }>`
     border-radius: 5px;
     border: 1px dashed rgba(255, 255, 255, 0.5);
     min-width: 5%;
-    max-width: 20%;
+    max-width: 50%;
     text-align: center;
     display: flex;
     justify-content: center;

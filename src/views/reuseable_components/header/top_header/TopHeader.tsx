@@ -10,12 +10,14 @@ type TopHeaderType = {
   setIsTrayOpen: Dispatch<SetStateAction<boolean>>;
   isTrayOpen: boolean;
   setCloseTray: Dispatch<SetStateAction<boolean>>;
+  setIsSupportOpen: Dispatch<SetStateAction<boolean>>;
 };
 
 const TopHeader = ({
   setIsTrayOpen,
   isTrayOpen,
   setCloseTray,
+  setIsSupportOpen,
 }: TopHeaderType) => {
   const navRef = useRef<HTMLDivElement>(null);
   const { pathname: windowPathname } = useLocation();
@@ -49,6 +51,7 @@ const TopHeader = ({
         setIsTrayOpen={setIsTrayOpen}
         isTrayOpen={isTrayOpen}
         setCloseTray={setCloseTray}
+        setIsSupportOpen={setIsSupportOpen}
       />
     </TopHeaderStyle>
   );

@@ -1,30 +1,32 @@
 import styled from 'styled-components';
 import colors from '../../assets/colors/project_colors';
 import Header from '../reuseable_components/header/Header';
+import Content from './components/PropertyContent';
 
 const Properties = () => {
   return (
     <PropertiesStyle>
       <Header />
-      <div>
-        <div>Properties</div>
-        <div>Here, Buy Now.</div>
-      </div>
+      <Content/>
     </PropertiesStyle>
   );
 };
 
 const PropertiesStyle = styled.div`
-
- > :nth-child(2){
+  > :nth-child(2) {
     background-color: ${colors.backgroundColor};
-    margin: 15px 20px;
-    padding:20px;
-    border-radius:10px;
+    padding: 15px 20px;
+    height: 84vh;
+  }
+  > :nth-child(2) > :first-child {
+    background-color: ${colors.backgroundColor};
+    border: 1px solid red;
+    padding: 20px;
+    border-radius: 10px;
     color: ${colors.white};
   }
 
-  > :nth-child(2) :last-child {
+  > :nth-child(2) >:first-child > :last-child {
     color: ${colors.orange};
   }
 `;

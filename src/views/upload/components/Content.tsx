@@ -5,14 +5,26 @@ import { useContext, useEffect, useState } from 'react';
 import ThirdForm from './ThirdUploadForm/ThirdForm';
 import SecondForm from './SecondUploadForm/SecondForm';
 import PageUploadNumbers from './PageUploadNumber';
-import FinalPopUp from './FinalPopUp';
+import FinalPopUp from '../../reuseable_components/final_pop_up/FinalPopUp';
 import { UploadContext } from '../../../assets/utils/UploadContext';
 
+const PageLoader = () => {
+  return (
+    <PageLoaderStyle>
+      <span className="page_loader"></span>
+    </PageLoaderStyle>
+  );
+};
 const Content = () => {
   const [pageNumber, setPageNumber] = useState(0);
   const [isFormUploaded, setIsFormUploaded] = useState(false);
   const [loading, setIsLoading] = useState(false);
   const [isModalClosed, setIsModalClosed] = useState(false);
+  const [isPageOneLoading, setIsPageOneLoading] = useState(false);
+  const [isPageTwoLoading, setIsPageTwoLoading] = useState(false);
+  const [isPageThreeLoading, setIsPageThreeLoading] = useState(false);
+  const [secondDelay, setSecondDelay] = useState('0s');
+  const [firstDelay, setFirstDelay] = useState('0s');
   const {
     formDataDefaults,
     singleImageDescriptionDefault,
@@ -23,34 +35,48 @@ const Content = () => {
   } = useContext(UploadContext);
 
   useEffect(() => {
-    setPageNumber(1);
+    setIsPageOneLoading(true);
+    setTimeout(() => {
+      setPageNumber(1);
+      setIsPageOneLoading(false);
+    }, 500);
   }, []);
 
   const closeFunc = () => {
     setIsLoading(true);
+    setIsPageOneLoading(true);
     setTimeout(() => {
+      setPageNumber(1);
       setIsLoading(false);
       setIsModalClosed(true);
-    }, 2000);
-    setTimeout(() => {
-      setIsModalClosed(false);
-      setIsFormUploaded(false);
-      setFormData(formDataDefaults);
-      setPageNumber(1);
-      setMultipleImagesDescription([]);
-      setSingleImageDescription(singleImageDescriptionDefault);
-      setSingleFileIsSelected(false);
-    }, 2500);
+      setIsPageOneLoading(false);
+      setTimeout(() => {
+        // * return everything back to it's default state
+        setIsModalClosed(false);
+        setIsFormUploaded(false);
+        setFormData(formDataDefaults);
+        setMultipleImagesDescription([]);
+        setSingleImageDescription(singleImageDescriptionDefault);
+        setSingleFileIsSelected(false);
+      }, 500);
+    }, 1000);
   };
 
   return (
-    <ContentStyle>
+    <ContentStyle
+      $isPageTwoLoading={isPageTwoLoading}
+      $isPageThreeLoading={isPageThreeLoading}
+      $isPageOneLoading={isPageOneLoading}
+    >
       {isFormUploaded ? (
         <div>
           <FinalPopUp
             closeFunc={closeFunc}
             isLoading={loading}
             isModalClosed={isModalClosed}
+            title={`Property Details Submitted Successfully`}
+            subTitle={`Once approved, you will get a notification about a successful mint.`}
+            isUploadForm={true}
           />
           <span onClick={closeFunc}></span>
         </div>
@@ -64,11 +90,29 @@ const Content = () => {
           <PageUploadNumbers
             pageNumber={pageNumber}
             setPageNumber={setPageNumber}
+            setIsPageTwoLoading={setIsPageTwoLoading}
+            setIsPageThreeLoading={setIsPageThreeLoading}
+            firstDelay={firstDelay}
+            secondDelay={secondDelay}
+            setFirstDelay={setFirstDelay}
+            setSecondDelay={setSecondDelay}
           />
-          {pageNumber === 1 ? (
-            <FirstForm setPageNumber={setPageNumber} />
-          ) : pageNumber === 2 ? (
-            <SecondForm setPageNumber={setPageNumber} />
+          {isPageOneLoading ? (
+            <PageLoader />
+          ) : pageNumber === 1 && !isPageTwoLoading ? (
+            <FirstForm
+              setPageNumber={setPageNumber}
+              setIsPageTwoLoading={setIsPageTwoLoading}
+            />
+          ) : isPageTwoLoading ? (
+            <PageLoader />
+          ) : pageNumber === 2 && !isPageThreeLoading ? (
+            <SecondForm
+              setPageNumber={setPageNumber}
+              setIsPageThreeLoading={setIsPageThreeLoading}
+            />
+          ) : isPageThreeLoading ? (
+            <PageLoader />
           ) : pageNumber === 3 ? (
             <ThirdForm setIsFormUploaded={setIsFormUploaded} />
           ) : (
@@ -80,11 +124,41 @@ const Content = () => {
   );
 };
 
-const ContentStyle = styled.div`
-  background-color: ${colors.backgroundColor};
-  margin: 15px 0 0;
+const PageLoaderStyle = styled.div`
+  position: absolute;
+  margin-top: 30%;
+  right: 45%;
+
+  .page_loader {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    animation: rotate_loader 0.4s forwards ease-out infinite;
+    border-right: 2px solid #fcfcfc;
+    border-radius: 30px;
+  }
+  @keyframes rotate_loader {
+    0% {
+      transform: rotate(0);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+`;
+
+const ContentStyle = styled.div<{
+  $isPageTwoLoading: boolean;
+  $isPageThreeLoading: boolean;
+  $isPageOneLoading: boolean;
+}>`
+  margin: 12px 0 0;
   padding-bottom: 100px;
-  // height: 200vh;
+  background-color: ${colors.backgroundColor};
+  ${({ $isPageTwoLoading, $isPageThreeLoading, $isPageOneLoading }) =>
+    $isPageTwoLoading || $isPageThreeLoading || $isPageOneLoading
+      ? 'height: 90vh'
+      : ''};
   border-radius: 7px 7px 0 0;
 
   .content_header {
@@ -107,6 +181,7 @@ const ContentStyle = styled.div`
   }
   .content_inner_container {
     width: 40%;
+    position: relative;
   }
 `;
 

@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useContext, useState } from 'react';
+import { Dispatch, SetStateAction, useContext } from 'react';
 import styled from 'styled-components';
 import FormHeader from '../FormHeader';
 import PageBtn from '../PageBtn';
@@ -7,20 +7,23 @@ import { UploadContext } from '../../../../assets/utils/UploadContext';
 
 type FirstFormType = {
   setPageNumber: Dispatch<SetStateAction<number>>;
+  setIsPageTwoLoading: Dispatch<SetStateAction<boolean>>;
 };
 
-const FirstForm = ({ setPageNumber }: FirstFormType) => {
-  const [loading, setIsLoading] = useState(false);
+const FirstForm = ({ setPageNumber, setIsPageTwoLoading }: FirstFormType) => {
+  // const [loading, setIsLoading] = useState(false);
   const { formData } = useContext(UploadContext);
 
   const goToNextPage = () => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
+    // setIsLoading(true);
+    // setTimeout(() => {
+    // setIsLoading(false);
+    setIsPageTwoLoading(true);
     setTimeout(() => {
       setPageNumber(2);
-    }, 2500);
+      setIsPageTwoLoading(false);
+    }, 1000);
+    // }, 500);
   };
 
   return (
@@ -32,7 +35,7 @@ const FirstForm = ({ setPageNumber }: FirstFormType) => {
       <FirstFormInputs />
       <PageBtn
         goToNextPage={goToNextPage}
-        loading={loading}
+        loading={false}
         text={'Next'}
         isFullyFilled={
           formData.propertyName &&

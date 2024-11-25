@@ -44,7 +44,6 @@ const ThirdForm = ({ setIsFormUploaded }: ThirdFormType) => {
   // ? Handles the click to upload file
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSingleUpload = async (file: any) => {
-    // const file = files[0];
     // * prevent error from occurring when the user cancels selecting a file
     if (!file) return;
 
@@ -123,10 +122,10 @@ const ThirdForm = ({ setIsFormUploaded }: ThirdFormType) => {
 
   const uploadForm = () => {
     setIsLoading(true);
-    setTimeout(() => {
+    setTimeout(async () => {
       setIsLoading(false);
-      setTimeout(() => {
 
+      setTimeout(() => {
         setIsFormUploaded(true);
       }, 500);
     }, 2000);

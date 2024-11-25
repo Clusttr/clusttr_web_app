@@ -1,17 +1,17 @@
 import styled from 'styled-components';
 import colors from '../../../assets/colors/project_colors';
-import {
-  Dispatch,
-  SetStateAction,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { Dispatch, SetStateAction, useContext, useEffect } from 'react';
 import { UploadContext } from '../../../assets/utils/UploadContext';
 
 type PageUploadNumbersType = {
   pageNumber: number;
+  firstDelay: string;
+  secondDelay: string;
   setPageNumber: Dispatch<SetStateAction<number>>;
+  setIsPageTwoLoading: Dispatch<SetStateAction<boolean>>;
+  setIsPageThreeLoading: Dispatch<SetStateAction<boolean>>;
+  setSecondDelay: Dispatch<SetStateAction<string>>;
+  setFirstDelay: Dispatch<SetStateAction<string>>;
 };
 type PageNumberType = {
   isActive: string;
@@ -43,18 +43,27 @@ const PageNumber = ({
 
 const PageUploadNumbers = ({
   pageNumber,
+  firstDelay,
+  secondDelay,
   setPageNumber,
+  setIsPageTwoLoading,
+  setIsPageThreeLoading,
+  setFirstDelay,
+  setSecondDelay,
 }: PageUploadNumbersType) => {
   const page = pageNumber.toString();
-  const [secondDelay, setSecondDelay] = useState('0s');
-  const [firstDelay, setFirstDelay] = useState('0s');
+
   const { formData } = useContext(UploadContext);
 
   const goToPageOne = () => {
     setPageNumber(1);
     setFirstDelay('0.55s');
+    setIsPageTwoLoading(false);
   };
-  const goToPageTwo = () => setPageNumber(2);
+  const goToPageTwo = () => {
+    setPageNumber(2);
+    setIsPageThreeLoading(false);
+  };
   const goToPageThree = () => setPageNumber(3);
 
   useEffect(() => {
@@ -62,7 +71,7 @@ const PageUploadNumbers = ({
     else setSecondDelay('0.55s');
 
     setFirstDelay('0s');
-  }, [pageNumber]);
+  }, [pageNumber, setFirstDelay, setSecondDelay]);
 
   return (
     <PageUploadNumbersStyle
