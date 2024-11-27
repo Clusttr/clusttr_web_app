@@ -28,15 +28,6 @@ const colors: { [key: string]: string } = {
 
 export default colors;
 
-// ? What I've completed
-// * Entire Home Dashboard
-// * Notifications Tray
-// * Profile Dropdown
-// * Upload Form
-// * Support
-// * Single Property Display
-
-// ?Mobile simulator 
 
 /*
 const data = {
