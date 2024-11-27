@@ -3,7 +3,7 @@ import colors from '../../../../assets/colors/project_colors';
 import transactionsIcon from '../../../../assets/images/transaction_icon.png';
 import TransactionsTabs from './TransactionsTabs';
 
-const Transactions = () => {
+const Transactions = ({ isProperty }: { isProperty: boolean }) => {
   return (
     <TransactionsStyle>
       <div className="transactions_header">
@@ -16,7 +16,7 @@ const Transactions = () => {
           />
         </div>
       </div>
-      <TransactionsTabs />
+      <TransactionsTabs isProperty={isProperty} />
     </TransactionsStyle>
   );
 };
@@ -26,7 +26,7 @@ const TransactionsStyle = styled.div`
   padding: 20px 20px 30px;
   border-radius: 10px;
   color: ${colors.white};
-  
+
   .transactions_header {
     display: flex;
     gap: 5px;

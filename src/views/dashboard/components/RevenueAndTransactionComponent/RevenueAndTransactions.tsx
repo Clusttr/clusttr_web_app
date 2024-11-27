@@ -7,7 +7,7 @@ const RevenueAndTransactions = () => {
   return (
     <RevenueAndTransactionsStyle>
       <Revenue />
-      <Transaction />
+      <Transaction isProperty={false} />
     </RevenueAndTransactionsStyle>
   );
 };

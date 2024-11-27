@@ -26,7 +26,7 @@ const PropertiesGridBoxInfo = ({
   return (
     <BoxInfoStyle onClick={() => setRotateAngle(!rotateAngle)}>
       <img src={icon} alt="" />
-      <div >
+      <div>
         {unit === '$' ? unit : ''}
         {info} {unit === '$' ? '' : unit}
       </div>
@@ -55,6 +55,7 @@ const BoxInfoStyle = styled.div`
   align-items: center;
   gap: 8px;
   overflow: hidden;
+  color: #c8e3df;
 
   .box_info_tooltip {
     width: 12%;

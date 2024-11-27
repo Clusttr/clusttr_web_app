@@ -8,7 +8,7 @@ import assets from '../../../../assets/images/assets.png';
 import testPic from '../../../../assets/images/temp_test_pic.png';
 import angle from '../../../../assets/images/angle.png';
 import EllipseText from '../../../reuseable_components/ellipsis_text/EllipseText';
-import PropertiesGridBoxInfo from './PropertiesGridBoxInfo';
+import PropertiesGridBoxInfo from '../../../reuseable_components/PropertiesGridBoxInfo';
 // import colors from '../../../../assets/colors/project_colors';
 import { Tooltip } from 'react-tooltip';
 import colors from '../../../../assets/colors/project_colors';

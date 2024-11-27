@@ -29,11 +29,12 @@ const colors: { [key: string]: string } = {
 export default colors;
 
 // ? What I've completed
-// * Entire Dashboard
+// * Entire Home Dashboard
 // * Notifications Tray
 // * Profile Dropdown
 // * Upload Form
 // * Support
+// * Single Property Display
 
 // ?Mobile simulator 
 
