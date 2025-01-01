@@ -29,8 +29,13 @@
   padding: 0;
   box-sizing: border-box;
   font-family: Roobert;
-
+  user-select: none !important;
+}
+html {
+  overflow: hidden;
 }
 body {
   background-color: #05020d;
+  overflow-x: hidden;
+  user-select: none;
 }

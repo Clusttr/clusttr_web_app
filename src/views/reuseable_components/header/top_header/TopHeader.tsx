@@ -1,12 +1,24 @@
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import colors from '../../../../assets/colors/project_colors';
-import { useEffect, useRef } from 'react';
+import { Dispatch, SetStateAction, useEffect, useRef } from 'react';
 import logo from '../../../../assets/images/clusttr_logo.png';
 import NavLinks from './NavLinks';
 import Profile from './Profile';
 
-const TopHeader = () => {
+type TopHeaderType = {
+  setIsTrayOpen: Dispatch<SetStateAction<boolean>>;
+  isTrayOpen: boolean;
+  setCloseTray: Dispatch<SetStateAction<boolean>>;
+  setIsSupportOpen: Dispatch<SetStateAction<boolean>>;
+};
+
+const TopHeader = ({
+  setIsTrayOpen,
+  isTrayOpen,
+  setCloseTray,
+  setIsSupportOpen,
+}: TopHeaderType) => {
   const navRef = useRef<HTMLDivElement>(null);
   const { pathname: windowPathname } = useLocation();
 
@@ -30,12 +42,17 @@ const TopHeader = () => {
   return (
     <TopHeaderStyle>
       <div className="logo_container">
-        <img src={logo} alt="Clusttr Logo" className="logo" />
+        <img src={logo} alt="Clusttr_Logo" className="logo" />
       </div>
       <div ref={navRef} className="nav_link__container">
         <NavLinks />
       </div>
-      <Profile />
+      <Profile
+        setIsTrayOpen={setIsTrayOpen}
+        isTrayOpen={isTrayOpen}
+        setCloseTray={setCloseTray}
+        setIsSupportOpen={setIsSupportOpen}
+      />
     </TopHeaderStyle>
   );
 };
@@ -46,33 +63,41 @@ const TopHeaderStyle = styled.div`
   align-items: center;
   background-color: ${colors.backgroundColor};
   padding: 15px;
-  
+
   #active {
     color: ${colors.white};
     background-color: ${colors.darkLightGreen};
     padding: 8px 12px;
     border-radius: 10px;
-    font-size: 0.65rem;
-    transition: all 0.3s;
+    font-size: calc(12.5 / 1.6 * 0.1rem);
   }
   .logo_container {
-    width: 6%;
+    width: 17%;
   }
   .logo {
-    width: 100%;
+    width: 34%;
   }
   .nav_link__container {
     display: flex;
-    flex-direction: row;
     align-items: center;
-    gap: 20px;
+    gap: 8px;
   }
   .nav_link {
     cursor: pointer;
     text-decoration: none;
     color: ${colors.navLinkColor};
-    font-size: 0.7rem;
+    font-size: calc(12.5 / 1.6 * 0.1rem);
     font-weight: 200;
+    padding: 0 12px;
+    transition: all 0.5s linear;
+  }
+  .nav_link:hover {
+    background-color: #3e3c3c7e;
+    color: white;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    transition: all 0.3s;
+    border-radius: 10px;
   }
 `;
 

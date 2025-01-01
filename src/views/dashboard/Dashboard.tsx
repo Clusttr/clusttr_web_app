@@ -1,24 +1,101 @@
 import styled from 'styled-components';
-import colors from '../../assets/colors/project_colors';
+// import colors from '../../assets/colors/project_colors';
 import Header from '../reuseable_components/header/Header';
+import DashboardPropertyTab from './components/DashboardPropertyTabComponent/DashboardPropertyTab';
+import RevenueAndTransactions from './components/RevenueAndTransactionComponent/RevenueAndTransactions';
+import DashboardProperties from './components/DashboardProperties/DashboardProperties';
+import { ContextAPI } from '../../assets/utils/PropertiesContext';
+
+import { useState } from 'react';
+import DashboardRequest from './components/DashboardRequest/DashboardRequest';
+import DashboardFilter from './components/DashboardFilter/DashboardFilter';
+import DashboardSearch from './components/DashboardSearch/DashboardSearch';
 
 const Dashboard = () => {
+  const [isActive, setIsActive] = useState({
+    isEditActive: false,
+    isDeleteActive: false,
+    isSearchActive: false,
+  });
+  const [isModalClosed, setIsModalClosed] = useState(false);
+  const [isSearchActive, setIsSearchActive] = useState(false);
+
+  const closeModal = () => {
+    setIsActive({
+      isEditActive: false,
+      isDeleteActive: false,
+      isSearchActive: false,
+    });
+    setIsModalClosed(false);
+  };
+
+  const closeSearchBox = () => {
+    setIsSearchActive(false);
+    setIsModalClosed(false);
+  };
+
+  // if (
+  //   isActive.isDeleteActive ||
+  //   isActive.isEditActive ||
+  //   isActive.isSearchActive
+  // )
+  //   document.body.classList.add('scroll-lock');
+  // else document.body.classList.remove('scroll-lock');
+
   return (
     <DashboardStyle>
       <Header />
+      <DashboardPropertyTab />
+      <ContextAPI>
+        <DashboardFilter setIsSearchActive={setIsSearchActive} />
+        {isSearchActive ? (
+          <div>
+            <DashboardSearch
+              isModalClosed={isModalClosed}
+              setIsModalClosed={setIsModalClosed}
+              closeSearchBox={closeSearchBox}
+            />
+          </div>
+        ) : (
+          ''
+        )}
+        <RevenueAndTransactions />
+        <DashboardProperties setIsActive={setIsActive} />
+        {isActive.isEditActive ? (
+          <div>
+            <DashboardRequest
+              isModalClosed={isModalClosed}
+              setIsModalClosed={setIsModalClosed}
+              closeModal={closeModal}
+              title={'You are requesting an edit'}
+              request={'Edit'}
+            />
+          </div>
+        ) : (
+          <></>
+        )}
+        {isActive.isDeleteActive ? (
+          <div>
+            <DashboardRequest
+              isModalClosed={isModalClosed}
+              setIsModalClosed={setIsModalClosed}
+              closeModal={closeModal}
+              title={'You are seeking to delete some files'}
+              request={'Delete'}
+            />
+          </div>
+        ) : (
+          <></>
+        )}
+      </ContextAPI>
     </DashboardStyle>
   );
 };
 
 const DashboardStyle = styled.div`
-  color: ${colors.white};
-
-  > :nth-child(2) {
-    color: ${colors.black};
-  }
-  > :nth-child(3) {
-    color: ${colors.orange};
-  }
+  position: relative;
+  display: flex;
+  flex-direction: column;
 `;
 
 export default Dashboard;
