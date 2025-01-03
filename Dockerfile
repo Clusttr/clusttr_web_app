@@ -1,8 +1,11 @@
 FROM node:18
 
-WORKDIR /usr/src/app
+WORKDIR /usr/src
 
-COPY . .
+COPY package.json .
 RUN npm install 
+RUN npm i -g serve
+COPY . .
 RUN npm run build
-CMD ["npm", "preview"]
+EXPOSE 8080
+CMD ["serve", "-s", "dist"]
